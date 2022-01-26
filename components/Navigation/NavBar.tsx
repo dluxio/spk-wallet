@@ -198,9 +198,9 @@ export const NavBar = () => {
             <a onClick={handleSettings} className="btn">
               {t("settings")}
             </a>
-            <a onClick={handleTrades} className="btn">
+            {/* <a onClick={handleTrades} className="btn">
               {t("pendingTrades")}
-            </a>
+            </a> */}
             <a className="btn" onClick={handleLogout}>
               {t("logout")}
             </a>
@@ -295,7 +295,7 @@ export const NavBar = () => {
           >
             {t("inventory")}
           </p>
-          <p
+          {/* <p
             className={`${
               url === "auction" && "selected"
             } navLink text-black hover:text-gray-800`}
@@ -310,7 +310,7 @@ export const NavBar = () => {
             onClick={() => router.push("/listings")}
           >
             {t("listings")}
-          </p>
+          </p> */}
         </div>
       )}
       <div className={"fixed bottom-5 right-5 grid-cols-1"}>
