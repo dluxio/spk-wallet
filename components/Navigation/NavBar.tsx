@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from "react";
-
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  userState,
-  broadcastState,
-  refreshState,
-  apiLinkState,
-} from "../../atoms";
-
-import { Login } from "../Login";
-
 import { useRouter } from "next/router";
-import { Spinner } from "../Spinner";
-
-import { placeHolder } from "../../constants";
-
-import { FaBars } from "react-icons/fa";
 import { FcGlobe } from "react-icons/fc";
-
+import { FaBars } from "react-icons/fa";
 import Image from "next/image";
-import { redoProfilePicture } from "../../utils";
-
-import { useHiveKeychainCeramic } from "spk-auth-react";
-import { isMobile } from "react-device-detect";
 import axios from "axios";
+import { useHiveKeychainCeramic } from "spk-auth-react";
 import {
   useLanguageQuery,
   useTranslation,
   LanguageSwitcher,
 } from "next-export-i18n";
 
+import {
+  userState,
+  broadcastState,
+  refreshState,
+  apiLinkState,
+} from "../../atoms";
+import { Login } from "../Login";
+import { Spinner } from "../Spinner";
+import { placeHolder } from "../../constants";
+import { redoProfilePicture } from "../../utils";
+import { useQuery } from "../../constants/breakpoints";
+
+
 export const NavBar = () => {
+  const { isMobile } = useQuery();
   const [profDropdown, setProfDropdown] = useState(false);
   const [languageSelect, setLanguageSelect] = useState(false);
   const [dropdown, setDropdown] = useState(false);
