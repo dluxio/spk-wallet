@@ -31,55 +31,55 @@ export const Market = () => {
   const [coins, setCoins] = useRecoilState<any>(coinState);
 
   useEffect(() => {
-    const fetchNfts = async () => {
-      axios.get(`${apiLink}api/sales`).then(({ data: { result } }) => {
-        setNfts(result);
-      });
-    };
+    // const fetchNfts = async () => {
+    //   axios.get(`${apiLink}api/sales`).then(({ data: { result } }) => {
+    //     setNfts(result);
+    //   });
+    // };
 
-    const fetchAuction = () => {
-      axios.get(`${apiLink}api/auctions`).then(({ data: { result } }) => {
-        setAuction(result);
-      });
-    };
+    // const fetchAuction = () => {
+    //   axios.get(`${apiLink}api/auctions`).then(({ data: { result } }) => {
+    //     setAuction(result);
+    //   });
+    // };
 
-    const fetchCoins = async () => {
-      const dluxData = {
-        name: "DLUX",
-        image: {
-          large: "https://www.dlux.io/img/dlux-hive-logo-alpha.svg",
-        },
-        market_data: {
-          current_price: {
-            usd: 0,
-          },
-        },
-      };
+    // const fetchCoins = async () => {
+    //   const dluxData = {
+    //     name: "DLUX",
+    //     image: {
+    //       large: "https://www.dlux.io/img/dlux-hive-logo-alpha.svg",
+    //     },
+    //     market_data: {
+    //       current_price: {
+    //         usd: 0,
+    //       },
+    //     },
+    //   };
 
-      const { data: hiveData } = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/hive",
-        {
-          headers: {
-            accept: "application/json",
-          },
-        }
-      );
-      const { data: hbdData } = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/hive_dollar",
-        {
-          headers: {
-            accept: "application/json",
-          },
-        }
-      );
+    //   const { data: hiveData } = await axios.get(
+    //     "https://api.coingecko.com/api/v3/coins/hive",
+    //     {
+    //       headers: {
+    //         accept: "application/json",
+    //       },
+    //     }
+    //   );
+    //   const { data: hbdData } = await axios.get(
+    //     "https://api.coingecko.com/api/v3/coins/hive_dollar",
+    //     {
+    //       headers: {
+    //         accept: "application/json",
+    //       },
+    //     }
+    //   );
 
-      axios.get(`${apiLink}dex`).then(({ data }) => {
-        dluxData.market_data.current_price.usd =
-          data.markets.hive.tick * hiveData.market_data.current_price.usd;
+    //   axios.get(`${apiLink}dex`).then(({ data }) => {
+    //     dluxData.market_data.current_price.usd =
+    //       data.markets.hive.tick * hiveData.market_data.current_price.usd;
 
-        setCoins([hiveData, dluxData, hbdData]);
-      });
-    };
+    //     setCoins([hiveData, dluxData, hbdData]);
+    //   });
+    // };
 
     const fetchPrefix = () => {
       axios.get(`${apiLink}api/protocol`).then(({ data }) => {
@@ -88,19 +88,19 @@ export const Market = () => {
       });
     };
 
-    if (!coins.length) {
-      fetchCoins();
-    }
+    // if (!coins.length) {
+    //   fetchCoins();
+    // }
     fetchPrefix();
-    fetchNfts();
-    fetchAuction();
+    // fetchNfts();
+    // fetchAuction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="w-full h-full">
       <MarketNav />
-      {selectedMarket === "exchange" && (
+      {/* {selectedMarket === "exchange" && (
         <>
           <h1 className="text-3xl mx-10 my-4 text-white font-medium">
             {t("tokens").toUpperCase()}
@@ -140,7 +140,7 @@ export const Market = () => {
               )}
           </div>
         </>
-      )}
+      )} */}
       {selectedMarket === "apps" && <AppScreen />}
       {selectedMarket === "news" && <NewsScreen />}
     </div>

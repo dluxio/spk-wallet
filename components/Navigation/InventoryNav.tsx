@@ -9,7 +9,6 @@ import { GoPlus } from "react-icons/go";
 import { inventoryNavState } from "../../atoms";
 import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
-import Link from "next/link";
 import router from "next/router";
 
 export const InventoryNav = () => {
@@ -21,7 +20,7 @@ export const InventoryNav = () => {
   return (
     <div className="flex flex-wrap items-center justify-between">
       <div className="flex mx-10 my-10 text-white gap-8 text-xl">
-        <div
+        {/* <div
           onClick={() => setMarketNavSelected("nft")}
           className={`flex flex-col items-center cursor-pointer ${marketNavSelected === "nft" && "border-b-2 border-blue-500"
             }`}
@@ -36,19 +35,21 @@ export const InventoryNav = () => {
         >
           <GiToken size={25} color="#fff" />
           <p className="text-md mt-1">Mint</p>
-        </div>
+        </div> */}
         <div
           onClick={() => setMarketNavSelected("tokens")}
-          className={`flex flex-col items-center cursor-pointer ${marketNavSelected === "tokens" && "border-b-2 border-blue-500"
-            }`}
+          className={`flex flex-col items-center cursor-pointer ${
+            marketNavSelected === "tokens" && "border-b-2 border-blue-500"
+          }`}
         >
           <FaDollarSign size={25} color="#fff" />
           <p className="text-md mt-1">{t("tokens")}</p>
         </div>
         <div
           onClick={() => setMarketNavSelected("dex")}
-          className={`flex flex-col items-center cursor-pointer ${marketNavSelected === "dex" && "border-b-2 border-blue-500"
-            }`}
+          className={`flex flex-col items-center cursor-pointer ${
+            marketNavSelected === "dex" && "border-b-2 border-blue-500"
+          }`}
         >
           <MdSwapVerticalCircle size={25} color="#fff" />
           <p className="text-md mt-1">DEX</p>

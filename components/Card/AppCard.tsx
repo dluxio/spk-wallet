@@ -15,6 +15,7 @@ export const AppCard = ({ app }: AppCardProps) => {
   useEffect(() => {
     const fetchImage = (json: any) => {
       let imagestring;
+
       if (json.image && Array.isArray(json.image)) {
         imagestring = json.image[0];
       } else if (typeof json.image == "string") {
@@ -24,7 +25,7 @@ export const AppCard = ({ app }: AppCardProps) => {
       } else {
         imagestring = "https://www.dlux.io/img/dlux-sdk.png";
       }
-      if (imagestring.substr(0, 5) !== "https") {
+      if (imagestring?.substring(0, 5) !== "https") {
         imagestring = "https://www.dlux.io/img/dlux-sdk.png";
       }
       setImage(imagestring);
