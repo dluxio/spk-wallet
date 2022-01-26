@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-
+import Masonary from "react-masonry-css";
 import axios from "axios";
+
 import { AppCard } from "../Card/AppCard";
+import { useQuery } from "../../constants/breakpoints";
 
 export const AppScreen = () => {
+  const { isMobile, isTablet } = useQuery();
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
@@ -12,11 +15,17 @@ export const AppScreen = () => {
     });
   }, []);
 
+  const getCols = () => (isTablet ? (isMobile ? 1 : 2) : 3);
+
   return (
-    <div className={`mx-10 mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3`}>
+    <Masonary
+      breakpointCols={getCols()}
+      className="masonry-grid sm:mx-4"
+      columnClassName="masonry-grid_column"
+    >
       {apps.map((app: any) => {
         return <AppCard key={app.permlink} app={app} />;
       })}
-    </div>
+    </Masonary>
   );
 };
