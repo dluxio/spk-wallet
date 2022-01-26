@@ -1,4 +1,1 @@
-# marketplace
-
-NFT
 # spk-wallet
