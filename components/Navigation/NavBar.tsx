@@ -24,7 +24,6 @@ import { placeHolder } from "../../constants";
 import { redoProfilePicture } from "../../utils";
 import { useQuery } from "../../constants/breakpoints";
 
-
 export const NavBar = () => {
   const { isMobile } = useQuery();
   const [profDropdown, setProfDropdown] = useState(false);
@@ -119,7 +118,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <div className="bg-black text-white px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
+    <div className="bg-primary text-white px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
       {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
           <p
