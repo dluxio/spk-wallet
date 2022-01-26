@@ -62,9 +62,9 @@ export const AppCard = ({ app }: AppCardProps) => {
     } else {
       client.database.getAccounts([author]).then((response: any) => {
         if (response[0]) {
-          console.log(response[0]);
           setProfilePicture(
-            JSON.parse(response[0].posting_json_metadata).profile.profile_image || placeHolder
+            JSON.parse(response[0].posting_json_metadata).profile
+              .profile_image || placeHolder
           );
         }
       });
