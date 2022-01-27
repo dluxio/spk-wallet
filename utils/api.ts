@@ -1,6 +1,8 @@
 import hive from "@hiveio/hive-js";
 import CeramicClient from "@ceramicnetwork/http-client";
 import { SpkClient } from '@spknetwork/graph-client';
+import { useRecoilState } from "recoil";
+import { broadcastState } from "../atoms";
 
 const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com")
 const spkClient = new SpkClient('https://us-01.infra.3speak.tv', ceramic);
@@ -601,15 +603,16 @@ export const dexBuy = async (
   return await handleBroadcastRequest(operations, username);
 };
 
-export const claim = async (username: string) => {
+export const claim = async (username: string, claimType: string) => {
+  console.log(username, claimType)
+
   const operations = [
     'custom_json',
     {
       required_auths: [username],
-      id: 'spk_claim',
+      id: claimType,
       required_posting_auths: 0,
-      json: JSON.stringify({ larynx: true }),
-
+      json: claimType === 'spk_claim' ? JSON.stringify({ larynx: true }) : JSON.stringify({}),
     }
   ]
 

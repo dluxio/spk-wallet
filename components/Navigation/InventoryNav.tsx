@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { FaDollarSign, FaGift } from "react-icons/fa";
 import { MdSwapVerticalCircle } from "react-icons/md";
 import { GoPlus } from "react-icons/go";
-import { inventoryNavState, userState } from "../../atoms";
+import { broadcastState, inventoryNavState, userState } from "../../atoms";
 import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
 import router from "next/router";
@@ -12,21 +12,29 @@ import { checkClaim } from "../../constants/api";
 import { claim } from "../../utils/api";
 
 export const InventoryNav = () => {
-  const [canClaim, setCanClaim] = useState(false);
+  const [claimType, setClaimType] = useState<boolean | string>(false);
   const { t } = useTranslation();
   const [query] = useLanguageQuery();
+  const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
   const [marketNavSelected, setMarketNavSelected] =
     useRecoilState(inventoryNavState);
-  const { name } = useRecoilValue(userState);
+  const user = useRecoilValue<any>(userState);
 
   useEffect(() => {
-    checkClaim(name).then((response) => {
-      setCanClaim(response);
-    });
-  }, []);
+    if (user) {
+      checkClaim(user.name).then((response) => {
+        setClaimType(response);
+      });
+    }
+  }, [user]);
 
   const handleClaim = async () => {
-    await claim(name);
+    const response: any = await claim(user.name, claimType as string);
+    if (response) {
+      if (response.success) {
+        setBroadcasts((prevState: any) => [...prevState, response]);
+      }
+    }
   };
 
   return (
@@ -66,7 +74,7 @@ export const InventoryNav = () => {
           <MdSwapVerticalCircle size={25} color="#fff" />
           <p className="text-md mt-1">DEX</p>
         </div>
-        {canClaim && (
+        {claimType && (
           <button
             onClick={handleClaim}
             className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-green-400 to-blue-500 rounded-xl"
