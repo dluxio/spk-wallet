@@ -8,7 +8,7 @@ import {
   prefixState,
   userState,
 } from "../../atoms";
-import { ftBuyTransfer, NFTBuy } from "../../utils";
+import { ftBuyTransfer, NFTBuy } from "../../utils/api";
 import { FormInput } from "../Utils/FormInput";
 import { Formik } from "formik";
 import { useTranslation } from "next-export-i18n";

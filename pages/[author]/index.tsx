@@ -5,7 +5,7 @@ import { ceramicApi, hiveApi, placeHolder } from "../../constants";
 import { Client } from "@hiveio/dhive";
 import { useTranslation } from "next-export-i18n";
 import { useHiveKeychainCeramic } from "spk-auth-react";
-import { getUserPosts } from "../../utils";
+import { getUserPosts } from "../../utils/api";
 import { ProfileCard } from "../../components/Card/ProfileCard";
 import { PostCard } from "../../components/Card/PostCard";
 import { useQuery } from "../../constants/breakpoints";

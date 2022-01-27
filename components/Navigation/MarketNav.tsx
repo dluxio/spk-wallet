@@ -22,7 +22,7 @@ export const MarketNav = () => {
       <div
         onClick={() => setMarketNavSelected("apps")}
         className={`flex flex-col items-center cursor-pointer ${
-          marketNavSelected === "apps" && "border-b-2 border-blue-500"
+          marketNavSelected === "apps" && "selected"
         }`}
       >
         <FaRocket size={25} color="#fff" />
@@ -31,7 +31,7 @@ export const MarketNav = () => {
       <div
         onClick={() => setMarketNavSelected("news")}
         className={`flex flex-col items-center cursor-pointer ${
-          marketNavSelected === "news" && "border-b-2 border-blue-500"
+          marketNavSelected === "news" && "selected"
         }`}
       >
         <FaNewspaper size={25} color="#fff" />

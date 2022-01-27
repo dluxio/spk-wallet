@@ -11,7 +11,7 @@ import {
 import { attributeColors } from "../../constants";
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { useTranslation } from "next-export-i18n";
-import { NFTMelt, SetPFP } from "../../utils";
+import { NFTMelt, SetPFP } from "../../utils/api";
 import { TransferNFTFormComp } from "../../components";
 import { Confirmation } from "../../components/Modals/Confirmation";
 import { AuctionNFTForm } from "../../components/Modals/AuctionForm";

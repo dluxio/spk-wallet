@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { useRecoilState } from "recoil";
-import { FaDollarSign } from "react-icons/fa";
-import { MdSwapHoriz, MdSwapVerticalCircle } from "react-icons/md";
-import { GiToken } from "react-icons/gi";
-import { MdStars } from "react-icons/md";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { FaDollarSign, FaGift } from "react-icons/fa";
+import { MdSwapVerticalCircle } from "react-icons/md";
 import { GoPlus } from "react-icons/go";
-import { inventoryNavState } from "../../atoms";
+import { broadcastState, inventoryNavState, userState } from "../../atoms";
 import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
 import router from "next/router";
+import { checkClaim } from "../../constants/api";
+import { claim } from "../../utils/api";
 
 export const InventoryNav = () => {
+  const [claimType, setClaimType] = useState<boolean | string>(false);
   const { t } = useTranslation();
   const [query] = useLanguageQuery();
+  const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
   const [marketNavSelected, setMarketNavSelected] =
     useRecoilState(inventoryNavState);
+  const user = useRecoilValue<any>(userState);
+
+  useEffect(() => {
+    if (user) {
+      checkClaim(user.name).then((response) => {
+        setClaimType(response);
+      });
+    }
+  }, [user]);
+
+  const handleClaim = async () => {
+    const response: any = await claim(user.name, claimType as string);
+    if (response) {
+      if (response.success) {
+        setBroadcasts((prevState: any) => [...prevState, response]);
+      }
+    }
+  };
 
   return (
     <div className="flex flex-wrap items-center justify-between">
@@ -39,7 +59,7 @@ export const InventoryNav = () => {
         <div
           onClick={() => setMarketNavSelected("tokens")}
           className={`flex flex-col items-center cursor-pointer ${
-            marketNavSelected === "tokens" && "border-b-2 border-blue-500"
+            marketNavSelected === "tokens" && "selected"
           }`}
         >
           <FaDollarSign size={25} color="#fff" />
@@ -48,12 +68,20 @@ export const InventoryNav = () => {
         <div
           onClick={() => setMarketNavSelected("dex")}
           className={`flex flex-col items-center cursor-pointer ${
-            marketNavSelected === "dex" && "border-b-2 border-blue-500"
+            marketNavSelected === "dex" && "selected"
           }`}
         >
           <MdSwapVerticalCircle size={25} color="#fff" />
           <p className="text-md mt-1">DEX</p>
         </div>
+        {claimType && (
+          <button
+            onClick={handleClaim}
+            className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-green-400 to-blue-500 rounded-xl"
+          >
+            <FaGift size="2rem" />
+          </button>
+        )}
       </div>
       <div className="flex mx-10 items-center text-white">
         <div

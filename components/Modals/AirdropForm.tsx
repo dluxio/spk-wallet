@@ -6,7 +6,7 @@ import { FormInput } from '../Utils/FormInput';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { prefixState, userState, broadcastState } from '../../atoms';
 
-import { FTAirdrop } from '../../utils';
+import { FTAirdrop } from "../../utils/api";
 
 export const Airdrop = ({
   handleClose,

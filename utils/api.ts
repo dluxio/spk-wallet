@@ -1,6 +1,8 @@
 import hive from "@hiveio/hive-js";
 import CeramicClient from "@ceramicnetwork/http-client";
 import { SpkClient } from '@spknetwork/graph-client';
+import { useRecoilState } from "recoil";
+import { broadcastState } from "../atoms";
 
 const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com")
 const spkClient = new SpkClient('https://us-01.infra.3speak.tv', ceramic);
@@ -113,18 +115,18 @@ export const Auction = async (
       json: JSON.stringify(
         auctionData.type === "DLUX"
           ? {
-              set: auctionData.set,
-              uid: auctionData.uid,
-              price: auctionData.price,
-              time: auctionData.time,
-            }
+            set: auctionData.set,
+            uid: auctionData.uid,
+            price: auctionData.price,
+            time: auctionData.time,
+          }
           : {
-              set: auctionData.set,
-              uid: auctionData.uid,
-              price: auctionData.price,
-              time: auctionData.time,
-              type: auctionData.type,
-            }
+            set: auctionData.set,
+            uid: auctionData.uid,
+            price: auctionData.price,
+            time: auctionData.time,
+            type: auctionData.type,
+          }
       ),
     },
   ];
@@ -307,29 +309,28 @@ export const NFTBid = async (
 ) => {
   const id = `${prefix}${kind}_bid`;
 
-  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${
-    type === "HIVE" ? "HIVE" : "HBD"
-  }`;
+  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${type === "HIVE" ? "HIVE" : "HBD"
+    }`;
 
   const operations =
     type === "DLUX"
       ? [
-          "custom_json",
-          {
-            required_auths: [username],
-            required_posting_auths: [],
-            id,
-            json: JSON.stringify(nftData),
-          },
-        ]
+        "custom_json",
+        {
+          required_auths: [username],
+          required_posting_auths: [],
+          id,
+          json: JSON.stringify(nftData),
+        },
+      ]
       : [
-          "transfer",
-          {
-            to: cc,
-            amount,
-            memo: `NFTbid ${nftData.set}:${nftData.uid}`,
-          },
-        ];
+        "transfer",
+        {
+          to: cc,
+          amount,
+          memo: `NFTbid ${nftData.set}:${nftData.uid}`,
+        },
+      ];
 
   return await handleBroadcastRequest(operations, username);
 };
@@ -436,8 +437,8 @@ export const ReserveRespond = async (
     reserveData.kind === "fts"
       ? `${prefix}ft_escrow_${response}`
       : response === "complete"
-      ? `${prefix}nft_reserve_${response}`
-      : `${prefix}nft_transfer_${response}`;
+        ? `${prefix}nft_reserve_${response}`
+        : `${prefix}nft_transfer_${response}`;
 
   const operations = [
     "custom_json",
@@ -593,15 +594,30 @@ export const dexBuy = async (
     {
       from: username,
       to,
-      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(2)} ${
-        data.coin
-      }`,
+      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(2)} ${data.coin
+        }`,
       memo: JSON.stringify(data.buyData),
     },
   ];
 
   return await handleBroadcastRequest(operations, username);
 };
+
+export const claim = async (username: string, claimType: string) => {
+  console.log(username, claimType)
+
+  const operations = [
+    'custom_json',
+    {
+      required_auths: [username],
+      id: claimType,
+      required_posting_auths: 0,
+      json: claimType === 'spk_claim' ? JSON.stringify({ larynx: true }) : JSON.stringify({}),
+    }
+  ]
+
+  return await handleBroadcastRequest(operations, username);
+}
 
 export const addRoyalties = async (
   royaltieString: string,
@@ -658,3 +674,4 @@ export const parseData = (data: any) => {
     ],
   };
 };
+

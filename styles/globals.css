@@ -22,7 +22,7 @@ a {
 }
 
 .selected {
-  @apply text-gray-500 border-b-4 border-blue-500;
+  @apply text-white border-b-4 border-blue-500;
 }
 
 .link {

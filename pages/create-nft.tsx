@@ -6,7 +6,7 @@ import { FormInput } from "../components/Utils/FormInput";
 import { useRecoilValue } from "recoil";
 import { userState, prefixState } from "../atoms";
 
-import { NFTCreate } from "../utils";
+import { NFTCreate } from "../utils/api";
 import { useTranslation } from "next-export-i18n";
 
 const CreateNFT = () => {

@@ -21,9 +21,8 @@ import {
 import { Login } from "../Login";
 import { Spinner } from "../Spinner";
 import { placeHolder } from "../../constants";
-import { redoProfilePicture } from "../../utils";
+import { redoProfilePicture } from "../../utils/api";
 import { useQuery } from "../../constants/breakpoints";
-
 
 export const NavBar = () => {
   const { isMobile } = useQuery();
@@ -123,7 +122,7 @@ export const NavBar = () => {
       {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
           <p
-            className={`${url === "" && "selected"} navLink`}
+            className={`${url === "" && "selected text-gray-400"} navLink`}
             onClick={() => router.push({ pathname: "/", query })}
           >
             {t("home")}
@@ -134,7 +133,7 @@ export const NavBar = () => {
                 url === "create-nft" ||
                 url === "trades" ||
                 url === "nft") &&
-              "selected"
+              "selected text-gray-400"
             } ${user ? "navLink" : "text-gray-600 cursor-not-allowed"}`}
             onClick={() => {
               if (user) {
