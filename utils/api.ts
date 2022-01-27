@@ -113,18 +113,18 @@ export const Auction = async (
       json: JSON.stringify(
         auctionData.type === "DLUX"
           ? {
-              set: auctionData.set,
-              uid: auctionData.uid,
-              price: auctionData.price,
-              time: auctionData.time,
-            }
+            set: auctionData.set,
+            uid: auctionData.uid,
+            price: auctionData.price,
+            time: auctionData.time,
+          }
           : {
-              set: auctionData.set,
-              uid: auctionData.uid,
-              price: auctionData.price,
-              time: auctionData.time,
-              type: auctionData.type,
-            }
+            set: auctionData.set,
+            uid: auctionData.uid,
+            price: auctionData.price,
+            time: auctionData.time,
+            type: auctionData.type,
+          }
       ),
     },
   ];
@@ -307,29 +307,28 @@ export const NFTBid = async (
 ) => {
   const id = `${prefix}${kind}_bid`;
 
-  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${
-    type === "HIVE" ? "HIVE" : "HBD"
-  }`;
+  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${type === "HIVE" ? "HIVE" : "HBD"
+    }`;
 
   const operations =
     type === "DLUX"
       ? [
-          "custom_json",
-          {
-            required_auths: [username],
-            required_posting_auths: [],
-            id,
-            json: JSON.stringify(nftData),
-          },
-        ]
+        "custom_json",
+        {
+          required_auths: [username],
+          required_posting_auths: [],
+          id,
+          json: JSON.stringify(nftData),
+        },
+      ]
       : [
-          "transfer",
-          {
-            to: cc,
-            amount,
-            memo: `NFTbid ${nftData.set}:${nftData.uid}`,
-          },
-        ];
+        "transfer",
+        {
+          to: cc,
+          amount,
+          memo: `NFTbid ${nftData.set}:${nftData.uid}`,
+        },
+      ];
 
   return await handleBroadcastRequest(operations, username);
 };
@@ -436,8 +435,8 @@ export const ReserveRespond = async (
     reserveData.kind === "fts"
       ? `${prefix}ft_escrow_${response}`
       : response === "complete"
-      ? `${prefix}nft_reserve_${response}`
-      : `${prefix}nft_transfer_${response}`;
+        ? `${prefix}nft_reserve_${response}`
+        : `${prefix}nft_transfer_${response}`;
 
   const operations = [
     "custom_json",
@@ -593,15 +592,29 @@ export const dexBuy = async (
     {
       from: username,
       to,
-      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(2)} ${
-        data.coin
-      }`,
+      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(2)} ${data.coin
+        }`,
       memo: JSON.stringify(data.buyData),
     },
   ];
 
   return await handleBroadcastRequest(operations, username);
 };
+
+export const claim = async (username: string) => {
+  const operations = [
+    'custom_json',
+    {
+      required_auths: [username],
+      id: 'spk_claim',
+      required_posting_auths: 0,
+      json: JSON.stringify({ larynx: true }),
+
+    }
+  ]
+
+  return await handleBroadcastRequest(operations, username);
+}
 
 export const addRoyalties = async (
   royaltieString: string,
@@ -658,3 +671,4 @@ export const parseData = (data: any) => {
     ],
   };
 };
+

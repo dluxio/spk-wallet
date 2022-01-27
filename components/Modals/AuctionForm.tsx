@@ -7,7 +7,7 @@ import { ImCross } from "react-icons/im";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, prefixState, broadcastState } from "../../atoms";
 
-import { Auction } from "../../utils";
+import { Auction } from "../../utils/api";
 import { useTranslation } from "next-export-i18n";
 import Select from "react-select";
 import { customSelectStyles, selectOptions } from "../../constants";

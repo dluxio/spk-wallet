@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { ImArrowRight2, ImCross } from "react-icons/im";
 import { FaQuestion } from "react-icons/fa";
 
-import { toBase64, FTOpen } from "../../utils";
+import { toBase64, FTOpen } from "../../utils/api";
 import { Airdrop } from "../Modals/AirdropForm";
 import axios from "axios";
 import { AuctionNFTForm } from "../Modals/AuctionForm";

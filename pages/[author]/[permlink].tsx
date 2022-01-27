@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import hive from "@hiveio/hive-js";
 import { Client } from "@hiveio/dhive";
-import { comment, vote } from "../../utils";
+import { comment, vote } from "../../utils/api";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { broadcastState, ipfsLinkState, userState } from "../../atoms";
 import { CommentCard } from "../../components/Card/CommentCard";

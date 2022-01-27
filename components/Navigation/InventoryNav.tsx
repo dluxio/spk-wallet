@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { FaDollarSign, FaGift } from "react-icons/fa";
 import { MdSwapVerticalCircle } from "react-icons/md";
 import { GoPlus } from "react-icons/go";
-import { inventoryNavState } from "../../atoms";
+import { inventoryNavState, userState } from "../../atoms";
 import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
 import router from "next/router";
+import { checkClaim } from "../../constants/api";
+import { claim } from "../../utils/api";
 
 export const InventoryNav = () => {
+  const [canClaim, setCanClaim] = useState(false);
   const { t } = useTranslation();
   const [query] = useLanguageQuery();
   const [marketNavSelected, setMarketNavSelected] =
     useRecoilState(inventoryNavState);
+  const { name } = useRecoilValue(userState);
+
+  useEffect(() => {
+    checkClaim(name).then((response) => {
+      setCanClaim(response);
+    });
+  }, []);
+
+  const handleClaim = async () => {
+    await claim(name);
+  };
 
   return (
     <div className="flex flex-wrap items-center justify-between">
@@ -52,9 +66,14 @@ export const InventoryNav = () => {
           <MdSwapVerticalCircle size={25} color="#fff" />
           <p className="text-md mt-1">DEX</p>
         </div>
-        <button className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-green-400 to-blue-500 rounded-xl">
-          <FaGift size="2rem" />
-        </button>
+        {canClaim && (
+          <button
+            onClick={handleClaim}
+            className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-green-400 to-blue-500 rounded-xl"
+          >
+            <FaGift size="2rem" />
+          </button>
+        )}
       </div>
       <div className="flex mx-10 items-center text-white">
         <div

@@ -1,8 +1,10 @@
 import { atom } from "recoil";
 
-export const userState = atom({
+export const userState = atom<{ name: string }>({
   key: "userState",
-  default: null,
+  default: {
+    name: ''
+  },
 });
 
 export const inventoryNavState = atom({

@@ -11,7 +11,7 @@ import {
 } from "../../atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { NFTBid } from "../../utils";
+import { NFTBid } from "../../utils/api";
 
 export const BidForm: React.FC<{
   set: string;

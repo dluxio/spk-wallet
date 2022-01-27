@@ -6,7 +6,7 @@ import { FormInput } from "../Utils/FormInput";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, prefixState, broadcastState } from "../../atoms";
 
-import { Sell } from "../../utils";
+import { Sell } from "../../utils/api";
 import { useTranslation } from "next-export-i18n";
 
 type SellFormProps = {
