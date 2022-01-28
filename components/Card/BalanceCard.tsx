@@ -9,7 +9,7 @@ export const BalanceCard = ({
   balance: number;
 }) => {
   return (
-    <div className="bg-gray-700 px-5 py-3 text-white  rounded-xl border-2 border-gray-800">
+    <div className="bg-gray-500 px-5 py-3 text-white  rounded-xl border-2 border-gray-700">
       <div className="flex items-center justify-between">
         {currency === "DLUX" && (
           <img

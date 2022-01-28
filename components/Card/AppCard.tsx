@@ -72,7 +72,7 @@ export const AppCard = ({ app }: AppCardProps) => {
   }, []);
 
   return (
-    <div className="border-2 my-3 border-gray-800 rounded-xl w-full bg-gray-600">
+    <div className="border-2 my-3 border-gray-800 rounded-xl w-full bg-gray-500">
       <div className="rounded-t-xl">
         {image && (
           <img src={image} className="w-full rounded-t-xl" alt="appPhoto" />

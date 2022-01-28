@@ -10,6 +10,7 @@ import { useLanguageQuery, useTranslation } from "next-export-i18n";
 import router from "next/router";
 import { checkClaim } from "../../constants/api";
 import { claim } from "../../utils/api";
+import { white } from "../../constants/colors";
 
 export const InventoryNav = () => {
   const [claimType, setClaimType] = useState<boolean | string>(false);
@@ -62,7 +63,7 @@ export const InventoryNav = () => {
             marketNavSelected === "tokens" && "selected"
           }`}
         >
-          <FaDollarSign size={25} color="#fff" />
+          <FaDollarSign size={25} />
           <p className="text-md mt-1">{t("tokens")}</p>
         </div>
         <div
@@ -71,13 +72,13 @@ export const InventoryNav = () => {
             marketNavSelected === "dex" && "selected"
           }`}
         >
-          <MdSwapVerticalCircle size={25} color="#fff" />
+          <MdSwapVerticalCircle size={25} />
           <p className="text-md mt-1">DEX</p>
         </div>
         {claimType && (
           <button
             onClick={handleClaim}
-            className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-green-400 to-blue-500 rounded-xl"
+            className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-blue-400 to-red-500 rounded-xl"
           >
             <FaGift size="2rem" />
           </button>

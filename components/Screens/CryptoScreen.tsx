@@ -24,7 +24,7 @@ export const CryptoScreen = ({ }) => {
 
   return (
     <div className="w-full">
-      <h1 className="text-white text-xl mx-10 my-2">{t("balances")}</h1>
+      <h1 className="text-gray-700 text-xl mx-10 my-2">{t("balances")}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-5 px-10">
         <BalanceCard currency="DLUX" balance={dluxBal} />
         <BalanceCard currency="HIVE" balance={hiveBal} />

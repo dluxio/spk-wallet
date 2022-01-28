@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useRecoilState } from "recoil";
-import { FaShoppingBag, FaRocket, FaNewspaper } from "react-icons/fa";
+import { FaRocket, FaNewspaper } from "react-icons/fa";
 import { marketNavState } from "../../atoms";
 import { useTranslation } from "next-export-i18n";
 
@@ -10,7 +10,7 @@ export const MarketNav = () => {
     useRecoilState(marketNavState);
   const { t } = useTranslation();
   return (
-    <div className="flex justify-center sm:justify-start mx-10 my-10 text-white gap-8 text-xl">
+    <div className="flex justify-center sm:justify-start text-white mx-10 my-10 text-whtie gap-8 text-xl">
       {/* <div
         onClick={() => setMarketNavSelected("exchange")}
         className={`flex flex-col items-center cursor-pointer ${marketNavSelected === "exchange" && "border-b-2 border-blue-500"
@@ -25,7 +25,7 @@ export const MarketNav = () => {
           marketNavSelected === "apps" && "selected"
         }`}
       >
-        <FaRocket size={25} color="#fff" />
+        <FaRocket size={25} />
         <p className="text-md mt-1">{t("apps")}</p>
       </div>
       <div
@@ -34,7 +34,7 @@ export const MarketNav = () => {
           marketNavSelected === "news" && "selected"
         }`}
       >
-        <FaNewspaper size={25} color="#fff" />
+        <FaNewspaper size={25} />
         <p className="text-md mt-1">{t("news")}</p>
       </div>
     </div>

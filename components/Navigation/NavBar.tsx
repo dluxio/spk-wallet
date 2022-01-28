@@ -114,15 +114,27 @@ export const NavBar = () => {
       getUser();
     }
 
+    fetch("https://3speak.tv/img/3S_logo.svg")
+      .then((res) => res.text())
+      .then((svg) => {
+        console.log(svg);
+        if (document.getElementById("logo")) {
+          document.getElementById("logo")!.innerHTML = svg;
+        }
+      });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="bg-black text-white px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
+    <div className="bg-white text-black shadow-xl px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
+      <div className="w-40" id="logo">
+        3Speak
+      </div>
       {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
           <p
-            className={`${url === "" && "selected text-gray-400"} navLink`}
+            className={`${url === "" && "selected"} navLink`}
             onClick={() => router.push({ pathname: "/", query })}
           >
             {t("home")}
@@ -133,7 +145,7 @@ export const NavBar = () => {
                 url === "create-nft" ||
                 url === "trades" ||
                 url === "nft") &&
-              "selected text-gray-400"
+              "selected"
             } ${user ? "navLink" : "text-gray-600 cursor-not-allowed"}`}
             onClick={() => {
               if (user) {
