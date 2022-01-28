@@ -5,7 +5,7 @@ import { FcGlobe } from "react-icons/fc";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import axios from "axios";
-import { useHiveKeychainCeramic } from "spk-auth-react";
+import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
 import {
   useLanguageQuery,
   useTranslation,

@@ -3,7 +3,7 @@ import ReactJWPlayer from "react-jw-player";
 import { RiHeartFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { MdComment } from "react-icons/md";
-import { useHiveKeychainCeramic } from "spk-auth-react";
+import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
 import { ceramicApi } from "../../constants";
 
 type IPost = {

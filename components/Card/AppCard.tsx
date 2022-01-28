@@ -6,7 +6,7 @@ import { FaPlay } from "react-icons/fa";
 import { RiUser3Fill, RiHeartFill } from "react-icons/ri";
 
 import { ceramicApi, hiveApi, placeHolder } from "../../constants";
-import { useHiveKeychainCeramic } from "spk-auth-react";
+import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
 
 type AppCardProps = {
   app: any;

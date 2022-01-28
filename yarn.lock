@@ -147,7 +147,7 @@
     cross-fetch "^3.1.4"
     uint8arrays "^2.0.5"
 
-"@ceramicnetwork/common@^1.11.0":
+"@ceramicnetwork/common@^1.10.1", "@ceramicnetwork/common@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@ceramicnetwork/common/-/common-1.11.0.tgz#f195ef61de73366a64d775496c9328660e9a30a2"
   integrity sha512-UU7/POxSl+Wf5f/Wi/ISxhPqaHKqJ4crvVL9/I4FrnDPEqsUPasBwuo5alN6T2zz+AMDksc+bk1FXKLKKY9VRg==
@@ -301,6 +301,13 @@
     "@ceramicstudio/idx-constants" "^1.0.0"
     caip "^0.9.2"
     cross-fetch "^3.1.4"
+
+"@datamodels/identity-profile-basic@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@datamodels/identity-profile-basic/-/identity-profile-basic-0.1.2.tgz#4eb78b5493950f1a8b3cbca87ec56dd6d26eba4e"
+  integrity sha512-bV+71JP5ykYB2s77LJkGxUzcWYRyYMGSkhtpn+oN/bAgRAKjlp7UYnivM7XVK5NXAVcI7RPlTQt7YHk3R5Wj4A==
+  dependencies:
+    "@glazed/types" "^0.1.3"
 
 "@emotion/cache@^11.4.0", "@emotion/cache@^11.7.1":
   version "11.7.1"
@@ -700,6 +707,14 @@
     "@ethersproject/logger" "^5.5.0"
     "@ethersproject/properties" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
+
+"@glazed/types@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@glazed/types/-/types-0.1.3.tgz#3cf7aa8f45efa987fe2a52b61cb9b4346cfc3600"
+  integrity sha512-u1QNCJ/vxVkni1eDZWstIZxzPLRn9x2LrTjGg0EmFwyZXhaz9fHRjt9hy6xrKyT7jjqlbsViP+Krm1V9aL6Zng==
+  dependencies:
+    ajv "^8.6.2"
+    dids "^2.3.0"
 
 "@hapi/accept@5.0.2":
   version "5.0.2"
@@ -1118,6 +1133,14 @@
     "@hiveio/dhive" "^1.1.1"
     "@stablelib/sha256" "^1.0.1"
     dids "^2.4.2"
+
+"@spknetwork/idx-data-utils@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@spknetwork/idx-data-utils/-/idx-data-utils-0.1.0.tgz#2105644b9ecbf4df6675ac6d41384e52da1bf339"
+  integrity sha512-rjVpxbZuDE1if6ABxmTLuPJ+RUhcu2BUUIu44mI0PC/sto1XPlTm4RxqblZSIF8CjYu4fNizFxtcoPVsx/Rcow==
+  dependencies:
+    "@ceramicnetwork/common" "^1.10.1"
+    "@datamodels/identity-profile-basic" "^0.1.2"
 
 "@stablelib/aead@^1.0.1":
   version "1.0.1"
@@ -1721,7 +1744,7 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^8.0.0, ajv@^8.0.1, ajv@^8.1.0:
+ajv@^8.0.0, ajv@^8.0.1, ajv@^8.1.0, ajv@^8.6.2:
   version "8.9.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.9.0.tgz#738019146638824dea25edcf299dcba1b0e7eb18"
   integrity sha512-qOKJyNj/h+OWx7s5DePL6Zu1KeM9jPZhwBqs+7DzP6bGOvqzVCSf0xueYmVuaC/oQ/VtS2zLMLHdQFbkka+XDQ==
@@ -3365,7 +3388,7 @@ did-resolver@^3.0.1, did-resolver@^3.1.0, did-resolver@^3.1.3, did-resolver@^3.1
   resolved "https://registry.yarnpkg.com/did-resolver/-/did-resolver-3.1.5.tgz#1a82a00fa96d64085676183bff40ebc13c88cd6a"
   integrity sha512-/4lM1vK5osnWVZ2oN9QhlWV5xOwssuLSL1MvueBc8LQWotbD5kM9XQMe7h4GydYpbh3JaWMFkOWwc9jvSZ+qgg==
 
-dids@^2.1.0, dids@^2.4.0, dids@^2.4.2:
+dids@^2.1.0, dids@^2.3.0, dids@^2.4.0, dids@^2.4.2:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/dids/-/dids-2.4.3.tgz#91b2243280bf90dd6bd24dad061d58bf4ec38453"
   integrity sha512-V4EX8XTtnyuZq0iqzV9kY7Zn7JlmaezLnxrK9g1bb7wT6FNZdsufVnEcIqCaSu4w64Nmaf1zHWbNeNfpxDvERg==
@@ -7419,20 +7442,6 @@ space-separated-tokens@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/space-separated-tokens/-/space-separated-tokens-2.0.1.tgz#43193cec4fb858a2ce934b7f98b7f2c18107098b"
   integrity sha512-ekwEbFp5aqSPKaqeY1PGrlGQxPNaq+Cnx4+bE2D8sciBQrHpbwoBbawqTN2+6jPs9IdWxxiUcN0K2pkczD3zmw==
-
-spk-auth-react@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/spk-auth-react/-/spk-auth-react-0.0.1.tgz#d586833a5719b6dbaaaa9421a786eef7bc00025a"
-  integrity sha512-A5PSHCGdKYqD25nw/Smy8X6+9fuponIBlVTJceh10VASxFSJMZFyDzVPC/N/LfaIx2FSD5OEPkuv0I0ev3S1JQ==
-  dependencies:
-    "3id-did-provider" "^1.1.1"
-    "@ceramicnetwork/3id-did-resolver" "^1.4.9"
-    "@ceramicnetwork/http-client" "^1.5.0"
-    "@ceramicstudio/idx" "^0.12.2"
-    "@hiveio/dhive" "^1.1.1"
-    "@stablelib/sha256" "^1.0.1"
-    dids "^2.4.2"
-    jotai "^1.4.5"
 
 split-on-first@^1.0.0:
   version "1.1.0"
