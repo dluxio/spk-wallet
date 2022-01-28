@@ -68,11 +68,10 @@ export const Login = ({ handleClose }: LoginProps) => {
 
   return (
     <div className="fixed  top-0 left-0 flex justify-center items-center h-screen w-screen bg-gray-700 bg-opacity-75 z-50">
-      <div className="p-8 bg-gray-700 rounded-xl border-4 border-gray-800 relative">
+      <div className="p-8 bg-gray-300 rounded-xl border-4 border-gray-800 relative">
         <button className="m-2 absolute top-0 right-0">
           <ImCross
             size={15}
-            color="#fff"
             opacity={100}
             onClick={handleClose as MouseEventHandler}
           />
@@ -83,14 +82,14 @@ export const Login = ({ handleClose }: LoginProps) => {
             type="text"
             placeholder="Username"
             ref={usernameRef}
-            className="px-3 py-1 rounded-lg border bg-gray-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="px-3 py-1 rounded-lg border bg-gray-300 border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200"
             onKeyDown={handleSubmit}
           />
           {errors.user && <h1 className="text-red-500">{t("userNotFound")}</h1>}
 
           <button
             onClick={handleSubmit}
-            className="rounded-lg border border-white py-1 w-2/3 px-2 bg-gray-500 focus:ring-4 mx-auto focus:outline-none focus:ring-gray-700"
+            className="rounded-lg border border-gray-500 py-1 w-2/3 px-2 bg-gray-200 focus:ring-4 mx-auto focus:outline-none focus:ring-gray-700"
           >
             {t("login")}
           </button>

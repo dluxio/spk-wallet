@@ -204,7 +204,7 @@ export const NavBar = () => {
           <div
             className={`${
               profDropdown ? "" : "hidden"
-            } absolute bg-white top-14 right-2 px-2 pt-2 rounded-xl flex flex-col z-40`}
+            } absolute bg-gray-200 top-14 right-10 px-2 pt-2 rounded-xl flex flex-col z-40`}
           >
             <a onClick={handleSettings} className="btn">
               {t("settings")}
