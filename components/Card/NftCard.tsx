@@ -13,7 +13,7 @@ import { useTranslation } from "next-export-i18n";
 
 import axios from "axios";
 
-import { handleSellCancel, NFTBuy } from "../../utils/api";
+import { handleSellCancel, NFTBuy } from "../../utils";
 import { useRouter } from "next/router";
 
 type NftCardProp = {

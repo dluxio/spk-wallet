@@ -6,7 +6,7 @@ import { FormInput } from "../Utils/FormInput";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, prefixState, broadcastState } from "../../atoms";
 
-import { Auction } from "../../utils/api";
+import { Auction } from "../../utils";
 import { useTranslation } from "next-export-i18n";
 import Select from "react-select";
 import { customSelectStyles, selectOptions } from "../../constants";

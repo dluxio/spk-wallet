@@ -21,7 +21,7 @@ import {
 import { Login } from "../Login";
 import { Spinner } from "../Spinner";
 import { placeHolder } from "../../constants";
-import { redoProfilePicture } from "../../utils/api";
+import { redoProfilePicture } from "../../utils";
 import { useQuery } from "../../constants/breakpoints";
 
 export const NavBar = () => {

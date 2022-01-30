@@ -11,7 +11,7 @@ import {
 } from "../../atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { NFTBid } from "../../utils/api";
+import { NFTBid } from "../../utils";
 import { ModalWrapper } from "../Utils/ModalWrapper";
 
 export const BidForm: React.FC<{

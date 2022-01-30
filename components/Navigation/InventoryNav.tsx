@@ -9,7 +9,7 @@ import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
 import router from "next/router";
 import { checkClaim } from "../../constants/api";
-import { claim } from "../../utils/api";
+import { claim } from "../../utils";
 import { white } from "../../constants/colors";
 
 export const InventoryNav = () => {

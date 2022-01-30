@@ -5,7 +5,7 @@ import { apiLinkState } from "../../atoms";
 import axios from "axios";
 import dynamic from "next/dynamic";
 
-import { parseData } from "../../utils/api";
+import { parseData } from "../../utils";
 
 export const DEXChart = ({ coin }: { coin: "HIVE" | "HBD" }) => {
   const apiLink: string = useRecoilValue(apiLinkState);

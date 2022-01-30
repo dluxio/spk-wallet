@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FaQuestion } from "react-icons/fa";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, prefixState, broadcastState, apiLinkState } from "../../atoms";
-import { ReserveRespond, toBase64 } from "../../utils/api";
+import { ReserveRespond, toBase64 } from "../../utils";
 
 type TradeCardProps = {
   trade: {

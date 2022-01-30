@@ -5,7 +5,7 @@ import { FaReply } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../atoms";
-import { replyComment } from "../../utils/api";
+import { replyComment } from "../../utils";
 import { hiveApi, placeHolder } from "../../constants";
 
 export const CommentCard = ({ comment }: { comment: any }) => {

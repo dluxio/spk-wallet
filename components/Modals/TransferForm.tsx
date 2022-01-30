@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { FormInput } from "../Utils/FormInput";
 import { ImCross } from "react-icons/im";
 
-import { Give, ReserveTrade } from "../../utils/api";
+import { Give, ReserveTrade } from "../../utils";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { prefixState, userState, broadcastState } from "../../atoms";
 import { useTranslation } from "next-export-i18n";

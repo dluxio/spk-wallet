@@ -9,7 +9,7 @@ import { BidForm } from "../Modals/BidForm";
 
 import { useRecoilValue } from "recoil";
 import { apiLinkState, userState } from "../../atoms";
-import { toBase64 } from "../../utils/api";
+import { toBase64 } from "../../utils";
 import { FaQuestion } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-export-i18n";

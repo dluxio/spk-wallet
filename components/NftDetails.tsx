@@ -6,7 +6,7 @@ import { AuctionNFTForm } from "./Modals/AuctionForm";
 import { SellForm } from "./Modals/SellForm";
 import { Confirmation } from "./Modals/Confirmation";
 
-import { NFTMelt, SetPFP } from "../utils/api";
+import { NFTMelt, SetPFP } from "../utils";
 import { broadcastState, prefixState, userState } from "../atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { attributeColors } from "../constants";

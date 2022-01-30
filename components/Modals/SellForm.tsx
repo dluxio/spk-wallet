@@ -6,7 +6,7 @@ import { FormInput } from "../Utils/FormInput";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, prefixState, broadcastState } from "../../atoms";
 
-import { Sell } from "../../utils/api";
+import { Sell } from "../../utils";
 import { useTranslation } from "next-export-i18n";
 import { ModalWrapper } from "../Utils/ModalWrapper";
 

@@ -2,7 +2,7 @@ import { useTranslation } from "next-export-i18n";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { dlux_ccState, prefixState, userState } from "../../atoms";
-import { dexBuy, dexSell } from "../../utils/api";
+import { dexBuy, dexSell } from "../../utils";
 
 export const Order = ({ type, coin }: { type: string; coin: string }) => {
   const [orderType, setOrderType] = useState("limit");

@@ -10,6 +10,7 @@ type FormInputProps = {
   name: string;
   type?: string;
   min?: number;
+  title?: string;
 };
 
 export const FormInput = ({
@@ -20,6 +21,7 @@ export const FormInput = ({
   touched,
   name,
   min,
+  title,
   type = "text",
 }: FormInputProps) => {
   const formattedName = name.replace("_", " ");
@@ -28,10 +30,13 @@ export const FormInput = ({
   return (
     <div className="flex flex-col w-full">
       <label className="text-left mb-1 text-md" htmlFor="start">
-        {t(formattedName).charAt(0).toUpperCase() + t(formattedName).slice(1)}
+        {title
+          ? title
+          : t(formattedName).charAt(0).toUpperCase() +
+            t(formattedName).slice(1)}
       </label>
       <input
-        className="px-3 py-1 rounded-lg border bg-gray-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        className="px-3 py-1 rounded-lg border bg-gray-300 text-gray-700 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
         type={type}
         name={name}
         onChange={handleChange}
