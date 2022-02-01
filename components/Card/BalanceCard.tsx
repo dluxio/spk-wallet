@@ -1,5 +1,5 @@
 import React from "react";
-import { DluxInfo } from "../Utils/DluxInfo";
+import { LarynxInfo } from "../Utils/DluxInfo";
 import { HiveInfo } from "../Utils/HiveInfo";
 
 export const BalanceCard = ({
@@ -7,7 +7,7 @@ export const BalanceCard = ({
   balance,
 }: {
   currency: string;
-  balance: number | { DLUX: number; GOV: number };
+  balance: number | { LARYNX: number; GOV: number };
 }) => {
   return (
     <div
@@ -33,14 +33,12 @@ export const BalanceCard = ({
         <h1 className="text-xl mr-3">
           {currency === "HIVE"
             ? balance
-            : ((balance as { DLUX: number; GOV: number }).DLUX / 1000).toFixed(
-                2
-              )}{" "}
-          {currency}
+            : ((balance as { LARYNX: number }).LARYNX / 1000).toFixed(2)}{" "}
+          {currency === "DLUX" ? "LARYNX" : currency}
         </h1>
       </div>
       {currency === "DLUX" && (
-        <DluxInfo balance={balance as { DLUX: number; GOV: number }} />
+        <LarynxInfo balance={balance as { LARYNX: number; GOV: number }} />
       )}
       {currency === "HIVE" && <HiveInfo balance={balance as number} />}
     </div>

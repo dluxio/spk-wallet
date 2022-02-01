@@ -3,7 +3,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 import { FcGlobe } from "react-icons/fc";
 import { FaBars } from "react-icons/fa";
-import Image from "next/image";
 import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
 import { Client } from "@hiveio/dhive";
 import {
@@ -12,12 +11,7 @@ import {
   LanguageSwitcher,
 } from "next-export-i18n";
 
-import {
-  userState,
-  broadcastState,
-  refreshState,
-  apiLinkState,
-} from "../../atoms";
+import { userState, broadcastState, refreshState } from "../../atoms";
 import { Login } from "../Login";
 import { Spinner } from "../Spinner";
 import { hiveApi, placeHolder } from "../../constants";
@@ -34,7 +28,6 @@ export const NavBar = () => {
   const [user, setUser] = useRecoilState<any>(userState);
   const [pfpData, setPfp] = useState<any>(placeHolder);
   const router = useRouter();
-  const apiLink: string = useRecoilValue(apiLinkState);
   const url = router.pathname.split("/")[1];
   const broadcasts: any = useRecoilValue(broadcastState);
   const refresh: string = useRecoilValue(refreshState);
@@ -75,8 +68,6 @@ export const NavBar = () => {
             const metadata = JSON.parse(
               response[0].posting_json_metadata
             ).profile;
-
-            console.log(metadata);
             setPfp(metadata);
           }
         });
@@ -125,7 +116,6 @@ export const NavBar = () => {
     fetch("https://3speak.tv/img/3S_logo.svg")
       .then((res) => res.text())
       .then((svg) => {
-        console.log(svg);
         if (document.getElementById("logo")) {
           document.getElementById("logo")!.innerHTML = svg;
         }
@@ -197,14 +187,18 @@ export const NavBar = () => {
               {user.name}
             </h1>
             <div className="flex items-center w-full ">
-              <img
-                height={30}
-                width={30}
-                src={
-                  pfpData.profile_image ? placeHolder : pfpData.profile_image
-                }
-                alt="profile"
-              />
+              <div
+                className="cursor-pointer"
+                onClick={() => router.push(`/@${user.name}`)}
+              >
+                <img
+                  width={50}
+                  src={
+                    pfpData.profile_image ? pfpData.profile_image : placeHolder
+                  }
+                  alt="profile"
+                />
+              </div>
             </div>
           </div>
 

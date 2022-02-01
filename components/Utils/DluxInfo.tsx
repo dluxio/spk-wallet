@@ -6,10 +6,10 @@ import { FaLock, FaUnlock } from "react-icons/fa";
 import { GovModal } from "../Modals/GovModal";
 import { Send } from "../Modals/SendForm";
 
-export const DluxInfo = ({
+export const LarynxInfo = ({
   balance,
 }: {
-  balance: { DLUX: number; GOV: number };
+  balance: { LARYNX: number; GOV: number };
 }) => {
   const [send, setSend] = useState(false);
   const [gov, setGov] = useState({ show: false, up: false });
@@ -20,7 +20,7 @@ export const DluxInfo = ({
       {send && (
         <Send
           currency="DLUX"
-          balance={balance.DLUX / 1000}
+          balance={balance.LARYNX / 1000}
           handleClose={() => setSend(false)}
         />
       )}
@@ -33,7 +33,7 @@ export const DluxInfo = ({
       )}
       <div className="flex flex-col sm:flex-row justify-between gap-5">
         <div>
-          <h1>DLUX Token ({(balance.DLUX / 1000).toFixed(2)} Bal)</h1>
+          <h1>LARYNX Token ({(balance.LARYNX / 1000).toFixed(2)} Bal)</h1>
           <h1 className="text-gray-400 pt-2">
             The utility token for content distribution and smart contracts, also
             called a smart media token (SMT)
@@ -51,12 +51,12 @@ export const DluxInfo = ({
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-600 mt-2 pt-2">
         <div>
-          <h1>DLUX Governance ({(balance.GOV / 1000).toFixed(2)} Bal)</h1>
+          <h1>LARYNX Governance ({(balance.GOV / 1000).toFixed(2)} Bal)</h1>
           <h1 className="text-gray-400 pt-2">
             Locked tokens used to determine concensus and earn rewards for
             running a node
           </h1>
-          <h1 className="text-gray-400 pt-2">Benefits of DLUX Governance:</h1>
+          <h1 className="text-gray-400 pt-2">Benefits of LARYNX Governance:</h1>
           <ul className="text-gray-400 pt-1 pl-3">
             <li>1. Provides liquid funds to DAO multi-sig wallet</li>
             <li>2. Ensures collateral for DEX escrow transactions</li>

@@ -8,7 +8,7 @@ import { BalanceCard } from "../Card/BalanceCard";
 import { useTranslation } from "next-export-i18n";
 
 export const CryptoScreen = ({ }) => {
-  const [dluxBal, setDluxBal] = useState({ DLUX: 0, GOV: 0 });
+  const [dluxBal, setDluxBal] = useState({ LARYNX: 0, GOV: 0 });
   const [hiveBal, setHiveBal] = useState(0);
   const user: any = useRecoilValue(userState);
   const apiLink: string = useRecoilValue(apiLinkState);
@@ -17,14 +17,12 @@ export const CryptoScreen = ({ }) => {
   useEffect(() => {
     setHiveBal(parseFloat(user.balance.split(" ")[0]));
 
-    axios
-      .get(`${apiLink}@${user.name}`)
-      .then(({ data }) =>
-        setDluxBal({
-          DLUX: parseFloat(data.balance),
-          GOV: parseFloat(data.gov),
-        })
-      );
+    axios.get(`${apiLink}@${user.name}`).then(({ data }) =>
+      setDluxBal({
+        LARYNX: parseFloat(data.balance),
+        GOV: parseFloat(data.gov),
+      })
+    );
   }, [user]);
 
   return (
