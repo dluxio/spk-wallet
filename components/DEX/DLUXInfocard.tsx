@@ -147,7 +147,7 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
   }, [coin]);
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-white text-xl">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-white text-xl">
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
         <h1 className="px-5 py-2 bg-gray-400 rounded-xl">{t("bid")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
