@@ -22,7 +22,7 @@ export const coinState = atom({
 
 export const prefixState = atom({
   key: "prefixState",
-  default: "dlux_",
+  default: "spkcc_",
 });
 
 export const broadcastState = atom({
@@ -42,7 +42,7 @@ export const refreshState = atom({
 
 export const apiLinkState = atom({
   key: "apiLinkState",
-  default: "https://token.dlux.io/",
+  default: "https://spktoken.dlux.io/",
 });
 
 export const ipfsLinkState = atom({

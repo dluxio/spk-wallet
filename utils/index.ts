@@ -701,12 +701,14 @@ export const ftBuyTransfer = async (
 export const parseData = (data: any) => {
   const result: { x: Date; y: any[] }[] = [];
 
-  Object.keys(data).map((key) => {
-    result.push({
-      x: new Date(+key),
-      y: [data[key].o, data[key].t, data[key].b, data[key].c],
+  if (data) {
+    Object.keys(data).map((key) => {
+      result.push({
+        x: new Date(+key),
+        y: [data[key].o, data[key].t, data[key].b, data[key].c],
+      });
     });
-  });
+  }
 
   return {
     series: [

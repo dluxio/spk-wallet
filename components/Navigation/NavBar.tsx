@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { FcGlobe } from "react-icons/fc";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
-import axios from "axios";
 import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
+import { Client } from "@hiveio/dhive";
 import {
   useLanguageQuery,
   useTranslation,
@@ -20,11 +20,12 @@ import {
 } from "../../atoms";
 import { Login } from "../Login";
 import { Spinner } from "../Spinner";
-import { placeHolder } from "../../constants";
+import { hiveApi, placeHolder } from "../../constants";
 import { redoProfilePicture } from "../../utils";
 import { useQuery } from "../../constants/breakpoints";
 
 export const NavBar = () => {
+  const client = new Client(hiveApi);
   const { isMobile } = useQuery();
   const [profDropdown, setProfDropdown] = useState(false);
   const [languageSelect, setLanguageSelect] = useState(false);
@@ -69,8 +70,15 @@ export const NavBar = () => {
       if (user) {
         setSigning(false);
         setProfDropdown(false);
-        axios.get(`${apiLink}api/pfp/${user.name}`).then(({ data }) => {
-          setPfp(data.result[0]);
+        client.database.getAccounts([user.name]).then((response: any) => {
+          if (response[0]) {
+            const metadata = JSON.parse(
+              response[0].posting_json_metadata
+            ).profile;
+
+            console.log(metadata);
+            setPfp(metadata);
+          }
         });
       }
     }
@@ -189,15 +197,14 @@ export const NavBar = () => {
               {user.name}
             </h1>
             <div className="flex items-center w-full ">
-              <div
-                id="profile-picture"
-                className={`w-9 ${
-                  pfpData?.set?.n === "hf" ? "mb-5" : ""
-                } cursor-pointer`}
-                onClick={() => router.push(`/@${user.name}`)}
-              >
-                <Image height={30} width={30} src={placeHolder} alt="profile" />
-              </div>
+              <img
+                height={30}
+                width={30}
+                src={
+                  pfpData.profile_image ? placeHolder : pfpData.profile_image
+                }
+                alt="profile"
+              />
             </div>
           </div>
 

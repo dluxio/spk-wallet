@@ -62,7 +62,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
         <h1 className={type === "sell" ? "text-red-500" : "text-green-500"}>
           {t(type)}
         </h1>
-        <h1>DLUX</h1>
+        <h1>LARYNX</h1>
       </div>
       <div className="flex flex-col sm:flex-row items-center  mr-5 justify-between mt-2 text-white font-light">
         <h1>{t("orderType")}</h1>
@@ -90,7 +90,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col mr-5">
               <h1>{t("qty")}</h1>
-              <h1 className="font-light text-sm">DLUX</h1>
+              <h1 className="font-light text-sm">LARYNX</h1>
             </div>
             <input
               step={0.001}
@@ -105,7 +105,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col mr-5">
               <h1>{t("qty")}</h1>
-              <h1 className="font-light text-sm">DLUX</h1>
+              <h1 className="font-light text-sm">LARYNX</h1>
             </div>
             <input
               step={0.001}

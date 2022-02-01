@@ -26,12 +26,14 @@ export const TransactionHistory = ({ coin }: { coin: "HIVE" | "HBD" }) => {
       axios
         .get(`${apiLink}api/historical/${tickerID}?depth=200`)
         .then(({ data }) => {
-          const sumOfOrders = data.buy.concat(data.sell);
-          const sortedTransactions = sumOfOrders.sort((x: any, y: any) => {
-            return y.trade_timestamp - x.trade_timestamp;
-          });
+          if (data.buy) {
+            const sumOfOrders = data.buy.concat(data.sell);
+            const sortedTransactions = sumOfOrders.sort((x: any, y: any) => {
+              return y.trade_timestamp - x.trade_timestamp;
+            });
 
-          setTransactions(sortedTransactions);
+            setTransactions(sortedTransactions);
+          }
         });
     }
   }, [tickerID]);

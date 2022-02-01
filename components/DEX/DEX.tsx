@@ -42,7 +42,7 @@ export const DEX = () => {
             HBD
           </button>
         </div>
-        <div className="flex flex-col sm:mx-10 bg-gray-600 mb-3 border-2 rounded-xl border-gray-800 p-5 justify-center">
+        <div className="flex flex-col sm:mx-10 bg-gray-500 mb-3 border-2 rounded-xl border-gray-800 p-5 justify-center">
           <div className="flex flex-wrap justify-center">
             <DLUXInfocard coin={coin} />
           </div>

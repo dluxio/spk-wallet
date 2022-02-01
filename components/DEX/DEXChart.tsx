@@ -33,7 +33,7 @@ export const DEXChart = ({ coin }: { coin: "HIVE" | "HBD" }) => {
             foreColor: "white",
           },
           title: {
-            text: `${coin}/DLUX`,
+            text: `${coin}/LARYNX`,
             align: "left",
           },
           xaxis: {
