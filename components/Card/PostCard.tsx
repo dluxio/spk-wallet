@@ -50,7 +50,7 @@ export const PostCard = ({
   }, []);
 
   return (
-    <div className="border-2 my-3 border-gray-800 rounded-xl w-full bg-gray-600">
+    <div className="border-2 my-3 border-gray-300 rounded-xl w-full bg-gray-400">
       <div className="rounded-t-xl">
         {speak ? (
           <div className="w-full flex justify-center">
@@ -65,7 +65,7 @@ export const PostCard = ({
           images &&
           images.length >= 1 && (
             <img
-              className="w-full h-full rounded-t-xl border-b-2 border-gray-800"
+              className="w-full h-full rounded-t-xl"
               src={images[0]}
               alt="thumbnail"
             />

@@ -59,6 +59,7 @@
     "orders": "orders",
     "date": "Date",
     "tradeHistory": "Trade History",
-    "owner": "Owner"
+    "owner": "Owner",
+    "witnessSettings": "Witness Settings"
   }
 }
