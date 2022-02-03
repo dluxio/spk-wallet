@@ -19,7 +19,7 @@ export const LarynxInfo = ({
     <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-500">
       {send && (
         <Send
-          currency="DLUX"
+          currency="LARYNX"
           balance={balance.LARYNX / 1000}
           handleClose={() => setSend(false)}
         />

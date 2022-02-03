@@ -91,7 +91,7 @@ export const Send = ({
               <div className={`absolute top-8 right-9`}>
                 <img
                   src={
-                    currency === "DLUX"
+                    currency === "LARYNX"
                       ? "https://www.dlux.io/img/dlux-hive-logo-alpha.svg"
                       : "https://www.dlux.io/img/hextacular.svg"
                   }
@@ -114,7 +114,7 @@ export const Send = ({
             <button
               type="submit"
               className={`px-2 py-1 mx-auto mt-5 flex items-center gap-3 rounded-lg border-2 text-white bg-gradient-to-b ${
-                currency === "DLUX"
+                currency === "LARYNX"
                   ? "from-pink-500 to-blue-500"
                   : "from-white to-red-500"
               } focus:outline-none focus:ring-2 focus:ring-blue-600`}

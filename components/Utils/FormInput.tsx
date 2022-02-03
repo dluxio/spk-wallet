@@ -40,6 +40,7 @@ export const FormInput = ({
         type={type}
         name={name}
         onChange={handleChange}
+        step={0.001}
         onBlur={handleBlur}
         value={value}
         min={min ? min : 0}
