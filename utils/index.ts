@@ -1,8 +1,7 @@
-import hive from "@hiveio/hive-js";
+import hive, { memo } from "@hiveio/hive-js";
 import CeramicClient from "@ceramicnetwork/http-client";
 import { SpkClient } from '@spknetwork/graph-client';
-import { useRecoilState } from "recoil";
-import { broadcastState } from "../atoms";
+import axios from "axios";
 
 const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com")
 const spkClient = new SpkClient('https://us-01.infra.3speak.tv', ceramic);
@@ -659,6 +658,47 @@ export const claim = async (username: string, claimType: string) => {
   ]
 
   return await handleBroadcastRequest(operations, username);
+}
+
+export const validateWitnessKey = ({ pubKey, prevKey, toPubKey }: { pubKey: string; prevKey: string; toPubKey: string }) => {
+  try {
+    return memo.encode(prevKey, toPubKey, '#' + pubKey)
+  } catch (e) {
+    console.error(e)
+    return ''
+  }
+}
+
+export type ISettings = {
+  dexFee: number;
+  domain: string;
+  pubKey: string;
+  prevKey: string;
+}
+
+export const witnessSettings = async (data: ISettings, username: string) => {
+  const operations = [
+    'custom_json',
+    {
+      required_auths: [username],
+      required_posting_auths: 0,
+      id: 'dlux_node_add',
+      json: JSON.stringify(data)
+    }
+  ]
+
+  const response = await axios.get('https://token.dlux.io/api/protocol')
+  const memoKey = response.data.memoKey;
+
+  if (validateWitnessKey({
+    pubKey: data.pubKey,
+    prevKey: data.prevKey,
+    toPubKey: memoKey
+  })) {
+    return await handleBroadcastRequest(operations, username);
+  } else {
+    return 'Incorrect key pair'
+  }
 }
 
 export const addRoyalties = async (

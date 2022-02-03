@@ -10,7 +10,7 @@ export const HiveInfo = ({ balance }: { balance: number }) => {
     useRecoilState(inventoryNavState);
 
   return (
-    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-500">
+    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-300">
       {send && (
         <Send
           currency="HIVE"
@@ -21,7 +21,7 @@ export const HiveInfo = ({ balance }: { balance: number }) => {
       <div className="flex justify-between gap-5">
         <div>
           <h1>HIVE Token ({balance.toFixed(2)} Bal)</h1>
-          <h1 className="text-gray-400 pt-2">
+          <h1 className="text-gray-500 pt-2">
             HIVE is a DPoS blockchain with free transactions and a method to
             post and rate content.
           </h1>

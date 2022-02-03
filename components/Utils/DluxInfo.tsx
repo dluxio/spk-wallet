@@ -16,7 +16,7 @@ export const LarynxInfo = ({
   const [showActions, setShowActions] = useState(false);
 
   return (
-    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-500">
+    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-300">
       {send && (
         <Send
           currency="LARYNX"
@@ -34,7 +34,7 @@ export const LarynxInfo = ({
       <div className="flex flex-col sm:flex-row justify-between gap-5">
         <div>
           <h1>LARYNX Token ({(balance.LARYNX / 1000).toFixed(2)} Bal)</h1>
-          <h1 className="text-gray-400 pt-2">
+          <h1 className="text-gray-500 pt-2">
             The utility token for content distribution and smart contracts, also
             called a smart media token (SMT)
           </h1>
@@ -49,15 +49,15 @@ export const LarynxInfo = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-600 mt-2 pt-2">
+      <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-300 mt-2 pt-2">
         <div>
           <h1>LARYNX Governance ({(balance.GOV / 1000).toFixed(2)} Bal)</h1>
-          <h1 className="text-gray-400 pt-2">
+          <h1 className="text-gray-500 pt-2">
             Locked tokens used to determine concensus and earn rewards for
             running a node
           </h1>
-          <h1 className="text-gray-400 pt-2">Benefits of LARYNX Governance:</h1>
-          <ul className="text-gray-400 pt-1 pl-3">
+          <h1 className="text-gray-500 pt-2">Benefits of LARYNX Governance:</h1>
+          <ul className="text-gray-500 pt-1 pl-3">
             <li>1. Provides liquid funds to DAO multi-sig wallet</li>
             <li>2. Ensures collateral for DEX escrow transactions</li>
             <li>3. Enables voting on proposed community measures</li>
