@@ -7,7 +7,7 @@ export const checkClaim = async (username: string) => {
   const currentMonth = new Date().getMonth();
 
   if (data.claim) return 'spk_claim';
-  if (currentMonth !== data.drop.last_claim) {
+  if (currentMonth !== +data.drop.last_claim) {
     return 'spkcc_claim';
   }
 
