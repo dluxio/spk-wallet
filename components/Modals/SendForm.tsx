@@ -5,7 +5,7 @@ import { BiPaperPlane } from "react-icons/bi";
 
 import { ModalWrapper } from "../Utils/ModalWrapper";
 import { FormInput } from "../Utils/FormInput";
-import { sendDLUX, sendHIVE } from "../../utils";
+import { sendHIVE, sendLARYNX } from "../../utils";
 import { broadcastState, userState } from "../../atoms";
 
 export const Send = ({
@@ -37,8 +37,8 @@ export const Send = ({
         }}
         onSubmit={(data, { setSubmitting }) => {
           if (user) {
-            if (currency === "DLUX") {
-              sendDLUX(data, user.name).then((response: any) => {
+            if (currency === "LARYNX") {
+              sendLARYNX(data, user.name).then((response: any) => {
                 if (response) {
                   if (response.success) {
                     setBroadcasts((prevState: any) => [...prevState, response]);
