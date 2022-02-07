@@ -120,7 +120,7 @@ const User = () => {
                 speak={false}
                 title={post.title}
                 votes={post.active_votes}
-                images={metadata.image}
+                image={metadata.image[0]}
                 playlist={[]}
                 pfp={
                   userData?.profile_image ? userData.profile_image : placeHolder
@@ -135,7 +135,7 @@ const User = () => {
                 speak={false}
                 title={post.content.title ? post.content.title : ""}
                 votes={[]}
-                images={[]}
+                image={""}
                 playlist={[]}
               />
             );
