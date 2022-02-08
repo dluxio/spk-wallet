@@ -1,5 +1,5 @@
 import React from "react";
-import { LarynxInfo } from "../Utils/DluxInfo";
+import { LarynxInfo } from "../Utils/LarynxInfo";
 import { HiveInfo } from "../Utils/HiveInfo";
 
 export const BalanceCard = ({

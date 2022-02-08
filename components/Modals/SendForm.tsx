@@ -115,7 +115,7 @@ export const Send = ({
               type="submit"
               className={`px-2 py-1 mx-auto mt-5 flex items-center gap-3 rounded-lg border-2 text-white bg-gradient-to-b ${
                 currency === "LARYNX"
-                  ? "from-pink-500 to-blue-500"
+                  ? "from-red-500 to-blue-500"
                   : "from-white to-red-500"
               } focus:outline-none focus:ring-2 focus:ring-blue-600`}
             >
