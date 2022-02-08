@@ -83,7 +83,7 @@ export const InventoryNav = () => {
           </button>
         )}
       </div>
-      <div className="flex mx-10 items-center text-white">
+      {/* <div className="flex mx-10 items-center text-white">
         <div
           onClick={() => router.push({ pathname: "/create-nft", query })}
           className={`flex flex-col items-center cursor-pointer`}
@@ -91,7 +91,7 @@ export const InventoryNav = () => {
           <GoPlus size={25} color="#fff" />
           <p className="text-md mt-1">{t("createNFT")}</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
