@@ -11,7 +11,7 @@ export const BalanceCard = ({
 }) => {
   return (
     <div
-      className={`bg-gray-400 w-full px-5 py-3 text-white  rounded-xl border-2 border-gray-300`}
+      className={`bg-gray-400 w-full px-5 py-3 text-white  rounded-xl border-2 border-gray-100`}
     >
       <div className="flex items-center justify-between">
         {currency === "DLUX" && (

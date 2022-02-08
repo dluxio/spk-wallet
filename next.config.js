@@ -18,7 +18,6 @@ const config = {
   ) {
     return {
       "/": { page: "/" },
-      "/inventory": { page: "/inventory" },
       "/auction": { page: "/auction" },
       "/create-nft": { page: "/create-nft" },
       "/listings": { page: "/listings" },

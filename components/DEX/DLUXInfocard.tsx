@@ -149,28 +149,28 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-white text-xl">
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
-        <h1 className="px-5 py-2 bg-gray-400 rounded-xl">{t("bid")}</h1>
+        <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("bid")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1>{bidPrice.dlux}</h1>
           <h1>${bidPrice.dollars}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
-        <h1 className="px-5 py-2 bg-gray-400 rounded-xl">{t("ask")}</h1>
+        <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("ask")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1>{askPrice.dlux}</h1>
           <h1>${askPrice.dollars}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
-        <h1 className="px-5 py-2 bg-gray-400 rounded-xl">{t("last")}</h1>
+        <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("last")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1>{lastPrice.dlux}</h1>
           <h1>${lastPrice.dollars}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
-        <h1 className="px-5 py-2 bg-gray-400 rounded-xl">{t("hourVolume")}</h1>
+        <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("hourVolume")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1>{volumePrice.dlux}</h1>
           <h1>${volumePrice.dollars}</h1>

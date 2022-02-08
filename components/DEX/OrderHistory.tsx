@@ -78,7 +78,7 @@ export const OrderHistory = ({
       <div className="grid grid-cols-4 gap-5 mt-3">
         <h1>{t("total").toUpperCase()}</h1>
         <h1>{coin}</h1>
-        <h1>DLUX</h1>
+        <h1>LARYNX</h1>
         <h1>{t(type === "sell" ? "ask" : "bid").toUpperCase()}</h1>
       </div>
       <div className="mt-2">
