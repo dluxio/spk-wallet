@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = 'https://dlux-test.herokuapp.com/';
+export const API = 'https://spktoken.dlux.io/';
 
 export const checkClaim = async (username: string) => {
   const { data } = await axios.get(API + `@${username}`);
@@ -12,6 +12,8 @@ export const checkClaim = async (username: string) => {
 
   if (data.claim) return 'spk_claim';
   if (currentMonth !== +data.drop.last_claim) {
+    console.log(currentMonth, data.drop.last_claim);
+
     return 'spkcc_claim';
   }
 

@@ -21,7 +21,7 @@ export const HiveInfo = ({ balance }: { balance: number }) => {
       <div className="flex justify-between gap-5">
         <div>
           <h1>HIVE Token ({balance.toFixed(2)} Bal)</h1>
-          <h1 className="text-gray-500 pt-2">
+          <h1 className="text-gray-600 pt-2">
             HIVE is a DPoS blockchain with free transactions and a method to
             post and rate content.
           </h1>

@@ -8,7 +8,7 @@ import { ceramicApi } from "../../constants";
 
 type IPost = {
   title: string;
-  images?: string[];
+  image: string;
   votes: any[];
   playlist?: any[];
   speak: boolean;
@@ -19,7 +19,7 @@ type IPost = {
 
 export const PostCard = ({
   title,
-  images,
+  image,
   votes,
   speak,
   playlist,
@@ -38,7 +38,7 @@ export const PostCard = ({
       return response;
     };
 
-    if (author[0] === "d") {
+    if (author.substring(0, 3) === "did") {
       getCeramicProfile(author).then((profile: any) => {
         setUsername(profile.name);
         setProfilePicture(
@@ -53,7 +53,7 @@ export const PostCard = ({
     <div className="border-2 my-3 border-gray-300 rounded-xl w-full bg-gray-400">
       <div className="rounded-t-xl">
         {speak ? (
-          <div className="w-full flex justify-center">
+          <div className="w-full rounded-t-xl flex justify-center">
             <ReactJWPlayer
               className="rounded-t-xl w-full"
               playerId="my-unique-id"
@@ -62,11 +62,10 @@ export const PostCard = ({
             />
           </div>
         ) : (
-          images &&
-          images.length >= 1 && (
+          image && (
             <img
               className="w-full h-full rounded-t-xl"
-              src={images[0]}
+              src={image}
               alt="thumbnail"
             />
           )
@@ -83,14 +82,8 @@ export const PostCard = ({
           />
           <h1>{username}</h1>
         </div>
-        <div className="flex justify-center">{title}</div>
+        <div className="flex text-center mt-3 justify-center">{title}</div>
         <div className="p-2 flex justify-center gap-2">
-          <button
-            onClick={() => router.replace(`/@${author}/${permlink}`)}
-            className="flex gap-1 items-center bg-red-500 hover:bg-red-600 transition-all p-1 px-2 rounded-xl"
-          >
-            <RiHeartFill /> {votes ? votes.length : 0}
-          </button>
           <button
             onClick={() => router.replace(`/@${author}/${permlink}`)}
             className="flex gap-1 justify-center px-5 items-center bg-blue-500 hover:bg-blue-600 transition-all p-1 rounded-xl"

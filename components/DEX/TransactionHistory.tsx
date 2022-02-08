@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useTranslation } from "next-export-i18n";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { apiLinkState, dayVolumeState } from "../../atoms";
+import { useRecoilValue } from "recoil";
+import { apiLinkState } from "../../atoms";
 import { useQuery } from "../../constants/breakpoints";
 import { TransactionHistoryItem } from "./TransactionHistoryItem";
 
@@ -44,7 +44,7 @@ export const TransactionHistory = ({ coin }: { coin: "HIVE" | "HBD" }) => {
       <div className="grid mt-2 mb-1 text-xl grid-cols-4 sm:grid-cols-5">
         {!isMobile && <h1>{t("date").toUpperCase()}</h1>}
         <h1>{t("type").toUpperCase()}</h1>
-        <h1>DLUX</h1>
+        <h1>LARYNX</h1>
         <h1>HIVE</h1>
         <h1>{t("total").toUpperCase()}</h1>
       </div>

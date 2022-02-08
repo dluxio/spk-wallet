@@ -28,21 +28,21 @@ export const DEX = () => {
           <button
             onClick={() => setCoin("HIVE")}
             className={`p-2 ${
-              coin === "HIVE" && "bg-gray-800"
-            } rounded-l-full bg-gray-700 text-white transition-all`}
+              coin === "HIVE" && "bg-gray-500"
+            } rounded-l-full bg-gray-400 text-white transition-all`}
           >
             HIVE
           </button>
           <button
             onClick={() => setCoin("HBD")}
             className={`p-2 ${
-              coin === "HBD" && "bg-gray-800"
-            } rounded-r-full bg-gray-700 text-white transition-all`}
+              coin === "HBD" && "bg-gray-500"
+            } rounded-r-full bg-gray-400 text-gray-200 transition-all`}
           >
             HBD
           </button>
         </div>
-        <div className="flex flex-col sm:mx-10 bg-gray-500 mb-3 border-2 rounded-xl border-gray-800 p-5 justify-center">
+        <div className="flex flex-col sm:mx-10 bg-gray-400 mb-3 border-2 rounded-xl border-gray-200 p-5 justify-center">
           <div className="flex flex-wrap justify-center">
             <DLUXInfocard coin={coin} />
           </div>
