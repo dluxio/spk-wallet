@@ -50,7 +50,7 @@ export const PostCard = ({
   }, []);
 
   return (
-    <div className="border-2 my-3 text-white border-white rounded-xl w-full bg-gray-400">
+    <div className="border-2 my-3 border-gray-300 rounded-xl w-full bg-gray-400">
       <div className="rounded-t-xl">
         {speak ? (
           <div className="w-full rounded-t-xl flex justify-center">

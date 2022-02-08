@@ -54,7 +54,7 @@ export const LarynxInfo = ({
   }, []);
 
   return (
-    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-500">
+    <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-300">
       {send && (
         <Send
           currency="LARYNX"
@@ -72,7 +72,7 @@ export const LarynxInfo = ({
       <div className="flex flex-col sm:flex-row justify-between gap-5">
         <div>
           <h1>LARYNX Token ({(balance.LARYNX / 1000).toFixed(2)} Bal)</h1>
-          <h1 className="mt-2 text-gray-400">
+          <h1 className="mt-2 text-gray-600">
             Utility token for smart contracts, also called a (SMT)
           </h1>
         </div>
@@ -86,11 +86,11 @@ export const LarynxInfo = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-600 mt-2 pt-2">
+      <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-300 mt-2 pt-2">
         <div>
           <h1>LARYNX Proof of stake ({(balance.GOV / 1000).toFixed(2)} Bal)</h1>
           <h1 className="mt-4">Claim info:</h1>
-          <ul className="text-gray-400 ml-3">
+          <ul className="text-gray-600 ml-3">
             <li>Availible per month: {claimInfo.availiblePerMonth} LARYNX</li>
             <li>Last claim: {claimInfo.lasClaim}</li>
             <li>Total claims: {claimInfo.totalClaims}</li>

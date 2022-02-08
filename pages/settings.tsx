@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { apiLinkState } from "../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { apiLinkState, userState } from "../atoms";
 import Ping from "ping.js";
 import Select from "react-select";
 import { useTranslation } from "next-export-i18n";
 import { FaWindows, FaApple, FaLinux } from "react-icons/fa";
+import { WitnessSettings } from "../components/Card/WitnessSettings";
+import { ISettings, witnessSettings } from "../utils";
 
 type optionEl = {
   value: string;
@@ -19,6 +21,7 @@ const Settings = () => {
   const [toShow, setToShow] = useState([]);
   const [apiLink, setApiLink] = useRecoilState(apiLinkState);
   const { t } = useTranslation();
+  const user = useRecoilValue<any>(userState);
 
   useEffect(() => {
     setToShow([]);
@@ -58,6 +61,10 @@ const Settings = () => {
     }
   }, [options]);
 
+  const handleSubmit = (data: ISettings) => {
+    witnessSettings(data, user.name);
+  };
+
   return (
     <div className="text-white text-3xl">
       <div className="mx-10 my-10">
@@ -73,6 +80,7 @@ const Settings = () => {
             }}
           />
         </div>
+        <WitnessSettings handleSubmit={handleSubmit} />
         <div className="w-full mx-2 sm:w-1/2">
           <h1 className="text-2xl mb-3">{t("desktopApp")}</h1>
           <div className="flex flex-col sm:flex-row gap-3">

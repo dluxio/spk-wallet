@@ -11,6 +11,7 @@ type FormInputProps = {
   type?: string;
   min?: number;
   title?: string;
+  sideTitle?: string;
 };
 
 export const FormInput = ({
@@ -22,6 +23,7 @@ export const FormInput = ({
   name,
   min,
   title,
+  sideTitle,
   type = "text",
 }: FormInputProps) => {
   const formattedName = name.replace("_", " ");
