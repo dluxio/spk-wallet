@@ -1,20 +1,41 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import React from "react";
-import { Market } from "../components";
 
-const Home: NextPage = () => {
+import { useRecoilValue } from "recoil";
+import { userState, inventoryNavState } from "../atoms";
+
+import { InventoryNav } from "../components";
+
+import { MintTokenScreen } from "../components/Screens/MintTokenScreen";
+import { CryptoScreen } from "../components/Screens/CryptoScreen";
+import { NFTScreen } from "../components/Screens/NFTScreen";
+import { DEX } from "../components/DEX/DEX";
+import dynamic from "next/dynamic";
+import NoSSR from "react-no-ssr";
+
+const Inventory = () => {
+  const user: any = useRecoilValue(userState);
+  const inventoryPage = useRecoilValue(inventoryNavState);
+
   return (
     <div>
-      <Head>
-        <title>3speak wallet</title>
-        <meta name="description" content="3Speak wallet web app" />
-        <meta name="og:image" content="https://3speak.tv/img/3S_logo.svg" />
-        <link rel="icon" href="https://3speak.tv/favicon.png" />
-      </Head>
-      <Market />
+      <title>{user ? `Inv-${user.name}` : "Inventory"}</title>
+      {user && (
+        <>
+          <InventoryNav />
+          <div className="">
+            {inventoryPage === "mint" && <MintTokenScreen />}
+            {inventoryPage === "nft" && <NFTScreen />}
+            {inventoryPage === "tokens" && <CryptoScreen />}
+            {inventoryPage === "dex" && (
+              <NoSSR>
+                <DEX />
+              </NoSSR>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
-export default Home;
+export default dynamic(() => Promise.resolve(Inventory), { ssr: false });

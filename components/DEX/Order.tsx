@@ -57,7 +57,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
   };
 
   return (
-    <div className="flex flex-col flex-grow bg-gray-700 border-2 border-gray-800 p-3 rounded-md">
+    <div className="flex flex-col w-20 flex-grow bg-gray-500 border-2 border-gray-300 p-3 rounded-md">
       <div className="text-white text-xl flex gap-3">
         <h1 className={type === "sell" ? "text-red-500" : "text-green-500"}>
           {t(type)}
@@ -70,16 +70,16 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           <button
             onClick={() => setOrderType("limit")}
             className={`p-2 ${
-              orderType === "limit" && "bg-gray-900"
-            } rounded-l-full bg-gray-800 text-white transition-all`}
+              orderType === "limit" && "bg-gray-600"
+            } rounded-l-full bg-gray-300 text-gray-400 transition-all`}
           >
             {t("limit")}
           </button>
           <button
             onClick={() => setOrderType("market")}
             className={`p-2 ${
-              orderType === "market" && "bg-gray-900"
-            } rounded-r-full bg-gray-800 text-white transition-all`}
+              orderType === "market" && "bg-gray-600"
+            } rounded-r-full bg-gray-300 text-gray-400 transition-all`}
           >
             {t("market")}
           </button>
@@ -94,7 +94,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             </div>
             <input
               step={0.001}
-              className="rounded-xl outline-none px-3 py-1 bg-gray-500 text-white"
+              className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(+e.target.value)}
@@ -109,7 +109,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             </div>
             <input
               step={0.001}
-              className="rounded-xl outline-none px-3 py-1 bg-gray-500 text-white"
+              className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(+e.target.value)}
@@ -124,7 +124,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             </div>
             <input
               step={0.001}
-              className="rounded-xl outline-none px-3 py-1 bg-gray-500 text-white"
+              className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
               value={total}
               onChange={(e) => setTotal(+e.target.value)}
@@ -139,7 +139,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             </div>
             <input
               step={0.001}
-              className="rounded-xl outline-none px-3 py-1 bg-gray-500 text-white"
+              className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
               value={total}
               onChange={(e) => setTotal(+e.target.value)}

@@ -129,14 +129,8 @@ export const NavBar = () => {
       <div className="w-40" id="logo">
         3Speak
       </div>
-      {!isMobile ? (
+      {/* {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
-          <p
-            className={`${url === "" && "selected"} navLink`}
-            onClick={() => router.push({ pathname: "/", query })}
-          >
-            {t("home")}
-          </p>
           <p
             className={`${
               (url === "inventory" ||
@@ -151,7 +145,13 @@ export const NavBar = () => {
               }
             }}
           >
-            {t("inventory")}
+            {t("wallet")}
+          </p>
+          <p
+            className={`${url === "" && "selected"} navLink`}
+            onClick={() => router.push({ pathname: "/", query })}
+          >
+            {t("home")}
           </p>
         </div>
       ) : (
@@ -164,7 +164,7 @@ export const NavBar = () => {
             />
           </div>
         </div>
-      )}
+      )} */}
 
       {user && (
         <div className="flex gap-7 items-center">
