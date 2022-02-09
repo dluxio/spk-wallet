@@ -604,7 +604,7 @@ export const replyComment = async (data: {
 };
 
 export const dexSell = async (
-  data: { dlux: number; hive?: number; hbd?: number },
+  data: { larynx: number; hive?: number; hbd?: number },
   username: string,
   prefix: string
 ) => {
@@ -635,8 +635,9 @@ export const dexBuy = async (
     {
       from: username,
       to,
-      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(2)} ${data.coin
-        }`,
+      amount: `${parseFloat((data.amount / 1000).toString()).toFixed(3)} ${
+        data.coin
+      }`,
       memo: JSON.stringify(data.buyData),
     },
   ];
