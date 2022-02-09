@@ -23,7 +23,6 @@ export const InventoryNav = () => {
   useEffect(() => {
     if (user) {
       checkClaim(user.name).then((response) => {
-        console.log(response);
         setClaimType(response);
       });
     }

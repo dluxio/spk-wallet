@@ -18,6 +18,7 @@ type optionEl = {
 const p = new Ping();
 const Settings = () => {
   const [options, setOptions] = useState<any>();
+  const [showWitness, setShowWitness] = useState(false);
   const [toShow, setToShow] = useState([]);
   const [apiLink, setApiLink] = useRecoilState(apiLinkState);
   const { t } = useTranslation();
@@ -36,6 +37,16 @@ const Settings = () => {
 
       setOptions(optionsToPush);
     });
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`${apiLink}markets`).then(({ data }) => {
+        setShowWitness(
+          !!Object.keys(data.markets.node).find((node) => node === user.name)
+        );
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -80,7 +91,7 @@ const Settings = () => {
             }}
           />
         </div>
-        <WitnessSettings handleSubmit={handleSubmit} />
+        {showWitness && <WitnessSettings handleSubmit={handleSubmit} />}
         <div className="w-full mx-2 sm:w-1/2">
           <h1 className="text-2xl mb-3">{t("desktopApp")}</h1>
           <div className="flex flex-col sm:flex-row gap-3">

@@ -17,6 +17,7 @@ import { Spinner } from "../Spinner";
 import { hiveApi, placeHolder } from "../../constants";
 import { redoProfilePicture } from "../../utils";
 import { useQuery } from "../../constants/breakpoints";
+import Link from "next/link";
 
 export const NavBar = () => {
   const client = new Client(hiveApi);
@@ -68,6 +69,7 @@ export const NavBar = () => {
             const metadata = JSON.parse(
               response[0].posting_json_metadata
             ).profile;
+
             setPfp(metadata);
           }
         });
@@ -126,7 +128,11 @@ export const NavBar = () => {
 
   return (
     <div className="bg-white text-black shadow-xl px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
-      <div className="w-40" id="logo">
+      <div
+        onClick={() => router.push("/")}
+        className="w-40 cursor-pointer"
+        id="logo"
+      >
         3Speak
       </div>
       {/* {!isMobile ? (

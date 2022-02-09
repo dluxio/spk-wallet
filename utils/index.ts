@@ -649,14 +649,17 @@ export const claim = async (username: string, claimType: string) => {
   console.log(username, claimType)
 
   const operations = [
-    'custom_json',
+    "custom_json",
     {
-      required_auths: [username],
+      required_auths: 0,
       id: claimType,
-      required_posting_auths: 0,
-      json: claimType === 'spk_claim' ? JSON.stringify({ larynx: true }) : JSON.stringify({}),
-    }
-  ]
+      required_posting_auths: [username],
+      json:
+        claimType === "spk_claim"
+          ? JSON.stringify({ larynx: true })
+          : JSON.stringify({}),
+    },
+  ];
 
   return await handleBroadcastRequest(operations, username);
 }
