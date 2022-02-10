@@ -63,7 +63,7 @@ export const LarynxInfo = ({
       )}
       {gov.show && (
         <GovModal
-          balance={balance.GOV}
+          balance={gov.up ? balance.LARYNX / 1000 : balance.GOV}
           handleClose={() => setGov({ ...gov, show: false })}
           up={gov.up}
         />

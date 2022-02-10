@@ -31,7 +31,7 @@ export const GovModal = ({
           const errors: { amount?: string } = {};
 
           if (amount > balance) {
-            errors.amount = "Not enough GOV";
+            errors.amount = `Not enough ${up ? "LARYNX" : "GOV"}`;
           }
 
           return errors;
@@ -62,8 +62,9 @@ export const GovModal = ({
           <form onSubmit={handleSubmit}>
             <div className="mt-2 relative">
               <FormInput
-                title={`Amount (${balance.toFixed(2)} GOV)`}
-                min={1}
+                title={`Amount (${balance.toFixed(2)} ${
+                  up ? "LARYNX" : "GOV"
+                })`}
                 name="amount"
                 type="number"
                 errors={errors.amount}
@@ -83,11 +84,11 @@ export const GovModal = ({
             </div>
             <button
               type="submit"
-              className="px-2 py-1 mx-auto mt-5 flex items-center gap-3 rounded-lg border-2 text-white bg-gradient-to-b from-pink-500 to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="px-2 py-1 mx-auto mt-5 flex items-center gap-3 rounded-lg border-2 text-white bg-gradient-to-b from-red-500 to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
             >
               {up ? (
                 <h1 className="flex gap-4 items-center">
-                  Lock GOV <FaLock />
+                  Lock LARYNX <FaLock />
                 </h1>
               ) : (
                 <h1 className="flex gap-4 items-center">
