@@ -375,7 +375,7 @@ export const sendDLUX = async (
     "custom_json",
     {
       required_auths: [username],
-      id: "larynx_send",
+      id: "spkcc_send",
       required_posting_auths: 0,
       json: JSON.stringify({
         ...data,
@@ -396,7 +396,7 @@ export const sendHIVE = async (
     "transfer",
     {
       required_auths: [username],
-      id: "larynx_send",
+      id: "spkcc_send",
       required_posting_auths: 0,
       json: JSON.stringify({
         ...data,
@@ -411,17 +411,17 @@ export const sendHIVE = async (
 
 export const gov = async (amount: number, username: string, up: boolean) => {
   const operations = [
-    'custom_json',
+    "custom_json",
     {
       required_auths: [username],
-      id: up ? 'dlux_gov_up' : 'dlux_gov_down',
+      id: up ? "spkcc_gov_up" : "spkcc_gov_down",
       required_posting_auths: 0,
-      json: JSON.stringify({ amount: amount * 1000 })
-    }
-  ]
+      json: JSON.stringify({ amount: amount * 1000 }),
+    },
+  ];
 
   return await handleBroadcastRequest(operations, username);
-}
+};
 
 type PFPData = {
   set: string;
