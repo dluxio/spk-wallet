@@ -37,7 +37,7 @@ export const Send = ({
         }}
         onSubmit={(data, { setSubmitting }) => {
           if (user) {
-            if (currency === "DLUX") {
+            if (currency === "LARYNX") {
               sendDLUX(data, user.name).then((response: any) => {
                 if (response) {
                   if (response.success) {

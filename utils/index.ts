@@ -367,33 +367,47 @@ export const NFTCreate = async (
   return await handleBroadcastRequest(operations, username);
 };
 
-export const sendDLUX = async (data: { to: string; amount: number; memo: string; }, username: string) => {
+export const sendDLUX = async (
+  data: { to: string; amount: number; memo: string },
+  username: string
+) => {
   const operations = [
-    'custom_json',
+    "custom_json",
     {
       required_auths: [username],
-      id: 'dlux_send',
+      id: "larynx_send",
       required_posting_auths: 0,
-      json: JSON.stringify({ ...data, from: username, amount: data.amount * 1000 })
-    }
-  ]
+      json: JSON.stringify({
+        ...data,
+        from: username,
+        amount: data.amount * 1000,
+      }),
+    },
+  ];
 
   return await handleBroadcastRequest(operations, username);
-}
+};
 
-export const sendHIVE = async (data: { to: string; amount: number; memo: string }, username: string) => {
+export const sendHIVE = async (
+  data: { to: string; amount: number; memo: string },
+  username: string
+) => {
   const operations = [
-    'transfer',
+    "transfer",
     {
       required_auths: [username],
-      id: 'dlux_send',
+      id: "larynx_send",
       required_posting_auths: 0,
-      json: JSON.stringify({ ...data, from: username, amount: `${data.amount.toFixed(3)} HIVE` })
-    }
-  ]
+      json: JSON.stringify({
+        ...data,
+        from: username,
+        amount: `${data.amount.toFixed(3)} HIVE`,
+      }),
+    },
+  ];
 
   return await handleBroadcastRequest(operations, username);
-}
+};
 
 export const gov = async (amount: number, username: string, up: boolean) => {
   const operations = [
