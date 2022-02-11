@@ -115,25 +115,17 @@ export const NavBar = () => {
       getUser();
     }
 
-    fetch("https://3speak.tv/img/3S_logo.svg")
-      .then((res) => res.text())
-      .then((svg) => {
-        if (document.getElementById("logo")) {
-          document.getElementById("logo")!.innerHTML = svg;
-        }
-      });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="bg-white text-black shadow-xl px-5 font-normal py-3 pb-2 flex justify-between items-center z-50">
+    <div className="bg-white text-black shadow-xl px-5 py-2 font-normal flex justify-between items-center z-50">
       <div
         onClick={() => router.push("/")}
-        className="w-40 cursor-pointer"
+        className="w-16 cursor-pointer"
         id="logo"
       >
-        3Speak
+        <img src="/logo.svg" alt="logo" />
       </div>
       {/* {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
@@ -242,7 +234,7 @@ export const NavBar = () => {
         <div
           className={`${
             languageSelect ? "" : "hidden"
-          } absolute bg-white top-14 ${
+          } absolute bg-gray-200 top-14 ${
             user ? "right-32" : "right-24"
           } px-2 pt-2 rounded-xl flex flex-col z-40`}
         >
