@@ -7,6 +7,7 @@ import { dexBuy, dexSell } from "../../utils";
 export const Order = ({ type, coin }: { type: string; coin: string }) => {
   const [orderType, setOrderType] = useState("limit");
   const [quantity, setQuantity] = useState(0);
+  const [error, setError] = useState("");
   const [total, setTotal] = useState(0);
   const user: any = useRecoilValue(userState);
   const prefix: string = useRecoilValue(prefixState);
@@ -29,30 +30,38 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             prefix
           );
     } else if (type === "buy" && orderType === "market") {
-      dexBuy(
-        {
-          coin,
-          amount: total * 1000,
-          buyData: {
-            hours: 720,
+      if (total <= 0.01) {
+        dexBuy(
+          {
+            coin,
+            amount: total * 1000,
+            buyData: {
+              hours: 720,
+            },
           },
-        },
-        user.name,
-        cc
-      );
+          user.name,
+          cc
+        );
+      } else {
+        setError("test_net");
+      }
     } else if (type === "buy" && orderType === "limit") {
-      dexBuy(
-        {
-          coin,
-          amount: total * 1000,
-          buyData: {
-            rate: parseFloat((total / quantity).toFixed(6)),
-            hours: 720,
+      if (total <= 0.01) {
+        dexBuy(
+          {
+            coin,
+            amount: total * 1000,
+            buyData: {
+              rate: parseFloat((total / quantity).toFixed(6)),
+              hours: 720,
+            },
           },
-        },
-        user.name,
-        cc
-      );
+          user.name,
+          cc
+        );
+      } else {
+        setError("test_net");
+      }
     }
   };
 
@@ -93,8 +102,9 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
               <h1 className="font-light text-sm">LARYNX</h1>
             </div>
             <input
+              min={0}
               step={0.001}
-              className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
+              className=" rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(+e.target.value)}
@@ -108,6 +118,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
               <h1 className="font-light text-sm">LARYNX</h1>
             </div>
             <input
+              min={0}
               step={0.001}
               className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
@@ -123,6 +134,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
               <h1 className="font-light text-sm">{coin}</h1>
             </div>
             <input
+              min={0}
               step={0.001}
               className="rounded-xl outline-none px-3 py-1 bg-gray-300 text-gray-500"
               type="number"
@@ -147,6 +159,11 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           </div>
         )}
       </div>
+      {error && (
+        <h1 className="text-red-500 text-center">
+          The current test net only allows the max of 0.01 HIVE to go through
+        </h1>
+      )}
       <div className="flex justify-end">
         <button
           onClick={handlePlaceOrder}
