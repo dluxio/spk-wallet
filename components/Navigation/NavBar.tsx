@@ -127,6 +127,9 @@ export const NavBar = () => {
       >
         <img src="/logo.svg" alt="logo" />
       </div>
+      <div>
+        <h1 className="text-2xl text-red-500">TEST NET</h1>
+      </div>
       {/* {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
           <p

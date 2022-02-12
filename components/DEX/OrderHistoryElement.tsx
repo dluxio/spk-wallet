@@ -77,7 +77,7 @@ export const OrderHistoryElement = ({
           ).toFixed(order.amountnai.precision)
         ).toFixed(2)}
       </h1>
-      <h1>{parseFloat(order.rate).toFixed(2)}</h1>
+      <h1>{parseFloat(order.rate).toFixed(6)}</h1>
     </div>
   );
 };
