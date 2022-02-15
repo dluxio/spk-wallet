@@ -79,7 +79,7 @@ export const Send = ({
             />
             <div className="mt-2 relative">
               <FormInput
-                title={`Amount (${balance.toFixed(2)} ${currency})`}
+                title={`Amount (${balance ? balance : "0.000"} ${currency})`}
                 name="amount"
                 type="number"
                 errors={errors.amount}

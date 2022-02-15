@@ -31,7 +31,7 @@ export const BalanceCard = ({
         <h1 className="text-xl mr-3">
           {currency === "HIVE"
             ? balance
-            : ((balance as { LARYNX: number }).LARYNX / 1000).toFixed(2)}{" "}
+            : (balance as { LARYNX: number }).LARYNX / 1000}{" "}
           {currency === "DLUX" ? "LARYNX" : currency}
         </h1>
       </div>

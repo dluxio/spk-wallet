@@ -70,7 +70,10 @@ export const LarynxInfo = ({
       )}
       <div className="flex flex-col sm:flex-row justify-between gap-5">
         <div>
-          <h1>LARYNX Token ({(balance.LARYNX / 1000).toFixed(2)} Bal)</h1>
+          <h1>
+            LARYNX Token ({balance.LARYNX ? balance.LARYNX / 1000 : "0.000"}{" "}
+            Bal)
+          </h1>
           <h1 className="mt-2 pl-2 text-gray-600">
             Utility token for smart contracts, also called a (SMT)
           </h1>
@@ -87,7 +90,10 @@ export const LarynxInfo = ({
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-300 mt-2 pt-2">
         <div>
-          <h1>LARYNX Proof of stake ({(balance.GOV / 1000).toFixed(2)} Bal)</h1>
+          <h1>
+            LARYNX Proof of stake ({balance.GOV ? balance.GOV / 1000 : "0.000"}{" "}
+            Bal)
+          </h1>
           <h1 className="text-gray-600 pl-2">
             Staked tokens (Powered Up) allowing for inflationary rewards
           </h1>
@@ -122,7 +128,7 @@ export const LarynxInfo = ({
         <h1 className="mt-1 text-md">Claim info:</h1>
         <ul className="text-gray-600 ml-3">
           <li>When can you claim: At the start of every month</li>
-          <li>Availible per month: {claimInfo.availiblePerMonth} LARYNX</li>
+          <li>Available per month: {claimInfo.availiblePerMonth} LARYNX</li>
           <li>Last claim: {claimInfo.lasClaim}</li>
           <li>Total claims: {claimInfo.totalClaims}</li>
         </ul>

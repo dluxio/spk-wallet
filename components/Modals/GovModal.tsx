@@ -62,7 +62,7 @@ export const GovModal = ({
           <form onSubmit={handleSubmit}>
             <div className="mt-2 relative">
               <FormInput
-                title={`Amount (${balance.toFixed(2)} ${
+                title={`Amount (${balance ? balance : "0.000"} ${
                   up ? "LARYNX" : "GOV"
                 })`}
                 name="amount"

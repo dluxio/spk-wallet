@@ -18,8 +18,6 @@ export const CryptoScreen = ({ }) => {
     setHiveBal(parseFloat(user.balance.split(" ")[0]));
 
     axios.get(`${apiLink}@${user.name}`).then(({ data }) => {
-      console.log(data);
-
       setDluxBal({
         LARYNX: parseFloat(data.balance),
         GOV: parseFloat(data.gov),
