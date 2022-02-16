@@ -60,20 +60,18 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
-    if (refresh === "pfp" || refresh === "") {
-      if (user) {
-        setSigning(false);
-        setProfDropdown(false);
-        client.database.getAccounts([user.name]).then((response: any) => {
-          if (response[0]) {
-            const metadata = JSON.parse(
-              response[0].posting_json_metadata
-            ).profile;
+    if (user) {
+      setSigning(false);
+      setProfDropdown(false);
+      client.database.getAccounts([user.name]).then((response: any) => {
+        if (response[0]) {
+          const metadata = JSON.parse(
+            response[0].posting_json_metadata
+          ).profile;
 
-            setPfp(metadata);
-          }
-        });
-      }
+          setPfp(metadata);
+        }
+      });
     }
   }, [user, refresh]);
 
