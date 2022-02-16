@@ -85,6 +85,8 @@ export const NavBar = () => {
           redoProfilePicture({ script, uid });
         }
       }
+    } else {
+      setPfp(placeHolder);
     }
   }, [pfpData]);
 
