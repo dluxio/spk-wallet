@@ -42,7 +42,6 @@ export const LarynxInfo = ({
 
   useEffect(() => {
     axios.get(`${API}@${user.name}`).then(({ data }) => {
-      console.log(data);
       setClaimInfo({
         availiblePerMonth:
           data.drop.availible.amount /

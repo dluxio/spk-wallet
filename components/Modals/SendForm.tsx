@@ -24,7 +24,7 @@ export const Send = ({
     <ModalWrapper handleClose={handleClose}>
       <h1 className="text-xl mb-2">Send {currency}</h1>
       <Formik
-        initialValues={{ to: "", amount: 1, memo: "" }}
+        initialValues={{ to: "", amount: balance, memo: "" }}
         validate={({ to, amount }) => {
           const errors: { to?: string; amount?: string } = {};
           if (!to) {

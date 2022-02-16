@@ -20,13 +20,15 @@ export const GovModal = ({
   const user = useRecoilValue<any>(userState);
   const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
 
+  console.log(balance);
+
   return (
     <ModalWrapper handleClose={handleClose}>
       <h1 className="text-xl mb-2">
         {up ? "Lock LARYNX for Governance Ops" : "Unlock Governance Tokens"}
       </h1>
       <Formik
-        initialValues={{ amount: 1 }}
+        initialValues={{ amount: balance }}
         validate={({ amount }) => {
           const errors: { amount?: string } = {};
 
