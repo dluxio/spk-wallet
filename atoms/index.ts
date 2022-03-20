@@ -42,7 +42,7 @@ export const refreshState = atom({
 
 export const apiLinkState = atom({
   key: "apiLinkState",
-  default: "https://spktoken.dlux.io/",
+  default: "https://spkcc.hive.pizza/",
 });
 
 export const ipfsLinkState = atom({
