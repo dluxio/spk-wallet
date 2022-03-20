@@ -30,7 +30,6 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
             prefix
           );
     } else if (type === "buy" && orderType === "market") {
-      if (total <= 0.01) {
         dexBuy(
           {
             coin,
@@ -42,11 +41,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           user.name,
           cc
         );
-      } else {
-        setError("test_net");
-      }
     } else if (type === "buy" && orderType === "limit") {
-      if (total <= 0.01) {
         dexBuy(
           {
             coin,
@@ -59,9 +54,6 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           user.name,
           cc
         );
-      } else {
-        setError("test_net");
-      }
     }
   };
 

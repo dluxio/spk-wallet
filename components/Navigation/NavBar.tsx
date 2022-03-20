@@ -17,7 +17,6 @@ import { Spinner } from "../Spinner";
 import { hiveApi, placeHolder } from "../../constants";
 import { redoProfilePicture } from "../../utils";
 import { useQuery } from "../../constants/breakpoints";
-import Link from "next/link";
 
 export const NavBar = () => {
   const client = new Client(hiveApi);
@@ -126,9 +125,6 @@ export const NavBar = () => {
         id="logo"
       >
         <img src="/logo.svg" alt="logo" />
-      </div>
-      <div>
-        <h1 className="text-2xl text-red-500">TEST NET</h1>
       </div>
       {/* {!isMobile ? (
         <div className="flex gap-10 flex-grow justify-center items-center">
