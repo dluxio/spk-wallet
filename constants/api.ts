@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API = 'https://spktoken.dlux.io/';
+export const API = 'https://spkcc.hive.pizza/';
 
 export const checkClaim = async (username: string) => {
   const { data } = await axios.get(API + `@${username}`);
