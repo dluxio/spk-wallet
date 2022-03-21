@@ -14,6 +14,7 @@ import { ImCross } from "react-icons/im";
 import hive from "@hiveio/hive-js";
 import { useTranslation } from "next-export-i18n";
 import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
+import { login } from "../utils";
 
 type LoginProps = {
   handleClose: MouseEventHandler;
@@ -29,27 +30,16 @@ export const Login = ({ handleClose }: LoginProps) => {
   const handleSubmit = (e: any) => {
     if (e.key === "Enter" || !e.key) {
       (async () => {
-        const response = await connector.login();
-        const didId = response?.context?.did?.id;
-
-        if (didId) {
-          hive.api.getAccounts(
-            [usernameRef.current.value],
-            async (err: any, result: any) => {
-              if (err) throw new Error(err);
-              if (result.length) {
-                setUser(result[0]);
-                await connector.idx.set(
-                  "basicProfile",
-                  JSON.parse(result[0].posting_json_metadata)
-                );
-                localStorage.setItem("user", JSON.stringify(result[0]));
-              } else {
-                setErrors({ user: "hello" });
-              }
+        const response: any = await login(e.target.value);
+        if (response.data.username === e.target.value) {
+          hive.api.getAccounts([e.target.value], async (err: any, res: any) => {
+            if (err) throw new Error(err);
+            if (res.length) {
+              console.log(res[0]);
             }
-          );
+          });
         }
+        console.log(response, e.target.values);
       })();
     }
   };

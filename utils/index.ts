@@ -18,6 +18,26 @@ export const toNumber = (Base64: string) => {
   return result;
 };
 
+export const parseDrop = (drop: any) => {
+  let months = drop.total_claims.split("").map((a: string) => parseInt(a, 16));
+  const monthNames: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return months.map((month: number) => monthNames[month - 1]);
+};
+
 export const toBase64 = (number: number) => {
   if (
     number !== number || // NaN !== NaN, equal true
@@ -56,6 +76,33 @@ export const getColor = (id: string) => {
     default:
       return ["rgba(123, 239, 178)", "rgba(123, 239, 178, 0.5)"];
   }
+};
+
+export const login = async (username: string) => {
+  return new Promise((res, rej) => {
+    // @ts-ignore
+    if (window.hive_keychain) {
+      const buf = JSON.stringify(
+        {
+          token: "something_here",
+        },
+        null,
+        0
+      );
+
+      // @ts-ignore
+      window.hive_keychain.requestSignBuffer(
+        username,
+        buf,
+        "Posting",
+        (response: any) => {
+          res(response);
+        }
+      );
+    } else {
+      rej("Hive keychain needs to be present");
+    }
+  });
 };
 
 const handleBroadcastRequest = async (

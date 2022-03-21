@@ -776,11 +776,6 @@
     secure-random "^1.1.2"
     ws "^3.3.2"
 
-"@hiveio/keychain@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@hiveio/keychain/-/keychain-1.0.7.tgz#ff5789a918a768af73ff8b8ab8173b8103082c04"
-  integrity sha512-VxuWGw9oCvqSr3+s+Q7sqsT+tpf+xlwG7k9F6cnK4gHqcuFE6x8lOnvNM9pgueG898s9jwvrH5l+xAQJT7XmsA==
-
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"

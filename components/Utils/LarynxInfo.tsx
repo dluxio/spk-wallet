@@ -7,6 +7,7 @@ import { FaLock, FaUnlock } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../atoms";
 import { API } from "../../constants/api";
+import { parseDrop } from "../../utils";
 import { GovModal } from "../Modals/GovModal";
 import { Send } from "../Modals/SendForm";
 
@@ -36,18 +37,21 @@ export const LarynxInfo = ({
   const [showActions, setShowActions] = useState(false);
   const [claimInfo, setClaimInfo] = useState({
     availiblePerMonth: 0,
-    lasClaim: "Feburary",
-    totalClaims: 0,
+    lastClaim: "Feburary",
+    totalClaims: "",
   });
 
   useEffect(() => {
     axios.get(`${API}@${user.name}`).then(({ data }) => {
+      const response = parseDrop(data.drop);
+      console.log(response);
+
       setClaimInfo({
         availiblePerMonth:
           data.drop.availible.amount /
           Math.pow(10, data.drop.availible.precision),
-        lasClaim: monthNames[+data.drop.last_claim - 1],
-        totalClaims: data.drop.total_claims,
+        lastClaim: response.slice(-1)[0],
+        totalClaims: response.join(", "),
       });
     });
   }, []);
@@ -124,7 +128,7 @@ export const LarynxInfo = ({
         <ul className="text-gray-600 ml-3">
           <li>When can you claim: At the start of every month</li>
           <li>Available per month: {claimInfo.availiblePerMonth} LARYNX</li>
-          <li>Last claim: {claimInfo.lasClaim}</li>
+          <li>Last claim: {claimInfo.lastClaim}</li>
           <li>Total claims: {claimInfo.totalClaims}</li>
         </ul>
       </div>
