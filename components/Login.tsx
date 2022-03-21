@@ -30,16 +30,19 @@ export const Login = ({ handleClose }: LoginProps) => {
   const handleSubmit = (e: any) => {
     if (e.key === "Enter" || !e.key) {
       (async () => {
-        const response: any = await login(e.target.value);
-        if (response.data.username === e.target.value) {
-          hive.api.getAccounts([e.target.value], async (err: any, res: any) => {
-            if (err) throw new Error(err);
-            if (res.length) {
-              console.log(res[0]);
+        const response: any = await login(usernameRef.current.value);
+        if (response.data.username === usernameRef.current.value) {
+          hive.api.getAccounts(
+            [usernameRef.current.value],
+            async (err: any, res: any) => {
+              if (err) throw new Error(err);
+              if (res.length) {
+                console.log(res[0]);
+                setUser(res[0]);
+              }
             }
-          });
+          );
         }
-        console.log(response, e.target.values);
       })();
     }
   };

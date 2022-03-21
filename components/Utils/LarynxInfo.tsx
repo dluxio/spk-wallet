@@ -44,8 +44,6 @@ export const LarynxInfo = ({
   useEffect(() => {
     axios.get(`${API}@${user.name}`).then(({ data }) => {
       const response = parseDrop(data.drop);
-      console.log(response);
-
       setClaimInfo({
         availiblePerMonth:
           data.drop.availible.amount /
