@@ -15,7 +15,7 @@ export const CryptoScreen = ({ }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    setHiveBal(parseFloat(user.balance.split(" ")[0]));
+    setHiveBal(user ? parseFloat(user?.balance?.split(" ")[0]) : 0);
 
     axios.get(`${apiLink}@${user.name}`).then(({ data }) => {
       setDluxBal({
@@ -30,8 +30,9 @@ export const CryptoScreen = ({ }) => {
       <h1 className="text-white text-xl mx-10 my-2 text-center">
         {t("balances")}
       </h1>
-      <div className="grid grid-cols-1 gap-5 px-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 px-10">
         <BalanceCard currency="DLUX" balance={dluxBal} />
+        <BalanceCard currency="HIVE" balance={hiveBal} />
       </div>
     </div>
   );
