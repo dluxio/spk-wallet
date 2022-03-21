@@ -15,7 +15,7 @@ export const CryptoScreen = ({ }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    setHiveBal(parseFloat(user.balance.split(" ")[0]));
+    setHiveBal(user ? parseFloat(user?.balance?.split(" ")[0]) : 0);
 
     axios.get(`${apiLink}@${user.name}`).then(({ data }) => {
       setDluxBal({

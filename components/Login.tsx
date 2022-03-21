@@ -26,43 +26,31 @@ export const Login = ({ handleClose }: LoginProps) => {
   const { t } = useTranslation();
   const connector = useHiveKeychainCeramic();
 
-  useEffect(() => {
-    const ceramicClient = async () => {
-      const response = await connector.login();
-      const didId = response?.context?.did?.id;
-
-      if (didId) {
-        let profile = await connector.idx.get(didId);
-        if (!profile) {
-          if (connector.idx.authenticated) {
-            profile = await connector.idx.set(
-              "basicProfile",
-              JSON.parse(user.json_metadata)
-            );
-          }
-        }
-      }
-    };
-
-    if (user && window !== undefined) {
-      ceramicClient();
-    }
-  }, [user]);
-
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     if (e.key === "Enter" || !e.key) {
-      hive.api.getAccounts(
-        [usernameRef.current.value],
-        async (err: any, result: any) => {
-          if (err) throw new Error(err);
-          if (result.length) {
-            setUser(result[0]);
-            localStorage.setItem("user", JSON.stringify(result[0]));
-          } else {
-            setErrors({ user: "hello" });
-          }
+      (async () => {
+        const response = await connector.login();
+        const didId = response?.context?.did?.id;
+
+        if (didId) {
+          hive.api.getAccounts(
+            [usernameRef.current.value],
+            async (err: any, result: any) => {
+              if (err) throw new Error(err);
+              if (result.length) {
+                setUser(result[0]);
+                await connector.idx.set(
+                  "basicProfile",
+                  JSON.parse(result[0].posting_json_metadata)
+                );
+                localStorage.setItem("user", JSON.stringify(result[0]));
+              } else {
+                setErrors({ user: "hello" });
+              }
+            }
+          );
         }
-      );
+      })();
     }
   };
 
