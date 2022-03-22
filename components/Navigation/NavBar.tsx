@@ -48,11 +48,6 @@ export const NavBar = () => {
     setProfDropdown(false);
   };
 
-  const handleTrades = () => {
-    router.push({ pathname: "/trades", query });
-    setProfDropdown(false);
-  };
-
   const handleSettings = () => {
     router.push({ pathname: "/settings", query });
     setProfDropdown(false);
@@ -95,18 +90,6 @@ export const NavBar = () => {
 
       if (userStor) {
         setUser(JSON.parse(userStor));
-        const response = await connector.login();
-        const didId = response?.context?.did?.id;
-
-        if (didId) {
-          let profile = await connector.idx.get("basicProfile", didId);
-          if (!profile) {
-            profile = await connector.idx.set(
-              "basicProfile",
-              JSON.parse(JSON.parse(userStor).posting_json_metadata)
-            );
-          }
-        }
       }
     };
 
