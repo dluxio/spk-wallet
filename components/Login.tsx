@@ -37,8 +37,8 @@ export const Login = ({ handleClose }: LoginProps) => {
             async (err: any, res: any) => {
               if (err) throw new Error(err);
               if (res.length) {
-                console.log(res[0]);
                 setUser(res[0]);
+                localStorage.setItem("user", JSON.stringify(res[0]));
               }
             }
           );
