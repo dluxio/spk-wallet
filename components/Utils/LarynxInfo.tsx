@@ -90,9 +90,15 @@ export const LarynxInfo = ({
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-300 mt-2 pt-2">
         <div>
-          <h1>LARYNX ({balance.GOV ? balance.GOV / 1000 : "0.000"} Bal)</h1>
+          <h1>LARYNXG ({balance.GOV ? balance.GOV / 1000 : "0.000"} Bal)</h1>
           <h1 className="text-gray-600 pl-2">
             Stake and run SCC node for DEX rewards.
+            <ul className="list-disc ml-8">
+              <li>Increased rewards from DEX</li>
+              <li>Instant Power Up</li>
+              <li>4 Week Power Down</li>
+              <li>1 Week Convert</li>
+            </ul>
           </h1>
         </div>
         <div className="flex relative flex-col items-center lg:items-end">
@@ -109,13 +115,13 @@ export const LarynxInfo = ({
                 onClick={() => setGov({ show: true, up: true })}
                 className="flex justify-between items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
               >
-                Lock LARYNX <FaLock />
+                Lock LARYNXG <FaLock />
               </button>
               <button
                 onClick={() => setGov({ show: true, up: false })}
                 className="flex mt-2 items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
               >
-                Unlock LARYNX <FaUnlock />
+                Unlock LARYNXG <FaUnlock />
               </button>
             </div>
           )}

@@ -42,7 +42,7 @@ export const refreshState = atom({
 
 export const apiLinkState = atom({
   key: "apiLinkState",
-  default: "https://spkcc.hive.pizza/",
+  default: "https://spkinstant.hivehoneycomb.com/",
 });
 
 export const ipfsLinkState = atom({

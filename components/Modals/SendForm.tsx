@@ -92,11 +92,11 @@ export const Send = ({
                 <img
                   src={
                     currency === "LARYNX"
-                      ? "https://www.dlux.io/img/dlux-hive-logo-alpha.svg"
+                      ? "https://spk.network/static/media/SPK.4d91f7a0.png"
                       : "https://www.dlux.io/img/hextacular.svg"
                   }
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="logo"
                 />
               </div>
