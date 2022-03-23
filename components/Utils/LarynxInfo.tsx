@@ -42,8 +42,6 @@ export const LarynxInfo = ({
 
     axios.get(`${apiLink}markets`).then(({ data }) => {
       if (Object.keys(data.markets.node).includes(user.name)) {
-        console.log(Object.keys(data.markets.node));
-
         setShowStake(true);
       }
     });

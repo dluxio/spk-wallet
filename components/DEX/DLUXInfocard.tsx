@@ -122,12 +122,8 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
     }
   }, [coin]);
 
-  console.log(lastPrice);
-
   useEffect(() => {
     if (dexData) {
-      console.log(dexData);
-
       if (coin === "HIVE") {
         setVolumePrice({
           larynx: volumePrice.larynx,

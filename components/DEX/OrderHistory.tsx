@@ -19,8 +19,6 @@ export const OrderHistory = ({
   useEffect(() => {
     axios.get(`${apiLink}dex`).then(({ data: { markets } }) => {
       if (markets && markets.hive && markets.hbd) {
-        console.log(markets);
-
         if (coin === "HIVE" && type === "buy") {
           setOrders(
             markets.hive.buys.length <= 1
