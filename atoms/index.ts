@@ -10,16 +10,6 @@ export const inventoryNavState = atom({
   default: "tokens",
 });
 
-export const marketNavState = atom({
-  key: "marketNavState",
-  default: "apps",
-});
-
-export const coinState = atom({
-  key: "coinState",
-  default: [],
-});
-
 export const prefixState = atom({
   key: "prefixState",
   default: "spkcc_",
@@ -55,10 +45,10 @@ export const dlux_ccState = atom({
   default: "",
 });
 
-export const dayVolumeState = atom({
-  key: "dayVolumeState",
+export const balanceState = atom({
+  key: "balance-state",
   default: {
-    dlux: "0",
-    dollars: "",
+    LARYNX: 0,
+    HIVE: 0,
   },
 });

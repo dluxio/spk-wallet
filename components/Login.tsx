@@ -31,6 +31,7 @@ export const Login = ({ handleClose }: LoginProps) => {
     if (e.key === "Enter" || !e.key) {
       (async () => {
         const response: any = await login(usernameRef.current.value);
+        console.log(response);
         if (response.data.username === usernameRef.current.value) {
           hive.api.getAccounts(
             [usernameRef.current.value],
