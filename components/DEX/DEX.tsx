@@ -51,7 +51,7 @@ export const DEX = () => {
               <DEXChart coin={coin} />
             </div>
           )}
-          <div className="flex flex-col my-5 gap-2 xl:flex-row xl:justify-between xl:gap-10">
+          <div className="flex flex-col my-5 gap-2 md:flex-row md:justify-between md:gap-10">
             <Order coin={coin} type="buy" />
             <Order coin={coin} type="sell" />
           </div>

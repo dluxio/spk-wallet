@@ -45,7 +45,7 @@ export const TransactionHistory = ({ coin }: { coin: "HIVE" | "HBD" }) => {
         {!isMobile && <h1>{t("date").toUpperCase()}</h1>}
         <h1>{t("type").toUpperCase()}</h1>
         <h1>LARYNX</h1>
-        <h1>HIVE</h1>
+        <h1>{coin}</h1>
         <h1>{t("total").toUpperCase()}</h1>
       </div>
       {transactions.map((transaction: any, i: number) => (

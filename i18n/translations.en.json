@@ -54,6 +54,7 @@
     "type": "Type",
     "limit": "Limit",
     "qty": "Quantity",
+    "depth": "Depth",
     "total": "Total",
     "last": "Last",
     "orders": "orders",

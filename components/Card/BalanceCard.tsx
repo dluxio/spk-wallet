@@ -14,7 +14,7 @@ export const BalanceCard = ({
       <div className="flex items-center justify-between">
         {currency === "DLUX" && (
           <img
-            src="https://www.dlux.io/img/dlux-hive-logo-alpha.svg"
+            src="https://spk.network/static/media/SPK.4d91f7a0.png"
             width={45}
             height={45}
             alt="logo"

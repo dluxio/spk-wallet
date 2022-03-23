@@ -18,51 +18,48 @@ export const OrderHistory = ({
 
   useEffect(() => {
     axios.get(`${apiLink}dex`).then(({ data: { markets } }) => {
-      if (coin === "HIVE" && type === "buy") {
-        setOrders(
-          markets.hive.buys.length <= 1
-            ? markets.hive.buys.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-            : markets.hive.buys.sort((a: any, b: any) =>
-                parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
-              )
-        );
-      } else if (coin === "HBD" && type === "buy") {
-        setOrders(
-          markets.hbd.buys.length <= 1
-            ? markets.hbd.buys.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-            : markets.hbd.buys.sort((a: any, b: any) =>
-                parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
-              )
-        );
-      } else if (coin === "HIVE" && type === "sell") {
-        setOrders(
-          markets.hive.sells.length <= 1
-            ? markets.hive.sells.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-            : markets.hive.sells.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-        );
-      } else if (coin === "HBD" && type === "sell") {
-        setOrders(
-          markets.hbd.sells.length <= 1
-            ? markets.hbd.sells.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-            : markets.hbd.sell.sort((a: any, b: any) =>
-                parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
-              )
-          // .filter((el: any, i: number, array: any) => {
-          //   if (array[i + 1]) {
-          //     return el.rate !== array[i + 1].rate ? el : true;
-          //   }
-          // })
-        );
+      if (markets && markets.hive && markets.hbd) {
+        if (coin === "HIVE" && type === "buy") {
+          setOrders(
+            markets.hive.buys.length <= 1
+              ? markets.hive.buys.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+              : markets.hive.buys.sort((a: any, b: any) =>
+                  parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
+                )
+          );
+        } else if (coin === "HBD" && type === "buy") {
+          setOrders(
+            markets.hbd.buys.length <= 1
+              ? markets.hbd.buys.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+              : markets.hbd.buys.sort((a: any, b: any) =>
+                  parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
+                )
+          );
+        } else if (coin === "HIVE" && type === "sell") {
+          setOrders(
+            markets.hive.sells.length <= 1
+              ? markets.hive.sells.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+              : markets.hive.sells.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+          );
+        } else if (coin === "HBD" && type === "sell") {
+          setOrders(
+            markets.hbd.sells.length <= 1
+              ? markets.hbd.sells.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+              : markets.hbd.sells.sort((a: any, b: any) =>
+                  parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                )
+          );
+        }
       }
     });
   }, [coin]);
@@ -76,10 +73,33 @@ export const OrderHistory = ({
         <h1>{t("orders")}</h1>
       </div>
       <div className="grid grid-cols-4 gap-5 mt-3">
-        <h1>{t("total").toUpperCase()}</h1>
-        <h1>{coin}</h1>
-        <h1>LARYNX</h1>
-        <h1>{t(type === "sell" ? "ask" : "bid").toUpperCase()}</h1>
+        {type === "sell" ? (
+          <>
+            <h1>
+              {t("ask").toUpperCase()} ({coin})
+            </h1>
+            <h1>LARYNX</h1>
+            <h1>
+              {t("total").toUpperCase()} ({coin})
+            </h1>
+            <h1>
+              {t("depth").toUpperCase()} ({coin})
+            </h1>
+          </>
+        ) : (
+          <>
+            <h1>
+              {t("depth").toUpperCase()} ({coin})
+            </h1>
+            <h1>
+              {t("total").toUpperCase()} ({coin})
+            </h1>
+            <h1>LARYNX</h1>
+            <h1>
+              {t("bid").toUpperCase()} ({coin})
+            </h1>
+          </>
+        )}
       </div>
       <div className="mt-2">
         {orders &&

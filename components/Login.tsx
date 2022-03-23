@@ -23,9 +23,8 @@ type LoginProps = {
 export const Login = ({ handleClose }: LoginProps) => {
   const usernameRef: MutableRefObject<any> = useRef(null);
   const [errors, setErrors] = useState({ user: "" });
-  const [user, setUser] = useRecoilState<any>(userState);
+  const [_user, setUser] = useRecoilState<any>(userState);
   const { t } = useTranslation();
-  const connector = useHiveKeychainCeramic();
 
   const handleSubmit = (e: any) => {
     if (e.key === "Enter" || !e.key) {
@@ -39,6 +38,8 @@ export const Login = ({ handleClose }: LoginProps) => {
               if (res.length) {
                 setUser(res[0]);
                 localStorage.setItem("user", JSON.stringify(res[0]));
+              } else {
+                setErrors({ user: "Not found" });
               }
             }
           );
