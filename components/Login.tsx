@@ -29,6 +29,11 @@ export const Login = ({ handleClose }: LoginProps) => {
   const handleSubmit = (e: any) => {
     if (e.key === "Enter" || !e.key) {
       (async () => {
+        // @ts-ignore
+        if (!window.hive_keychain) {
+          setErrors({ user: "keychainNotFound" });
+        }
+
         const response: any = await login(usernameRef.current.value);
         if (response.data.username === usernameRef.current.value) {
           hive.api.getAccounts(
@@ -39,10 +44,12 @@ export const Login = ({ handleClose }: LoginProps) => {
                 setUser(res[0]);
                 localStorage.setItem("user", JSON.stringify(res[0]));
               } else {
-                setErrors({ user: "Not found" });
+                setErrors({ user: "userNotFound" });
               }
             }
           );
+        } else {
+          setErrors({ user: "notAuthorised" });
         }
       })();
     }
@@ -59,7 +66,7 @@ export const Login = ({ handleClose }: LoginProps) => {
           />
         </button>
         <h1 className="text-xl text-center mb-5">{t("inputUsername")}</h1>
-        <div className="flex justify-center flex-col gap-3">
+        <div className="flex justify-center flex-col">
           <input
             type="text"
             placeholder="Username"
@@ -67,13 +74,18 @@ export const Login = ({ handleClose }: LoginProps) => {
             className="px-3 py-1 rounded-lg border bg-gray-300 border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200"
             onKeyDown={handleSubmit}
           />
-          {errors.user && <h1 className="text-red-500">{t("userNotFound")}</h1>}
+          {errors.user && <h1 className="text-red-500">{t(errors.user)}</h1>}
 
           <button
             onClick={handleSubmit}
-            className="rounded-lg border border-gray-500 py-1 w-2/3 px-2 bg-gray-200 focus:ring-4 mx-auto focus:outline-none focus:ring-gray-700"
+            className="mt-2 rounded-lg border border-gray-500 py-1 w-2/3 px-2 bg-gray-600 focus:ring-4 mx-auto focus:outline-none focus:ring-gray-700"
           >
-            {t("login")}
+            <div className="max-w-xs">
+              <img
+                src="https://peakd.com/static/img/keychain.6846c271.png"
+                alt="Login using hive keychain"
+              />
+            </div>
           </button>
         </div>
       </div>

@@ -32,6 +32,7 @@
     "comments": "Komentarai",
     "comment": "Komentuok",
     "runApp": "Paleiskite programą",
+    "no_open_orders": "Jūs neturite jokių atvirų užsakymų",
     "writeComment": "Rašyk komentarą...",
     "author": "Autorius",
     "votes": "Balsai",
@@ -59,6 +60,7 @@
     "orders": "užsakymai",
     "date": "Data",
     "tradeHistory": "Užsakymų istorija",
-    "owner": "Savininkas"
+    "owner": "Savininkas",
+    "keychainNotFound": "Reikia tūrėti HIVE Keychain susiinstaliavus"
   }
 }

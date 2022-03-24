@@ -5,9 +5,8 @@ import { userState, inventoryNavState } from "../atoms";
 
 import { InventoryNav } from "../components";
 
-import { MintTokenScreen } from "../components/Screens/MintTokenScreen";
 import { CryptoScreen } from "../components/Screens/CryptoScreen";
-import { NFTScreen } from "../components/Screens/NFTScreen";
+import { OpenOrdersScreen } from "../components/Screens/OpenOrdersScreen";
 import { DEX } from "../components/DEX/DEX";
 import dynamic from "next/dynamic";
 import NoSSR from "react-no-ssr";
@@ -23,9 +22,8 @@ const Inventory = () => {
         <>
           <InventoryNav />
           <div className="">
-            {inventoryPage === "mint" && <MintTokenScreen />}
-            {inventoryPage === "nft" && <NFTScreen />}
             {inventoryPage === "tokens" && <CryptoScreen />}
+            {inventoryPage === "open_orders" && <OpenOrdersScreen />}
             {inventoryPage === "dex" && (
               <NoSSR>
                 <DEX />
