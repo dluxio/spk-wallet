@@ -836,3 +836,20 @@ export const parseData = (data: any) => {
   };
 };
 
+export const deleteOrder = async (
+  username: string,
+  txid: string,
+  prefix: string
+) => {
+  const operations = [
+    "custom_json",
+    {
+      required_auths: [username],
+      id: `${prefix}dex_clear`,
+      required_posting_auths: 0,
+      json: JSON.stringify({ txid }),
+    },
+  ];
+
+  return await handleBroadcastRequest(operations, username);
+};

@@ -57,10 +57,12 @@
     "depth": "Depth",
     "total": "Total",
     "last": "Last",
+    "no_open_orders": "You don't have any open orders",
     "orders": "orders",
     "date": "Date",
     "tradeHistory": "Trade History",
     "owner": "Owner",
-    "witnessSettings": "Witness Settings"
+    "witnessSettings": "Witness Settings",
+    "keychainNotFound": "You need to have HIVE Keychain installed"
   }
 }
