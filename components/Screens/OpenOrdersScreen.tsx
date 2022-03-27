@@ -16,10 +16,7 @@ export const OpenOrdersScreen = () => {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`${apiLink}@${user.name}`);
-      console.log(data);
       if (data.contracts.length) {
-        console.log(data.contracts[0]);
-
         setOpenOrders(
           data.contracts.map((order: any) => {
             let fillPercent = 0;
