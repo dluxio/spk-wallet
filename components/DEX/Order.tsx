@@ -105,7 +105,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
                 max={balances.LARYNX}
                 className="rounded-xl outline-none w-1/2 px-3 py-1 bg-gray-300 text-gray-500"
                 type="number"
-                value={quantity}
+                value={quantity.toString().replace(/^0+/, "")}
                 onChange={(e) => setQuantity(+e.target.value)}
               />
             </div>
@@ -123,7 +123,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
               max={balances.LARYNX}
               className="rounded-xl outline-none px-3 py-1 w-1/2 bg-gray-300 text-gray-500"
               type="number"
-              value={quantity}
+              value={quantity.toString().replace(/^0+/, "")}
               onChange={(e) => setQuantity(+e.target.value)}
             />
           </div>
@@ -141,7 +141,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
                 max={balances.HIVE}
                 className="rounded-xl outline-none px-3 py-1 w-1/2  bg-gray-300 text-gray-500"
                 type="number"
-                value={total}
+                value={total.toString().replace(/^0+/, "")}
                 onChange={(e) => setTotal(+e.target.value)}
               />
             </div>
@@ -168,7 +168,7 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
                 max={balances.HIVE}
                 className="rounded-xl outline-none px-3 py-1 w-1/2 bg-gray-300 text-gray-500"
                 type="number"
-                value={total}
+                value={total.toString().replace(/^0+/, "")}
                 onChange={(e) => setTotal(+e.target.value)}
               />
             </div>
