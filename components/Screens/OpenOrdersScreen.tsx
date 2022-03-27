@@ -15,9 +15,7 @@ export const OpenOrdersScreen = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(
-        `https://spkinstant.hivehoneycomb.com/@themarkymark`
-      );
+      const { data } = await axios.get(`${apiLink}@${user.name}`);
       console.log(data);
       if (data.contracts.length) {
         console.log(data.contracts[0]);
