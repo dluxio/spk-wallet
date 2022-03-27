@@ -14,11 +14,19 @@ import { claim } from "../../utils";
 export const InventoryNav = () => {
   const [claimType, setClaimType] = useState<boolean | string>(false);
   const { t } = useTranslation();
-  const [query] = useLanguageQuery();
   const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
-  const [marketNavSelected, setMarketNavSelected] =
-    useRecoilState(inventoryNavState);
+  const [navSelected, setNavSelected] = useRecoilState(inventoryNavState);
   const user = useRecoilValue<any>(userState);
+
+  useEffect(() => {
+    if (localStorage.getItem("spk_inv_nav")) {
+      setNavSelected(localStorage.getItem("spk_inv_nav")!);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("spk_inv_nav", navSelected);
+  }, [navSelected]);
 
   useEffect(() => {
     if (user) {
@@ -41,27 +49,27 @@ export const InventoryNav = () => {
     <div className="flex flex-wrap items-center justify-between">
       <div className="flex mx-10 my-10 text-white gap-8 text-xl">
         <div
-          onClick={() => setMarketNavSelected("tokens")}
+          onClick={() => setNavSelected("tokens")}
           className={`flex flex-col items-center cursor-pointer ${
-            marketNavSelected === "tokens" && "selected"
+            navSelected === "tokens" && "selected"
           }`}
         >
           <FaDollarSign size={25} />
           <p className="text-md mt-1">{t("tokens")}</p>
         </div>
         <div
-          onClick={() => setMarketNavSelected("open_orders")}
+          onClick={() => setNavSelected("open_orders")}
           className={`flex flex-col items-center cursor-pointer ${
-            marketNavSelected === "open_orders" && "selected"
+            navSelected === "open_orders" && "selected"
           }`}
         >
           <GiOpenBook size={25} />
           <p className="text-md mt-1">{t("orders")}</p>
         </div>
         <div
-          onClick={() => setMarketNavSelected("dex")}
+          onClick={() => setNavSelected("dex")}
           className={`flex flex-col items-center cursor-pointer ${
-            marketNavSelected === "dex" && "selected"
+            navSelected === "dex" && "selected"
           }`}
         >
           <MdSwapVerticalCircle size={25} />
