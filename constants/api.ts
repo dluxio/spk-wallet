@@ -1,15 +1,30 @@
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { apiLinkState, userState } from "../atoms";
 
-export const API = 'https://spkcc.hive.pizza/';
+export const useClaim = () => {
+  const apiLink = useRecoilValue(apiLinkState);
+  const user: any = useRecoilValue(userState);
 
-export const checkClaim = async (username: string) => {
-  const { data } = await axios.get(API + `@${username}`);
-  const currentMonth = new Date().getMonth();
+  (async () => {
+    if (user) {
+      const { data } = await axios.get(apiLink + `@${user.name}`);
+      const currentMonth = new Date().getMonth();
 
-  if (data.claim) return "spk_claim";
-  if (currentMonth + 1 !== +data.drop.last_claim) {
-    return "spkcc_claim";
-  }
+      console.log(data);
 
-  return false;
-}
+      if (data.claim)
+        return { claimType: "spkcc_shares_claim", amount: data.claim };
+      if (currentMonth + 1 !== +data.drop.last_claim) {
+        return {
+          claimType: "spkcc_claim",
+          amount:
+            data.drop.availible.amount /
+            Math.pow(10, data.drop.availible.precision),
+        };
+      }
+    }
+  })();
+
+  return { claimType: "", amount: 0 };
+};

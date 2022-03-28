@@ -7,16 +7,15 @@ import { GiOpenBook } from "react-icons/gi";
 import { broadcastState, inventoryNavState, userState } from "../../atoms";
 import { useLanguageQuery, useTranslation } from "next-export-i18n";
 
-import router from "next/router";
-import { checkClaim } from "../../constants/api";
+import { useClaim } from "../../constants/api";
 import { claim } from "../../utils";
 
 export const InventoryNav = () => {
-  const [claimType, setClaimType] = useState<boolean | string>(false);
   const { t } = useTranslation();
   const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
   const [navSelected, setNavSelected] = useRecoilState(inventoryNavState);
   const user = useRecoilValue<any>(userState);
+  const { claimType, amount } = useClaim();
 
   useEffect(() => {
     if (localStorage.getItem("spk_inv_nav")) {
@@ -28,19 +27,13 @@ export const InventoryNav = () => {
     localStorage.setItem("spk_inv_nav", navSelected);
   }, [navSelected]);
 
-  useEffect(() => {
-    if (user) {
-      checkClaim(user.name).then((response) => {
-        setClaimType(response);
-      });
-    }
-  }, [user]);
-
   const handleClaim = async () => {
-    const response: any = await claim(user.name, claimType as string);
-    if (response) {
-      if (response.success) {
-        setBroadcasts((prevState: any) => [...prevState, response]);
+    if (claimType) {
+      const response: any = await claim(user.name, claimType as string);
+      if (response) {
+        if (response.success) {
+          setBroadcasts((prevState: any) => [...prevState, response]);
+        }
       }
     }
   };
@@ -78,9 +71,10 @@ export const InventoryNav = () => {
         {claimType && (
           <button
             onClick={handleClaim}
-            className="p-2 px-4 flex jsutify-center items-center bg-gradient-to-r from-blue-400 to-red-500 rounded-xl"
+            className="p-2 px-4 gap-2 flex justify-center items-center bg-gradient-to-r from-blue-400 to-red-500 rounded-xl"
           >
             <FaGift size="2rem" />
+            <h1 className="font-semibold">{amount} LARYNX</h1>
           </button>
         )}
       </div>

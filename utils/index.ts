@@ -728,7 +728,7 @@ export const claim = async (username: string, claimType: string) => {
       id: claimType,
       required_posting_auths: [username],
       json:
-        claimType === "spk_claim"
+        claimType === "spkcc_claim"
           ? JSON.stringify({ larynx: true })
           : JSON.stringify({}),
     },

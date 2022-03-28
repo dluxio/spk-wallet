@@ -6,7 +6,6 @@ import { BiPaperPlane } from "react-icons/bi";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
 import { apiLinkState, userState } from "../../atoms";
-import { API } from "../../constants/api";
 import { parseDrop } from "../../utils";
 import { GovModal } from "../Modals/GovModal";
 import { Send } from "../Modals/SendForm";
@@ -29,7 +28,7 @@ export const LarynxInfo = ({
   });
 
   useEffect(() => {
-    axios.get(`${API}@${user.name}`).then(({ data }) => {
+    axios.get(`${apiLink}@${user.name}`).then(({ data }) => {
       const response = parseDrop(data.drop);
       setClaimInfo({
         availiblePerMonth:
