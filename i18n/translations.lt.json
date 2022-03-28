@@ -61,6 +61,7 @@
     "date": "Data",
     "tradeHistory": "Užsakymų istorija",
     "owner": "Savininkas",
-    "keychainNotFound": "Reikia tūrėti HIVE Keychain susiinstaliavus"
+    "keychainNotFound": "Reikia tūrėti HIVE Keychain susiinstaliavus",
+    "notAuthorised": "Jūs neturite prieeigos prie šitos paskyros"
   }
 }

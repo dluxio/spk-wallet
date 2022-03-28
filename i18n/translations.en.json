@@ -63,6 +63,7 @@
     "tradeHistory": "Trade History",
     "owner": "Owner",
     "witnessSettings": "Witness Settings",
-    "keychainNotFound": "You need to have HIVE Keychain installed"
+    "keychainNotFound": "You need to have HIVE Keychain installed",
+    "notAuthorised": "You aren't authorised to login to this account"
   }
 }
