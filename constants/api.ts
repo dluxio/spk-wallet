@@ -14,7 +14,10 @@ export const useClaim = () => {
       console.log(data);
 
       if (data.claim)
-        return { claimType: "spkcc_shares_claim", amount: data.claim };
+        return {
+          claimType: "spkcc_shares_claim",
+          amount: data.claim / Math.pow(10, 3),
+        };
       if (currentMonth + 1 !== +data.drop.last_claim) {
         return {
           claimType: "spkcc_claim",
