@@ -4,23 +4,39 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { FaDollarSign, FaGift } from "react-icons/fa";
 import { MdSwapVerticalCircle } from "react-icons/md";
 import { GiOpenBook } from "react-icons/gi";
-import { broadcastState, inventoryNavState, userState } from "../../atoms";
-import { useLanguageQuery, useTranslation } from "next-export-i18n";
+import {
+  apiLinkState,
+  broadcastState,
+  inventoryNavState,
+  userState,
+} from "../../atoms";
+import { useTranslation } from "next-export-i18n";
 
-import { useClaim } from "../../constants/api";
 import { claim } from "../../utils";
+import { getClaim } from "../../constants/api";
 
 export const InventoryNav = () => {
   const { t } = useTranslation();
+  const [claimType, setClaimType] = useState({
+    claimType: "",
+    amount: 0,
+  });
   const [_broadcasts, setBroadcasts] = useRecoilState<any>(broadcastState);
   const [navSelected, setNavSelected] = useRecoilState(inventoryNavState);
+  const apiLink: string = useRecoilValue(apiLinkState);
   const user = useRecoilValue<any>(userState);
-  const { claimType, amount } = useClaim();
 
   useEffect(() => {
     if (localStorage.getItem("spk_inv_nav")) {
       setNavSelected(localStorage.getItem("spk_inv_nav")!);
     }
+
+    (async () => {
+      const response = await getClaim(apiLink, user.name);
+      if (response) {
+        setClaimType(response);
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -29,7 +45,10 @@ export const InventoryNav = () => {
 
   const handleClaim = async () => {
     if (claimType) {
-      const response: any = await claim(user.name, claimType as string);
+      const response: any = await claim(
+        user.name,
+        claimType.claimType as string
+      );
       if (response) {
         if (response.success) {
           setBroadcasts((prevState: any) => [...prevState, response]);
@@ -68,13 +87,13 @@ export const InventoryNav = () => {
           <MdSwapVerticalCircle size={25} />
           <p className="text-md mt-1">DEX</p>
         </div>
-        {claimType && (
+        {!!claimType.amount && (
           <button
             onClick={handleClaim}
             className="p-2 px-4 gap-2 flex justify-center items-center bg-gradient-to-r from-blue-400 to-red-500 rounded-xl"
           >
             <FaGift size="2rem" />
-            <h1 className="font-semibold">{amount} LARYNX</h1>
+            <h1 className="font-semibold">{claimType.amount} LARYNX</h1>
           </button>
         )}
       </div>
