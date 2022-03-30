@@ -42,7 +42,7 @@ export const OrderHistoryElement = ({
     });
 
     setTotalSum(total.toFixed(2));
-  }, []);
+  }, [orderCoin]);
 
   return type === "sell" ? (
     <div

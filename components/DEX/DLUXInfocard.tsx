@@ -3,6 +3,7 @@ import { useTranslation } from "next-export-i18n";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { apiLinkState } from "../../atoms";
+import { FaHive } from "react-icons/fa";
 
 export const DLUXInfocard = ({ coin }: { coin: string }) => {
   const [bidPrice, setBidPrice] = useState<{
@@ -123,19 +124,39 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
   }, [coin]);
 
   useEffect(() => {
-    if (dexData) {
-      if (coin === "HIVE") {
+    axios
+      .get(`${apiLink}api/recent/${coin}_LARYNX?limit=1000%27`)
+      .then(({ data }: any) => {
+        const agoTime = new Date().getTime() - 86400000;
+
+        const dollars = data.recent_trades.reduce(
+          (
+            a: number,
+            b: { trade_timestamp: number; target_volume: string }
+          ) => {
+            if (b.trade_timestamp > agoTime)
+              return a + Math.floor(parseFloat(b.target_volume));
+            else return a;
+          },
+          0
+        );
+
+        const larynx = data.recent_trades.reduce(
+          (a: number, b: { trade_timestamp: number; base_volume: string }) => {
+            console.log(a);
+
+            if (b.trade_timestamp > agoTime)
+              return a + Math.floor(parseFloat(b.base_volume));
+            else return a;
+          },
+          0
+        );
+
         setVolumePrice({
-          larynx: volumePrice.larynx,
-          dollars: volumePrice.larynx * dexData.markets.hive.tick,
+          larynx,
+          dollars,
         });
-      } else {
-        setVolumePrice({
-          larynx: volumePrice.larynx,
-          dollars: volumePrice.larynx * dexData.markets.hbd.tick,
-        });
-      }
-    }
+      });
   }, [coin]);
 
   return (
@@ -143,29 +164,37 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("bid")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
-          <h1>{bidPrice.larynx}</h1>
-          <h1>${bidPrice.dollars.toFixed(6)}</h1>
+          <h1 className="flex items-center gap-1">
+            <FaHive /> {bidPrice.larynx}
+          </h1>
+          <h1>$ {bidPrice.dollars.toFixed(6)}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("ask")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
-          <h1>{askPrice.larynx}</h1>
-          <h1>${askPrice.dollars.toFixed(6)}</h1>
+          <h1 className="flex items-center gap-1">
+            <FaHive /> {askPrice.larynx}
+          </h1>{" "}
+          <h1>$ {askPrice.dollars.toFixed(6)}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("last")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
-          <h1>{lastPrice.larynx}</h1>
-          <h1>${lastPrice.dollars.toFixed(6)}</h1>
+          <h1 className="flex items-center gap-1">
+            <FaHive /> {lastPrice.larynx}
+          </h1>
+          <h1>$ {lastPrice.dollars.toFixed(6)}</h1>
         </div>
       </div>
       <div className="mx-3 flex flex-col justify-center items-center gap-3">
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("hourVolume")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
-          <h1>{volumePrice.larynx.toFixed(6)}</h1>
-          <h1>${volumePrice.dollars.toFixed(6)}</h1>
+          <h1 className="flex items-center gap-1">
+            <FaHive /> {volumePrice.larynx}
+          </h1>
+          <h1>$ {volumePrice.dollars}</h1>
         </div>
       </div>
     </div>
