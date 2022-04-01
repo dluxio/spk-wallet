@@ -127,26 +127,19 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
     axios
       .get(`${apiLink}api/recent/${coin}_LARYNX?limit=1000%27`)
       .then(({ data }: any) => {
+        console.log(data);
         const agoTime = new Date().getTime() - 86400000;
 
-        const dollars = data.recent_trades.reduce(
-          (
-            a: number,
-            b: { trade_timestamp: number; target_volume: string }
-          ) => {
-            if (b.trade_timestamp > agoTime)
-              return a + Math.floor(parseFloat(b.target_volume));
-            else return a;
-          },
-          0
-        );
+        const dollars = data.recent_trades.reduce((a: any, b: any) => {
+          if (b.trade_timestamp > agoTime)
+            return a + parseInt(parseFloat(b.target_volume).toString());
+          else return a;
+        }, 0);
 
         const larynx = data.recent_trades.reduce(
           (a: number, b: { trade_timestamp: number; base_volume: string }) => {
-            console.log(a);
-
             if (b.trade_timestamp > agoTime)
-              return a + Math.floor(parseFloat(b.base_volume));
+              return a + parseInt(parseFloat(b.base_volume).toString());
             else return a;
           },
           0

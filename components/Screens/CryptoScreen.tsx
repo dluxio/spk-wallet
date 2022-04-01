@@ -20,6 +20,9 @@ export const CryptoScreen = ({}) => {
       setHiveBal(user ? parseFloat(user?.balance?.split(" ")[0]) : 0);
 
       const { data } = await axios.get(`${apiLink}@${user.name}`);
+
+      console.log(user);
+
       setDluxBal({
         LARYNX: parseFloat(data.balance),
         GOV: parseFloat(data.gov),
@@ -28,6 +31,7 @@ export const CryptoScreen = ({}) => {
       setBalances({
         LARYNX: parseFloat(data.balance) / 1000,
         HIVE: user ? parseFloat(user?.balance?.split(" ")[0]) : 0,
+        HBD: user ? parseFloat(user?.hbd_balance?.split(" ")[0]) : 0,
       });
     })();
   }, [user]);

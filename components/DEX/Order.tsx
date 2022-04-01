@@ -190,14 +190,18 @@ export const Order = ({ type, coin }: { type: string; coin: string }) => {
           <b>
             {type === "sell"
               ? `${balances.LARYNX} LARYNX`
-              : `${balances.HIVE} HIVE`}
+              : `${
+                  coin === "HIVE"
+                    ? balances.HIVE.toFixed(2)
+                    : balances.HBD.toFixed(2)
+                } ${coin}`}
           </b>
         </h1>
         <h1
           onClick={() =>
             type === "sell"
               ? setQuantity(balances.LARYNX)
-              : setTotal(balances.HIVE)
+              : setTotal(coin === "HIVE" ? balances.HIVE : balances.HBD)
           }
           className="pl-2 text-white hover:text-gray-400 cursor-pointer transition-all"
         >

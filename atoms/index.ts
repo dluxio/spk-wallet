@@ -50,5 +50,6 @@ export const balanceState = atom({
   default: {
     LARYNX: 0,
     HIVE: 0,
+    HBD: 0,
   },
 });
