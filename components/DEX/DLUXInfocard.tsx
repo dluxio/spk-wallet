@@ -59,18 +59,16 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         if (coin === "HIVE") {
           if (data.markets.hive.sells.length && data.markets.hive.buys.length) {
             setBidPrice({
-              larynx: parseFloat(data.markets.hive.buys[0].rate),
+              larynx: parseFloat(
+                data.markets.hive.buys[data.markets.hive.buys.length - 1].rate
+              ),
               dollars:
-                parseFloat(data.markets.hive.tick) *
                 hiveCost *
-                data.markets.hive.buys[0].rate,
+                data.markets.hive.buys[data.markets.hive.buys.length - 1].rate,
             });
             setAskPrice({
               larynx: parseFloat(data.markets.hive.sells[0].rate),
-              dollars:
-                parseFloat(data.markets.hive.tick) *
-                hiveCost *
-                data.markets.hive.sells[0].rate,
+              dollars: hiveCost * data.markets.hive.sells[0].rate,
             });
           } else {
             setBidPrice({
@@ -90,18 +88,12 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         } else if (coin === "HBD") {
           if (data.markets.hbd.sells.length && data.markets.hbd.buys.length) {
             setBidPrice({
-              larynx: data.markets.hbd.sells[0].rate,
-              dollars:
-                parseFloat(data.markets.hbd.tick) *
-                hbdCost *
-                data.markets.hbd.sells[0].rate,
+              larynx: parseFloat(data.markets.hbd.sells[0].rate),
+              dollars: hbdCost * data.markets.hbd.sells[0].rate,
             });
             setAskPrice({
-              larynx: data.markets.hbd.buys[0].rate,
-              dollars:
-                parseFloat(data.markets.hbd.tick) *
-                hbdCost *
-                data.markets.hbd.sells[0].rate,
+              larynx: parseFloat(data.markets.hbd.buys[0].rate),
+              dollars: hbdCost * data.markets.hbd.sells[0].rate,
             });
           } else {
             setBidPrice({
@@ -121,33 +113,27 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         }
       });
     }
-  }, [coin]);
 
-  useEffect(() => {
     axios
       .get(`${apiLink}api/recent/${coin}_LARYNX?limit=1000%27`)
       .then(({ data }: any) => {
-        console.log(data);
         const agoTime = new Date().getTime() - 86400000;
 
-        const dollars = data.recent_trades.reduce((a: any, b: any) => {
-          if (b.trade_timestamp > agoTime)
-            return a + parseInt(parseFloat(b.target_volume).toString());
-          else return a;
-        }, 0);
-
-        const larynx = data.recent_trades.reduce(
-          (a: number, b: { trade_timestamp: number; base_volume: string }) => {
+        const dollars = data.recent_trades.reduce(
+          (
+            a: number,
+            b: { trade_timestamp: number; target_volume: string }
+          ) => {
             if (b.trade_timestamp > agoTime)
-              return a + parseInt(parseFloat(b.base_volume).toString());
+              return a + Math.ceil(parseFloat(b.target_volume) * 1000) / 1000;
             else return a;
           },
           0
         );
 
         setVolumePrice({
-          larynx,
-          dollars,
+          larynx: dollars,
+          dollars: dollars * (coin === "HIVE" ? hiveCost : hbdCost),
         });
       });
   }, [coin]);
@@ -158,7 +144,7 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("bid")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1 className="flex items-center gap-1">
-            <FaHive /> {bidPrice.larynx}
+            <FaHive /> {bidPrice.larynx.toFixed(6)}
           </h1>
           <h1>$ {bidPrice.dollars.toFixed(6)}</h1>
         </div>
@@ -167,7 +153,7 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("ask")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1 className="flex items-center gap-1">
-            <FaHive /> {askPrice.larynx}
+            <FaHive /> {askPrice.larynx.toFixed(6)}
           </h1>{" "}
           <h1>$ {askPrice.dollars.toFixed(6)}</h1>
         </div>
@@ -185,9 +171,9 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         <h1 className="px-5 py-2 bg-gray-500 rounded-xl">{t("hourVolume")}</h1>
         <div className="flex flex-col justify-center items-center text-md">
           <h1 className="flex items-center gap-1">
-            <FaHive /> {volumePrice.larynx}
+            <FaHive /> {volumePrice.larynx.toFixed(2)}
           </h1>
-          <h1>$ {volumePrice.dollars}</h1>
+          <h1>$ {volumePrice.dollars.toFixed(2)}</h1>
         </div>
       </div>
     </div>
