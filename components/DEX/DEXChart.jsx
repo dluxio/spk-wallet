@@ -13,8 +13,14 @@ import { getData } from '../../utils/parse-chart-data';
 
 class CandleStickChart extends React.Component {
   state = {
-    data: getData(),
+    data: [],
   }
+
+	componentDidMount () {
+		getData().then(data => {
+			this.setState(data)
+		})
+	}
 
 	render() {
 		const { type, width, ratio } = this.props;
