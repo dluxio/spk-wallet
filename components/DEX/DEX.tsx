@@ -6,8 +6,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { apiLinkState, dlux_ccState } from "../../atoms";
 import axios from "axios";
 import { TransactionHistory } from "./TransactionHistory";
-import { DEXChart } from "./DEXChart";
 import { useQuery } from "../../constants/breakpoints";
+import DEXChart from "./DEXChart.jsx";
 
 export const DEX = () => {
   const { isMobile } = useQuery();
@@ -46,14 +46,11 @@ export const DEX = () => {
           <div className="flex flex-wrap justify-center">
             <DLUXInfocard coin={coin} />
           </div>
-          <h1 className="text-center my-40 text-white text-xl">
-            Chart coming soon!
-          </h1>
-          {/* {!isMobile && (
+          {!isMobile && (
             <div className="my-3">
-              <DEXChart coin={coin} />
+              <DEXChart type="svg" width={100} ratio={100} />
             </div>
-          )} */}
+          )}
           <div className="flex flex-col my-5 gap-2 md:flex-row md:justify-between md:gap-10">
             <Order coin={coin} type="buy" />
             <Order coin={coin} type="sell" />

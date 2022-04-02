@@ -3,8 +3,8 @@ import CeramicClient from "@ceramicnetwork/http-client";
 import { SpkClient } from '@spknetwork/graph-client';
 import axios from "axios";
 
-const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com")
-const spkClient = new SpkClient('https://us-01.infra.3speak.tv', ceramic);
+const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com");
+const spkClient = new SpkClient("https://us-01.infra.3speak.tv", ceramic);
 
 const _Rixits =
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+=";
@@ -173,18 +173,18 @@ export const Auction = async (
       json: JSON.stringify(
         auctionData.type === "DLUX"
           ? {
-            set: auctionData.set,
-            uid: auctionData.uid,
-            price: auctionData.price,
-            time: auctionData.time,
-          }
+              set: auctionData.set,
+              uid: auctionData.uid,
+              price: auctionData.price,
+              time: auctionData.time,
+            }
           : {
-            set: auctionData.set,
-            uid: auctionData.uid,
-            price: auctionData.price,
-            time: auctionData.time,
-            type: auctionData.type,
-          }
+              set: auctionData.set,
+              uid: auctionData.uid,
+              price: auctionData.price,
+              time: auctionData.time,
+              type: auctionData.type,
+            }
       ),
     },
   ];
@@ -367,28 +367,29 @@ export const NFTBid = async (
 ) => {
   const id = `${prefix}${kind}_bid`;
 
-  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${type === "HIVE" ? "HIVE" : "HBD"
-    }`;
+  const amount = `${parseFloat((nftData.bid_amount / 1000).toFixed(3))} ${
+    type === "HIVE" ? "HIVE" : "HBD"
+  }`;
 
   const operations =
     type === "DLUX"
       ? [
-        "custom_json",
-        {
-          required_auths: [username],
-          required_posting_auths: [],
-          id,
-          json: JSON.stringify(nftData),
-        },
-      ]
+          "custom_json",
+          {
+            required_auths: [username],
+            required_posting_auths: [],
+            id,
+            json: JSON.stringify(nftData),
+          },
+        ]
       : [
-        "transfer",
-        {
-          to: cc,
-          amount,
-          memo: `NFTbid ${nftData.set}:${nftData.uid}`,
-        },
-      ];
+          "transfer",
+          {
+            to: cc,
+            amount,
+            memo: `NFTbid ${nftData.set}:${nftData.uid}`,
+          },
+        ];
 
   return await handleBroadcastRequest(operations, username);
 };
@@ -551,8 +552,8 @@ export const ReserveRespond = async (
     reserveData.kind === "fts"
       ? `${prefix}ft_escrow_${response}`
       : response === "complete"
-        ? `${prefix}nft_reserve_${response}`
-        : `${prefix}nft_transfer_${response}`;
+      ? `${prefix}nft_reserve_${response}`
+      : `${prefix}nft_transfer_${response}`;
 
   const operations = [
     "custom_json",
@@ -572,9 +573,9 @@ export const ReserveRespond = async (
 };
 
 export const getUserPosts = async (did: string) => {
-  const response = await spkClient.getDocumentsForUser(did)
+  const response = await spkClient.getDocumentsForUser(did);
   return response;
-}
+};
 
 export const handleSellCancel = async (
   nft: { set: string; uid: string; kind: string },
@@ -719,7 +720,7 @@ export const dexBuy = async (
 };
 
 export const claim = async (username: string, claimType: string) => {
-  console.log(username, claimType)
+  console.log(username, claimType);
 
   const operations = [
     "custom_json",
@@ -735,48 +736,58 @@ export const claim = async (username: string, claimType: string) => {
   ];
 
   return await handleBroadcastRequest(operations, username);
-}
+};
 
-export const validateWitnessKey = ({ pubKey, prevKey, toPubKey }: { pubKey: string; prevKey: string; toPubKey: string }) => {
+export const validateWitnessKey = ({
+  pubKey,
+  prevKey,
+  toPubKey,
+}: {
+  pubKey: string;
+  prevKey: string;
+  toPubKey: string;
+}) => {
   try {
-    return memo.encode(prevKey, toPubKey, '#' + pubKey)
+    return memo.encode(prevKey, toPubKey, "#" + pubKey);
   } catch (e) {
-    console.error(e)
-    return ''
+    console.error(e);
+    return "";
   }
-}
+};
 
 export type ISettings = {
   dexFee: number;
   domain: string;
   pubKey: string;
   prevKey: string;
-}
+};
 
 export const witnessSettings = async (data: ISettings, username: string) => {
   const operations = [
-    'custom_json',
+    "custom_json",
     {
       required_auths: [username],
       required_posting_auths: 0,
-      id: 'dlux_node_add',
-      json: JSON.stringify(data)
-    }
-  ]
+      id: "dlux_node_add",
+      json: JSON.stringify(data),
+    },
+  ];
 
-  const response = await axios.get('https://token.dlux.io/api/protocol')
+  const response = await axios.get("https://token.dlux.io/api/protocol");
   const memoKey = response.data.memoKey;
 
-  if (validateWitnessKey({
-    pubKey: data.pubKey,
-    prevKey: data.prevKey,
-    toPubKey: memoKey
-  })) {
+  if (
+    validateWitnessKey({
+      pubKey: data.pubKey,
+      prevKey: data.prevKey,
+      toPubKey: memoKey,
+    })
+  ) {
     return await handleBroadcastRequest(operations, username);
   } else {
-    return 'Incorrect key pair'
+    return "Incorrect key pair";
   }
-}
+};
 
 export const addRoyalties = async (
   royaltieString: string,
@@ -813,27 +824,6 @@ export const ftBuyTransfer = async (
   ];
 
   return await handleBroadcastRequest(operations, username);
-};
-
-export const parseData = (data: any) => {
-  const result: { x: Date; y: any[] }[] = [];
-
-  if (data) {
-    Object.keys(data).map((key) => {
-      result.push({
-        x: new Date(+key),
-        y: [data[key].o, data[key].t, data[key].b, data[key].c],
-      });
-    });
-  }
-
-  return {
-    series: [
-      {
-        data: result,
-      },
-    ],
-  };
 };
 
 export const deleteOrder = async (
