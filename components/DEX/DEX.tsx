@@ -7,7 +7,7 @@ import { apiLinkState, dlux_ccState } from "../../atoms";
 import axios from "axios";
 import { TransactionHistory } from "./TransactionHistory";
 import { useQuery } from "../../constants/breakpoints";
-import DEXChart from "./DEXChart.jsx";
+import { DEXChart } from "./Chart";
 
 export const DEX = () => {
   const { isMobile } = useQuery();
@@ -48,7 +48,7 @@ export const DEX = () => {
           </div>
           {!isMobile && (
             <div className="my-3">
-              <DEXChart type="svg" width={100} ratio={100} />
+              <DEXChart />
             </div>
           )}
           <div className="flex flex-col my-5 gap-2 md:flex-row md:justify-between md:gap-10">
