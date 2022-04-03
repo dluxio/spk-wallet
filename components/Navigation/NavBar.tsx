@@ -174,7 +174,7 @@ export const NavBar = () => {
                 <img
                   width={50}
                   src={
-                    pfpData.profile_image ? pfpData.profile_image : placeHolder
+                    pfpData?.profile_image ? pfpData.profile_image : placeHolder
                   }
                   alt="profile"
                 />
