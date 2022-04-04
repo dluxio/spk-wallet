@@ -13,7 +13,6 @@ import { ImCross } from "react-icons/im";
 
 import hive from "@hiveio/hive-js";
 import { useTranslation } from "next-export-i18n";
-import { useHiveKeychainCeramic } from "@spknetwork/auth-react";
 import { login } from "../utils";
 
 type LoginProps = {
@@ -35,7 +34,7 @@ export const Login = ({ handleClose }: LoginProps) => {
         }
 
         const response: any = await login(usernameRef.current.value);
-        if (!response.success) {
+        if (response.success) {
           hive.api.getAccounts(
             [usernameRef.current.value ?? response.data.username],
             async (err: any, res: any) => {
