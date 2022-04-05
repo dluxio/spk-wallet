@@ -22,7 +22,6 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
     dollars: number;
     larynx: number;
   }>({ dollars: 0, larynx: 0 });
-  const [dexData, setDexData] = useState<{ markets: any }>();
   const { t } = useTranslation();
 
   const apiLink: string = useRecoilValue(apiLinkState);
@@ -55,7 +54,6 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
     fetchCoins();
     if (coin) {
       axios.get(`${apiLink}dex`).then(({ data }) => {
-        setDexData(data);
         if (coin === "HIVE") {
           if (data.markets.hive.sells.length && data.markets.hive.buys.length) {
             setBidPrice({
@@ -88,11 +86,11 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         } else if (coin === "HBD") {
           if (data.markets.hbd.sells.length && data.markets.hbd.buys.length) {
             setBidPrice({
-              larynx: parseFloat(data.markets.hbd.sells[0].rate),
-              dollars: hbdCost * data.markets.hbd.sells[0].rate,
+              larynx: parseFloat(data.markets.hbd.buys[0].rate),
+              dollars: hbdCost * data.markets.hbd.buys[0].rate,
             });
             setAskPrice({
-              larynx: parseFloat(data.markets.hbd.buys[0].rate),
+              larynx: parseFloat(data.markets.hbd.sells[0].rate),
               dollars: hbdCost * data.markets.hbd.sells[0].rate,
             });
           } else {
