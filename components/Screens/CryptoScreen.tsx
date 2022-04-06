@@ -18,11 +18,7 @@ export const CryptoScreen = ({}) => {
   useEffect(() => {
     (async () => {
       setHiveBal(user ? parseFloat(user?.balance?.split(" ")[0]) : 0);
-
       const { data } = await axios.get(`${apiLink}@${user.name}`);
-
-      console.log(user);
-
       setDluxBal({
         LARYNX: parseFloat(data.balance),
         GOV: parseFloat(data.gov),
