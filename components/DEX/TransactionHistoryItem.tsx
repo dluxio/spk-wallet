@@ -44,8 +44,8 @@ export const TransactionHistoryItem = ({
       >
         {transaction.type.toUpperCase()}
       </h1>
-      <h1>{parseFloat(transaction.base_volume).toFixed(2)}</h1>
-      <h1>{parseFloat(transaction.price).toFixed(2)}</h1>
+      <h1>{Number(parseFloat(transaction.base_volume).toFixed(5))}</h1>
+      <h1>{Number(parseFloat(transaction.price).toFixed(5))}</h1>
       <h1>{parseFloat(totalSum).toFixed(2)}</h1>
     </div>
   );
