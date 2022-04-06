@@ -49,7 +49,7 @@ export const OrderHistory = ({
                     parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
                   )
                 : markets.hbd.sells.sort((a: any, b: any) =>
-                    parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                    parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
                   )
             );
           } else {
@@ -59,7 +59,7 @@ export const OrderHistory = ({
                     parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
                   )
                 : markets.hbd.buys.sort((a: any, b: any) =>
-                    parseFloat(a.rate) < parseFloat(b.rate) ? -1 : 1
+                    parseFloat(a.rate) > parseFloat(b.rate) ? -1 : 1
                   )
             );
           }

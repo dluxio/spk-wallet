@@ -13,6 +13,8 @@ export const TransactionHistoryItem = ({
   const { isMobile } = useQuery();
   const [totalSum, setTotalSum] = useState("");
 
+  console.log(transaction);
+
   useEffect(() => {
     let total = 0;
     transactions.forEach((transaction, index) => {

@@ -30,7 +30,7 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
     let hiveCost = 0;
     let hbdCost = 0;
 
-    const fetchCoins = async () => {
+    (async () => {
       const { data: hiveData } = await axios.get(
         "https://api.coingecko.com/api/v3/coins/hive",
         {
@@ -49,9 +49,8 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
       );
       hiveCost = hiveData.market_data.current_price.usd;
       hbdCost = hbdData.market_data.current_price.usd;
-    };
+    })();
 
-    fetchCoins();
     if (coin) {
       axios.get(`${apiLink}dex`).then(({ data }) => {
         if (coin === "HIVE") {
@@ -86,8 +85,12 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
         } else if (coin === "HBD") {
           if (data.markets.hbd.sells.length && data.markets.hbd.buys.length) {
             setBidPrice({
-              larynx: parseFloat(data.markets.hbd.buys[0].rate),
-              dollars: hbdCost * data.markets.hbd.buys[0].rate,
+              larynx: parseFloat(
+                data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate
+              ),
+              dollars:
+                hbdCost *
+                data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate,
             });
             setAskPrice({
               larynx: parseFloat(data.markets.hbd.sells[0].rate),
