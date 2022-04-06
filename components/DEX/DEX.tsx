@@ -46,11 +46,7 @@ export const DEX = () => {
           <div className="flex flex-wrap justify-center">
             <DLUXInfocard coin={coin} />
           </div>
-          {!isMobile && (
-            <div className="my-3">
-              <DEXChart />
-            </div>
-          )}
+          {!isMobile && <DEXChart />}
           <div className="flex flex-col my-5 gap-2 md:flex-row md:justify-between md:gap-10">
             <Order coin={coin} type="buy" />
             <Order coin={coin} type="sell" />
