@@ -1,14 +1,20 @@
 import axios from "axios";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { apiLinkState } from "../atoms";
 
 export const useChartData = (coin: string) => {
+  const [buyData, setBuyData] = useState([]);
   const apiLink: string = useRecoilValue(apiLinkState);
 
   (async () => {
     const { data } = await axios.get(`${apiLink}DEX`);
-    console.log(data.markets[coin].days);
+    const dayData = data.markets[coin].days;
+
+    setBuyData(dayData.map((day: any) => ({ ...day })));
   })();
+
+  return buyData;
 };
 
 export let initialData = [
