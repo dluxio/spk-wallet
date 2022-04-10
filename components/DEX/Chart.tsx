@@ -21,7 +21,6 @@ import {
   ZoomButtons,
 } from "react-financial-charts";
 import { useRecoilValue } from "recoil";
-import { useChartData } from "../../utils/chart_data";
 import { useQuery } from "../../constants/breakpoints";
 import { apiLinkState } from "../../atoms";
 import axios from "axios";
