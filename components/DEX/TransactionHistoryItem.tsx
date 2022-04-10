@@ -13,8 +13,6 @@ export const TransactionHistoryItem = ({
   const { isMobile } = useQuery();
   const [totalSum, setTotalSum] = useState("");
 
-  console.log(transaction);
-
   useEffect(() => {
     let total = 0;
     transactions.forEach((transaction, index) => {
@@ -23,7 +21,7 @@ export const TransactionHistoryItem = ({
       }
     });
 
-    setTotalSum(total.toFixed(2));
+    setTotalSum(total.toFixed(5));
   }, []);
 
   return (
@@ -46,7 +44,7 @@ export const TransactionHistoryItem = ({
       </h1>
       <h1>{Number(parseFloat(transaction.base_volume).toFixed(5))}</h1>
       <h1>{Number(parseFloat(transaction.price).toFixed(5))}</h1>
-      <h1>{parseFloat(totalSum).toFixed(2)}</h1>
+      <h1>{Number(parseFloat(totalSum).toFixed(5))}</h1>
     </div>
   );
 };
