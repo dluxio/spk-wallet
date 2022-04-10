@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
-import styled from "styled-components";
 import {
   elderRay,
   discontinuousTimeScaleProviderBuilder,
@@ -21,13 +20,45 @@ import {
   MouseCoordinateY,
   ZoomButtons,
 } from "react-financial-charts";
-import { initialData, useChartData } from "../../utils/chart_data";
+import { useRecoilValue } from "recoil";
+import { useChartData } from "../../utils/chart_data";
 import { useQuery } from "../../constants/breakpoints";
+import { apiLinkState } from "../../atoms";
+import axios from "axios";
 
-export const DEXChart = () => {
+interface IProps {
+  coin: "HIVE" | "HBD";
+}
+
+interface ChartData {
+  date: string;
+  open: any;
+  low: any;
+  high: any;
+  close: any;
+  volume: any;
+}
+
+export const DEXChart: React.FC<IProps> = ({ coin }) => {
+  const [initialData, setInitialData] = useState<ChartData[]>();
+  const apiLink: string = useRecoilValue(apiLinkState);
   const { isTablet, isSmDesktop, isDesktop, isDesktopLg } = useQuery();
 
-  useChartData('hive');
+  useEffect(() => {
+    axios.get(`${apiLink}DEX`).then(({ data }) => {
+      const usableCoin = coin.toLowerCase();
+      setInitialData(
+        Object.keys(data.markets[usableCoin].days).map((key) => ({
+          date: new Date(+key).toISOString(),
+          open: data.markets[usableCoin].days[key].o,
+          low: data.markets[usableCoin].days[key].b,
+          high: data.markets[usableCoin].days[key].t,
+          close: data.markets[usableCoin].days[key].c,
+          volume: data.markets[usableCoin].days[key].v,
+        }))
+      );
+    });
+  }, [coin]);
 
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
@@ -44,8 +75,9 @@ export const DEXChart = () => {
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
   const elder = elderRay();
 
-  const { data, xScale, xAccessor, displayXAccessor } =
-    ScaleProvider(initialData);
+  const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(
+    initialData ?? []
+  );
   const pricesDisplayFormat = format(".2f");
   const max = xAccessor(data[data.length - 1]);
   const min = xAccessor(data[Math.max(0, data.length - 100)]);

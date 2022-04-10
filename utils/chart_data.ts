@@ -1,16 +1,3 @@
-import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { apiLinkState } from "../atoms";
-
-export const useChartData = (coin: string) => {
-  const apiLink: string = useRecoilValue(apiLinkState);
-
-  (async () => {
-    const { data } = await axios.get(`${apiLink}DEX`);
-    console.log(data.markets[coin].days);
-  })();
-};
-
 export let initialData = [
   {
     date: "2021-02-02 16:00:00",
