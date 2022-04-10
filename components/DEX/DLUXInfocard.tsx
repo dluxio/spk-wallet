@@ -64,8 +64,13 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
                 data.markets.hive.buys[data.markets.hive.buys.length - 1].rate,
             });
             setAskPrice({
-              larynx: parseFloat(data.markets.hive.sells[0].rate),
-              dollars: hiveCost * data.markets.hive.sells[0].rate,
+              larynx: parseFloat(
+                data.markets.hive.sells[data.markets.hive.sells.length - 1].rate
+              ),
+              dollars:
+                hiveCost *
+                data.markets.hive.sells[data.markets.hive.sells.length - 1]
+                  .rate,
             });
           } else {
             setBidPrice({
@@ -93,8 +98,12 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
                 data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate,
             });
             setAskPrice({
-              larynx: parseFloat(data.markets.hbd.sells[0].rate),
-              dollars: hbdCost * data.markets.hbd.sells[0].rate,
+              larynx: parseFloat(
+                data.markets.hbd.sells[data.markets.hbd.sells.length - 1].rate
+              ),
+              dollars:
+                hbdCost *
+                data.markets.hbd.sells[data.markets.hbd.sells.length - 1].rate,
             });
           } else {
             setBidPrice({
