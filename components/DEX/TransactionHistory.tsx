@@ -46,7 +46,9 @@ export const TransactionHistory = ({ coin }: { coin: "HIVE" | "HBD" }) => {
         <h1>{t("type").toUpperCase()}</h1>
         <h1>LARYNX</h1>
         <h1>{coin}</h1>
-        <h1>{t("total").toUpperCase()}</h1>
+        <h1>
+          {t("total").toUpperCase()} ({coin})
+        </h1>
       </div>
       {transactions.map((transaction: any, i: number) => (
         <TransactionHistoryItem transaction={transaction} i={i} />
