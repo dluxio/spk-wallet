@@ -4,27 +4,11 @@ import { useQuery } from "../../constants/breakpoints";
 export const TransactionHistoryItem = ({
   transaction,
   i,
-  transactions,
 }: {
   transaction: any;
   i: number;
-  transactions: any[];
 }) => {
   const { isMobile } = useQuery();
-  const [totalSum, setTotalSum] = useState("");
-
-  console.log(transaction);
-
-  useEffect(() => {
-    let total = 0;
-    transactions.forEach((transaction, index) => {
-      if (index <= i) {
-        total += +transaction.price;
-      }
-    });
-
-    setTotalSum(total.toFixed(2));
-  }, []);
 
   return (
     <div
@@ -46,7 +30,11 @@ export const TransactionHistoryItem = ({
       </h1>
       <h1>{Number(parseFloat(transaction.base_volume).toFixed(5))}</h1>
       <h1>{Number(parseFloat(transaction.price).toFixed(5))}</h1>
-      <h1>{parseFloat(totalSum).toFixed(2)}</h1>
+      <h1>
+        {(
+          parseFloat(transaction.base_volume) * parseFloat(transaction.price)
+        ).toFixed(3)}
+      </h1>
     </div>
   );
 };

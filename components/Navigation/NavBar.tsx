@@ -190,9 +190,6 @@ export const NavBar = () => {
             <a onClick={handleSettings} className="btn">
               {t("settings")}
             </a>
-            {/* <a onClick={handleTrades} className="btn">
-              {t("pendingTrades")}
-            </a> */}
             <a className="btn" onClick={handleLogout}>
               {t("logout")}
             </a>

@@ -6,6 +6,8 @@ import { apiLinkState } from "../../atoms";
 import { FaHive } from "react-icons/fa";
 
 export const DLUXInfocard = ({ coin }: { coin: string }) => {
+  const [hiveCost, setHiveCost] = useState(0);
+  const [hbdCost, setHbdCost] = useState(0);
   const [bidPrice, setBidPrice] = useState<{
     dollars: number;
     larynx: number;
@@ -27,9 +29,6 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
   const apiLink: string = useRecoilValue(apiLinkState);
 
   useEffect(() => {
-    let hiveCost = 0;
-    let hbdCost = 0;
-
     (async () => {
       const { data: hiveData } = await axios.get(
         "https://api.coingecko.com/api/v3/coins/hive",
@@ -47,73 +46,81 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
           },
         }
       );
-      hiveCost = hiveData.market_data.current_price.usd;
-      hbdCost = hbdData.market_data.current_price.usd;
+      setHiveCost(hiveData.market_data.current_price.usd);
+      setHbdCost(hbdData.market_data.current_price.usd);
     })();
+  }, []);
 
-    if (coin) {
-      axios.get(`${apiLink}dex`).then(({ data }) => {
-        if (coin === "HIVE") {
-          if (data.markets.hive.sells.length && data.markets.hive.buys.length) {
-            setBidPrice({
-              larynx: parseFloat(
-                data.markets.hive.buys[data.markets.hive.buys.length - 1].rate
-              ),
-              dollars:
-                hiveCost *
-                data.markets.hive.buys[data.markets.hive.buys.length - 1].rate,
-            });
-            setAskPrice({
-              larynx: parseFloat(data.markets.hive.sells[0].rate),
-              dollars: hiveCost * data.markets.hive.sells[0].rate,
-            });
-          } else {
-            setBidPrice({
-              larynx: 0,
-              dollars: 0,
-            });
-            setAskPrice({
-              larynx: 0,
-              dollars: 0,
-            });
-          }
-
-          setLastPrice({
-            larynx: data.markets.hive.tick,
-            dollars: parseFloat(data.markets.hive.tick) * hiveCost,
+  useEffect(() => {
+    axios.get(`${apiLink}dex`).then(({ data }) => {
+      if (coin === "HIVE") {
+        if (data.markets.hive.sells.length && data.markets.hive.buys.length) {
+          setBidPrice({
+            larynx: parseFloat(
+              data.markets.hive.buys[data.markets.hive.buys.length - 1].rate
+            ),
+            dollars:
+              hiveCost *
+              data.markets.hive.buys[data.markets.hive.buys.length - 1].rate,
           });
-        } else if (coin === "HBD") {
-          if (data.markets.hbd.sells.length && data.markets.hbd.buys.length) {
-            setBidPrice({
-              larynx: parseFloat(
-                data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate
-              ),
-              dollars:
-                hbdCost *
-                data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate,
-            });
-            setAskPrice({
-              larynx: parseFloat(data.markets.hbd.sells[0].rate),
-              dollars: hbdCost * data.markets.hbd.sells[0].rate,
-            });
-          } else {
-            setBidPrice({
-              larynx: 0,
-              dollars: 0,
-            });
-            setAskPrice({
-              larynx: 0,
-              dollars: 0,
-            });
-          }
-
-          setLastPrice({
-            larynx: data.markets.hbd.tick,
-            dollars: parseFloat(data.markets.hbd.tick) * hiveCost,
+          setAskPrice({
+            larynx: parseFloat(
+              data.markets.hive.sells[data.markets.hive.sells.length - 1].rate
+            ),
+            dollars:
+              hiveCost *
+              data.markets.hive.sells[data.markets.hive.sells.length - 1].rate,
+          });
+        } else {
+          setBidPrice({
+            larynx: 0,
+            dollars: 0,
+          });
+          setAskPrice({
+            larynx: 0,
+            dollars: 0,
           });
         }
-      });
-    }
+
+        setLastPrice({
+          larynx: data.markets.hive.tick,
+          dollars: parseFloat(data.markets.hive.tick) * hiveCost,
+        });
+      } else if (coin === "HBD") {
+        if (data.markets.hbd.sells.length && data.markets.hbd.buys.length) {
+          setBidPrice({
+            larynx: parseFloat(
+              data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate
+            ),
+            dollars:
+              hbdCost *
+              data.markets.hbd.buys[data.markets.hbd.buys.length - 1].rate,
+          });
+          setAskPrice({
+            larynx: parseFloat(
+              data.markets.hbd.sells[data.markets.hbd.sells.length - 1].rate
+            ),
+            dollars:
+              hbdCost *
+              data.markets.hbd.sells[data.markets.hbd.sells.length - 1].rate,
+          });
+        } else {
+          setBidPrice({
+            larynx: 0,
+            dollars: 0,
+          });
+          setAskPrice({
+            larynx: 0,
+            dollars: 0,
+          });
+        }
+
+        setLastPrice({
+          larynx: data.markets.hbd.tick,
+          dollars: parseFloat(data.markets.hbd.tick) * hiveCost,
+        });
+      }
+    });
 
     axios
       .get(`${apiLink}api/recent/${coin}_LARYNX?limit=1000%27`)
@@ -137,7 +144,7 @@ export const DLUXInfocard = ({ coin }: { coin: string }) => {
           dollars: dollars * (coin === "HIVE" ? hiveCost : hbdCost),
         });
       });
-  }, [coin]);
+  }, [coin, hiveCost, hbdCost]);
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-white text-xl">

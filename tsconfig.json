@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/index.ts", "next-i18next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/index.ts", "next-i18next.config.js", "components/DEX/DEXChart.tsx", "components/DEX/DEXChart.tsx"],
   "exclude": ["node_modules"]
 }
