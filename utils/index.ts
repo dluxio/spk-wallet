@@ -861,7 +861,7 @@ export const getHistorical = async (
   const now = Date.now();
   var startdate = new Date(now - period * numbars).getTime();
   var currentBucket = startdate;
-  if (!dex.markets.hive.his) return;
+  if (!dex.markets[coin].his) return;
   const current_block = dex.stats.lastIBlock;
   const buckets = Object.keys(dex.markets[pair].days);
   buckets.sort(function (a, b) {
@@ -1059,7 +1059,14 @@ export const getHistorical = async (
   }
   var newBars = [];
   for (var i = 0; i < bars.length; i++) {
-    newBars.push({ ...bars[i] });
+    newBars.push({
+      close: bars[i].c,
+      high: bars[i].h,
+      low: bars[i].l,
+      open: bars[i].o,
+      volume: bars[i].v,
+      date: new Date(bars[i].x).toISOString(),
+    });
   }
   return newBars;
 };
