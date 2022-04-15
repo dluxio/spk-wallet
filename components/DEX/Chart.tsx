@@ -25,6 +25,7 @@ import { useRecoilValue } from "recoil";
 import { useQuery } from "../../constants/breakpoints";
 import { apiLinkState } from "../../atoms";
 import { getHistorical } from "../../utils";
+import axios from "axios";
 
 interface IProps {
   coin: "HIVE" | "HBD";
@@ -73,10 +74,10 @@ export const DEXChart: React.FC<IProps> = ({ coin }) => {
   const { isTablet, isSmDesktop, isDesktop, isDesktopLg } = useQuery();
 
   useEffect(() => {
-    getHistorical(coin.toLowerCase(), "60000", apiLink).then((data) => {
+    getHistorical(coin.toLowerCase(), barWidth, apiLink).then((data) => {
       setInitialData(data);
     });
-  }, [coin]);
+  }, [coin, barWidth]);
 
   const zoomButtonStyles = {
     fill: "#383E55",
@@ -147,7 +148,7 @@ export const DEXChart: React.FC<IProps> = ({ coin }) => {
     return data.close > data.open ? "#26a69a" : "#ef5350";
   };
 
-  return (
+  return data.length ? (
     <>
       <div className="flex my-5 justify-center w-full">
         <div className="bg-gray-500 p-5 rounded-xl">
@@ -234,5 +235,9 @@ export const DEXChart: React.FC<IProps> = ({ coin }) => {
         />
       </div>
     </>
+  ) : (
+    <div>
+      <h1>Loading</h1>
+    </div>
   );
 };
