@@ -20,9 +20,11 @@ import {
   MouseCoordinateY,
   ZoomButtons,
 } from "react-financial-charts";
+import Select from "react-select";
 import { useRecoilValue } from "recoil";
 import { useQuery } from "../../constants/breakpoints";
 import { apiLinkState } from "../../atoms";
+import { getHistorical } from "../../utils";
 import axios from "axios";
 
 interface IProps {
@@ -38,26 +40,51 @@ interface ChartData {
   volume: any;
 }
 
+const timeFrames = [
+  {
+    value: "60000",
+    label: "1m",
+  },
+  {
+    value: "300000",
+    label: "5m",
+  },
+  {
+    value: "900000",
+    label: "15m",
+  },
+  {
+    value: "3600000",
+    label: "1h",
+  },
+  {
+    value: "14400000",
+    label: "4h",
+  },
+  {
+    value: "86400000",
+    label: "1d",
+  },
+];
+
 export const DEXChart: React.FC<IProps> = ({ coin }) => {
   const [initialData, setInitialData] = useState<ChartData[]>();
+  const [barWidth, setBarWidth] = useState("60000");
   const apiLink: string = useRecoilValue(apiLinkState);
   const { isTablet, isSmDesktop, isDesktop, isDesktopLg } = useQuery();
 
   useEffect(() => {
-    axios.get(`${apiLink}DEX`).then(({ data }) => {
-      const usableCoin = coin.toLowerCase();
-      setInitialData(
-        Object.keys(data.markets[usableCoin].days).map((key) => ({
-          date: new Date(+key).toISOString(),
-          open: data.markets[usableCoin].days[key].o,
-          low: data.markets[usableCoin].days[key].b,
-          high: data.markets[usableCoin].days[key].t,
-          close: data.markets[usableCoin].days[key].c,
-          volume: data.markets[usableCoin].days[key].v,
-        }))
-      );
+    getHistorical(coin.toLowerCase(), barWidth, apiLink).then((data) => {
+      setInitialData(data);
     });
-  }, [coin]);
+  }, [coin, barWidth]);
+
+  const zoomButtonStyles = {
+    fill: "#383E55",
+    fillOpacity: 0.75,
+    strokeWidth: 0,
+    textFill: "#9EAAC7",
+  };
 
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
@@ -121,79 +148,96 @@ export const DEXChart: React.FC<IProps> = ({ coin }) => {
     return data.close > data.open ? "#26a69a" : "#ef5350";
   };
 
-  return (
-    <div className="flex my-5 justify-center w-full">
-      <ChartCanvas
-        height={height}
-        ratio={3}
-        width={width}
-        margin={margin}
-        data={data}
-        displayXAccessor={displayXAccessor}
-        seriesName="Data"
-        xScale={xScale}
-        xAccessor={xAccessor}
-        xExtents={xExtents}
-        zoomAnchor={lastVisibleItemBasedZoomAnchor}
-      >
-        <Chart
-          id={2}
-          height={barChartHeight}
-          origin={barChartOrigin}
-          yExtents={barChartExtents}
-        >
-          <BarSeries fillStyle={volumeColor} yAccessor={volumeSeries} />
-        </Chart>
-        <Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
-          <XAxis showGridLines showTickLabel={false} />
-          <YAxis showGridLines tickFormat={pricesDisplayFormat} />
-          <CandlestickSeries />
-          <MouseCoordinateY
-            rectWidth={margin.right}
-            displayFormat={pricesDisplayFormat}
-          />
-          <EdgeIndicator
-            itemType="last"
-            rectWidth={margin.right}
-            fill={openCloseColor}
-            lineStroke={openCloseColor}
-            displayFormat={pricesDisplayFormat}
-            yAccessor={yEdgeIndicator}
-          />
-          <ZoomButtons />
-          <OHLCTooltip origin={[8, 16]} />
-        </Chart>
-        <Chart
-          id={4}
-          height={elderRayHeight}
-          yExtents={[0, elder.accessor()]}
-          origin={elderRayOrigin}
-          padding={{ top: 8, bottom: 8 }}
-        >
-          <XAxis showGridLines gridLinesStrokeStyle="#e0e3eb" />
-          <YAxis ticks={4} tickFormat={pricesDisplayFormat} />
+  return data.length ? (
+    <>
+      <div className="flex my-5 justify-center w-full">
+        <div className="bg-gray-500 p-5 rounded-xl">
+          <ChartCanvas
+            height={height}
+            ratio={3}
+            width={width}
+            margin={margin}
+            data={data}
+            displayXAccessor={displayXAccessor}
+            seriesName="Data"
+            xScale={xScale}
+            xAccessor={xAccessor}
+            xExtents={xExtents}
+            zoomAnchor={lastVisibleItemBasedZoomAnchor}
+          >
+            <Chart
+              id={2}
+              height={barChartHeight}
+              origin={barChartOrigin}
+              yExtents={barChartExtents}
+            >
+              <BarSeries fillStyle={volumeColor} yAccessor={volumeSeries} />
+            </Chart>
+            <Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
+              <XAxis showGridLines showTickLabel={false} />
+              <YAxis showGridLines tickFormat={pricesDisplayFormat} />
+              <CandlestickSeries />
+              <MouseCoordinateY
+                rectWidth={margin.right}
+                displayFormat={pricesDisplayFormat}
+              />
+              <EdgeIndicator
+                itemType="last"
+                rectWidth={margin.right}
+                fill={openCloseColor}
+                lineStroke={openCloseColor}
+                displayFormat={pricesDisplayFormat}
+                yAccessor={yEdgeIndicator}
+              />
+              <ZoomButtons {...zoomButtonStyles} />
+              <OHLCTooltip textFill={openCloseColor} origin={[8, 16]} />
+            </Chart>
+            <Chart
+              id={4}
+              height={elderRayHeight}
+              yExtents={[0, elder.accessor()]}
+              origin={elderRayOrigin}
+              padding={{ top: 8, bottom: 8 }}
+            >
+              <XAxis showGridLines gridLinesStrokeStyle="#e0e3eb" />
+              <YAxis ticks={4} tickFormat={pricesDisplayFormat} />
 
-          <MouseCoordinateX displayFormat={timeDisplayFormat} />
-          <MouseCoordinateY
-            rectWidth={margin.right}
-            displayFormat={pricesDisplayFormat}
-          />
+              <MouseCoordinateX displayFormat={timeDisplayFormat} />
+              <MouseCoordinateY
+                rectWidth={margin.right}
+                displayFormat={pricesDisplayFormat}
+              />
 
-          <ElderRaySeries yAccessor={elder.accessor()} />
+              <ElderRaySeries yAccessor={elder.accessor()} />
 
-          <SingleValueTooltip
-            yAccessor={elder.accessor()}
-            yLabel="Elder Ray"
-            yDisplayFormat={(d: any) =>
-              `${pricesDisplayFormat(d.bullPower)}, ${pricesDisplayFormat(
-                d.bearPower
-              )}`
-            }
-            origin={[8, 16]}
-          />
-        </Chart>
-        <CrossHairCursor />
-      </ChartCanvas>
+              <SingleValueTooltip
+                yAccessor={elder.accessor()}
+                yLabel="Elder Ray"
+                yDisplayFormat={(d: any) =>
+                  `${pricesDisplayFormat(d.bullPower)}, ${pricesDisplayFormat(
+                    d.bearPower
+                  )}`
+                }
+                origin={[8, 16]}
+              />
+            </Chart>
+            <CrossHairCursor />
+          </ChartCanvas>
+        </div>
+      </div>
+      <div className="mx-auto max-w-sm">
+        <Select
+          defaultValue={timeFrames[0]}
+          onChange={(e) => {
+            setBarWidth(e?.value ?? timeFrames[0].value);
+          }}
+          options={timeFrames}
+        />
+      </div>
+    </>
+  ) : (
+    <div>
+      <h1>Loading</h1>
     </div>
   );
 };

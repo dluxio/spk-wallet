@@ -3,6 +3,7 @@ import { useTranslation } from "next-export-i18n";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { apiLinkState } from "../../atoms";
+import { getHistorical } from "../../utils";
 import { OrderHistoryElement } from "./OrderHistoryElement";
 
 export const OrderHistory = ({
