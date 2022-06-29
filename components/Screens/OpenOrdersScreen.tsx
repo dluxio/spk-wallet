@@ -97,7 +97,13 @@ export const OpenOrdersScreen = () => {
                   </b>
                 </h1>
                 <h1>
-                  FEE: <b>{fee} LARYNX</b>
+                  FEE:{" "}
+                  <b>
+                    {parseFloat(
+                      parseFloat((+fee / Math.pow(10, 3)).toString()).toFixed(3)
+                    ).toFixed(2)}{" "}
+                    LARYNX
+                  </b>
                 </h1>
                 <h1>
                   FILLED: <b>{fillPercent}%</b>
