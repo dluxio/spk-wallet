@@ -167,10 +167,7 @@ export const NavBar = () => {
               {user.name}
             </h1>
             <div className="flex items-center w-full ">
-              <div
-                className="cursor-pointer"
-                onClick={() => router.push(`/@${user.name}`)}
-              >
+              <div className="cursor-pointer">
                 <img
                   width={50}
                   src={

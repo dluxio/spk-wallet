@@ -17,6 +17,7 @@ export const OpenOrdersScreen = () => {
     (async () => {
       const { data } = await axios.get(`${apiLink}@${user.name}`);
       if (data.contracts.length) {
+        console.log(data.contracts);
         setOpenOrders(
           data.contracts.map((order: any) => {
             let fillPercent = 0;
@@ -64,10 +65,30 @@ export const OpenOrdersScreen = () => {
                   {type === "sell" ? "SELL" : "BUY"}
                 </h1>
                 <h1>
-                  {hive ? "HIVE" : "HBD"}: <b>{hive ? hive : hbd}</b>
+                  {hive ? "HIVE" : "HBD"}:{" "}
+                  <b>
+                    {hive
+                      ? parseFloat(
+                          parseFloat(
+                            (+hive / Math.pow(10, 3)).toString()
+                          ).toFixed(3)
+                        ).toFixed(2)
+                      : parseFloat(
+                          parseFloat(
+                            (+hbd / Math.pow(10, 3)).toString()
+                          ).toFixed(3)
+                        ).toFixed(2)}
+                  </b>
                 </h1>
                 <h1>
-                  LARYNX: <b>{amount}</b>
+                  LARYNX:{" "}
+                  <b>
+                    {parseFloat(
+                      parseFloat(
+                        (+amount / Math.pow(10, 3)).toString()
+                      ).toFixed(3)
+                    ).toFixed(2)}
+                  </b>
                 </h1>
                 <h1>
                   PRICE:{" "}

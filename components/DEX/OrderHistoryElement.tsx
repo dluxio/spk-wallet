@@ -13,6 +13,8 @@ export const OrderHistoryElement = ({
     const type = order.type.split(":")[1];
     const [totalSum, setTotalSum] = useState("");
 
+    console.log(order);
+
     useEffect(() => {
       let total = 0;
 
