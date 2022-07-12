@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
+import { HiOutlineUserGroup } from "react-icons/hi";
 import { BiPaperPlane } from "react-icons/bi";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
@@ -106,15 +107,21 @@ export const LarynxInfo = ({
               <div className="bg-gray-600 rounded-xl p-3 absolute top-14">
                 <button
                   onClick={() => setGov({ show: true, up: true })}
-                  className="flex justify-between items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                  className="flex justify-between items-center whitespace-nowrap bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
                 >
-                  Lock LARYNXG <FaLock />
+                  Lock <FaLock />
                 </button>
                 <button
                   onClick={() => setGov({ show: true, up: false })}
-                  className="flex mt-2 items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                  className="flex mt-2 items-center whitespace-nowrap justify-between bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
                 >
-                  Unlock LARYNXG <FaUnlock />
+                  Unlock <FaUnlock />
+                </button>
+                <button
+                  onClick={() => setGov({ show: true, up: false })}
+                  className="flex mt-2 items-center whitespace-nowrap justify-between gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                >
+                  Delegate <HiOutlineUserGroup />
                 </button>
               </div>
             )}
