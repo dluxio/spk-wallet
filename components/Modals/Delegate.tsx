@@ -1,12 +1,13 @@
 import axios from "axios";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { apiLinkState } from "../../atoms";
+import { useRecoilCallback, useRecoilValue } from "recoil";
+import { apiLinkState, prefixState, userState } from "../../atoms";
 import { FormInput } from "../Utils/FormInput";
 import { ModalWrapper } from "../Utils/ModalWrapper";
 import Select from "react-select";
 import { customSelectStyles } from "../../constants";
+import { delegate } from "../../utils";
 
 interface IProps {
   handleClose: () => void;
@@ -15,6 +16,8 @@ interface IProps {
 
 export const Delegate: React.FC<IProps> = ({ handleClose, balance }) => {
   const apiLink = useRecoilValue(apiLinkState);
+  const prefix = useRecoilValue(prefixState);
+  const user: any = useRecoilValue(userState);
   const [to, setTo] = useState("");
   const [delegateTo, setDelegateTo] = useState<
     { label: string; value: string }[]
@@ -32,23 +35,24 @@ export const Delegate: React.FC<IProps> = ({ handleClose, balance }) => {
     });
   }, []);
 
-  console.log(delegateTo);
   return (
     <ModalWrapper handleClose={handleClose}>
       <h1 className="text-2xl mb-5">Delegate LARYNXG</h1>
       <Formik
-        initialValues={{ amount: balance }}
+        initialValues={{ amount: 0 }}
         validate={({ amount }) => {
           const errors: Record<string, string> = {};
 
-          if (!amount) {
+          if (!amount || amount > balance) {
             errors.amount = "Not enough funds!";
           }
 
           return errors;
         }}
         onSubmit={({ amount }) => {
-          console.log("delegate ", amount, to);
+          delegate(user.name, to, amount, prefix).then((r) => {
+            console.log(r);
+          });
         }}
       >
         {({
@@ -72,12 +76,14 @@ export const Delegate: React.FC<IProps> = ({ handleClose, balance }) => {
             />
             <FormInput
               type="number"
-              name={`amount (${balance} LARYNXG)`}
+              name="amount"
+              title={`Amount (${balance} LARYNXG)`}
               errors={errors.amount}
               handleBlur={handleBlur}
               handleChange={handleChange}
               touched={touched.amount}
               value={values.amount}
+              min={0}
             />
             <button
               type="submit"
