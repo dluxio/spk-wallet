@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
+import { HiOutlineUserGroup } from "react-icons/hi";
 import { BiPaperPlane } from "react-icons/bi";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
@@ -9,6 +10,7 @@ import { apiLinkState, userState } from "../../atoms";
 import { parseDrop } from "../../utils";
 import { GovModal } from "../Modals/GovModal";
 import { Send } from "../Modals/SendForm";
+import { Delegate } from "../Modals/Delegate";
 
 export const LarynxInfo = ({
   balance,
@@ -20,6 +22,7 @@ export const LarynxInfo = ({
   const [send, setSend] = useState(false);
   const [showStake, setShowStake] = useState(false);
   const [gov, setGov] = useState({ show: false, up: false });
+  const [delegate, setDelegate] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [claimInfo, setClaimInfo] = useState({
     availiblePerMonth: 0,
@@ -48,6 +51,12 @@ export const LarynxInfo = ({
 
   return (
     <div className="flex flex-col mt-3 pt-3 border-t-2 border-gray-300">
+      {delegate && (
+        <Delegate
+          balance={balance.GOV}
+          handleClose={() => setDelegate(false)}
+        />
+      )}
       {send && (
         <Send
           currency="LARYNX"
@@ -80,7 +89,7 @@ export const LarynxInfo = ({
           </button>
         </div>
       </div>
-      {showStake && (
+      {!showStake && (
         <div className="flex flex-col sm:flex-row justify-between gap-10 border-t-2 border-gray-300 mt-2 pt-2">
           <div>
             <h1>LARYNXG ({balance.GOV ? balance.GOV / 1000 : "0.000"} Bal)</h1>
@@ -106,15 +115,21 @@ export const LarynxInfo = ({
               <div className="bg-gray-600 rounded-xl p-3 absolute top-14">
                 <button
                   onClick={() => setGov({ show: true, up: true })}
-                  className="flex justify-between items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                  className="flex justify-between items-center whitespace-nowrap bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
                 >
-                  Lock LARYNXG <FaLock />
+                  Lock <FaLock />
                 </button>
                 <button
                   onClick={() => setGov({ show: true, up: false })}
-                  className="flex mt-2 items-center whitespace-nowrap gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                  className="flex mt-2 items-center whitespace-nowrap justify-between bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
                 >
-                  Unlock LARYNXG <FaUnlock />
+                  Unlock <FaUnlock />
+                </button>
+                <button
+                  onClick={() => setDelegate(true)}
+                  className="flex mt-2 items-center whitespace-nowrap justify-between gap-2 bg-gray-500 w-full px-2 py-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-700"
+                >
+                  Delegate <HiOutlineUserGroup />
                 </button>
               </div>
             )}

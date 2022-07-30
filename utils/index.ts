@@ -90,6 +90,8 @@ const generate_token = (length: number) => {
   return b.join("");
 };
 
+
+
 export const login = async (username: string) => {
   return new Promise((res, rej) => {
     // @ts-ignore
@@ -212,6 +214,27 @@ export const FTOpen = async (
 
   return await handleBroadcastRequest(operations, username);
 };
+
+export const delegate = async (username: string, to: string, amount: number, prefix: string) => {
+  const id = `${prefix}power_grant`
+
+  console.log('something')
+
+  const operations = [
+    "custom_json",
+    {
+      required_auths: [username],
+      required_posting_auths: 0,
+      id,
+      json: JSON.stringify({
+        to,
+        amount: amount * 1000
+      })
+    }
+  ]
+
+  return await handleBroadcastRequest(operations, username);
+}
 
 type AirdropData = {
   to: string[];
